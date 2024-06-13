@@ -1,0 +1,38 @@
+{
+  "type": "module",
+  "name": "@dfsj/docs",
+  "description": "@dfsj接口文档",
+  "version": "3.0.0",
+  "author": "yangbo <1747837358@qq.com>",
+  "homepage": "",
+  "private": true,
+  "scripts": {
+    "docs:dev": "vitepress dev",
+    "docs:build": "vitepress build",
+    "docs:preview": "vitepress preview",
+    "generate:hooks:md": "esno generate/hooks.ts"
+  },
+  "devDependencies": {
+    "@rollup/plugin-image": "3.0.3",
+    "@types/node": "^20.11.3",
+    "rollup-plugin-progress": "^1.1.2",
+    "rollup-plugin-sizes": "^1.0.5",
+    "rollup-plugin-svg": "^2.0.0",
+    "rollup-plugin-typescript2": "0.36.0",
+    "typescript": "5.2.2"
+  },
+  "dependencies": {
+    "@babel/runtime": "^7.24.0",
+    "@dfsj/cesium": "workspace:^",
+    "@dfsj/components": "workspace:^",
+    "@dfsj/echarts": "workspace:^",
+    "@dfsj/guest": "workspace:^",
+    "@dfsj/hooks": "workspace:^",
+    "@dfsj/ol": "workspace:^",
+    "@dfsj/utils": "workspace:^",
+    "@vitepress-demo-preview/component": "^2.3.2",
+    "@vitepress-demo-preview/plugin": "^1.2.3",
+    "element-plus": "^2.6.1",
+    "unocss": "^0.58.6"
+  }
+}

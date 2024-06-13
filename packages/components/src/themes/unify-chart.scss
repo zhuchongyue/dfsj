@@ -1,0 +1,25 @@
+$prefixCls: ec-chart-toolbox-wrap;
+.#{$prefixCls} {
+  height: 100%;
+  width: 100%;
+  min-height: 0;
+  min-width: 0;
+  .tools-container{
+    min-height: 0;
+    display: flex;
+    justify-content: flex-end;
+    cursor: pointer;
+    right: 0px;
+    top: 0px;
+    gap: 10px;
+    z-index: 9999;
+    .app-iconify{
+      cursor: pointer!important;
+      transition: all .5s ease;
+      &:hover{
+        transition: all .5s ease;
+        box-shadow: 0px 1px 10px 0px rgba(0, 0, 0, 0.05), 0px 4px 5px 0px rgba(0, 0, 0, 0.08), 0px 2px 4px -1px rgba(0, 0, 0, 0.12);
+      }
+    }
+  }
+}

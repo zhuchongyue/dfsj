@@ -1,0 +1,138 @@
+{
+  "name": "root",
+  "type": "module",
+  "private": true,
+  "version": "3.0.0",
+  "scripts": {
+    "info": "lerna info",
+    "packages": "lerna ls",
+    "release": "lerna publish --conventional-commits",
+    "packages:dev": "esno ./scripts/package.ts dev ",
+    "packages:pub": "esno ./scripts/package.ts pub",
+    "clear:dist": "esno ./scripts/clear.ts dev ",
+    "rm:node_modules": "lerna exec -- rimraf ./node_modules",
+    "rm:dist": "lerna exec rimraf ./dist",
+    "docs:dev": "cd docs && npm run docs:dev",
+    "docs:build": "cd docs && npm run docs:build",
+    "commit": "cz",
+    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0",
+    "prepare": "husky install",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "yarn run clear:dist && lerna run build && yarn run packages:pub"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^17.6.5",
+    "@commitlint/config-conventional": "^17.6.5",
+    "@types/fs-extra": "^11.0.4",
+    "commitizen": "^4.3.0",
+    "conventional-changelog-conventionalcommits": "^6.0.0",
+    "eslint": "^8.54.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-define-config": "^2.0.0",
+    "eslint-plugin-prettier": "^5.0.1",
+    "eslint-plugin-vue": "^9.18.1",
+    "esno": "^0.17.0",
+    "fs-extra": "^11.2.0",
+    "husky": "^8.0.0",
+    "lerna": "^8.0.2",
+    "picocolors": "^1.0.0",
+    "prettier": "^3.1.0",
+    "rimraf": "^4.1.2",
+    "rollup": "^3.15.0",
+    "stylelint": "^15.11.0",
+    "stylelint-config-html": "^1.1.0",
+    "stylelint-config-recommended": "^13.0.0",
+    "stylelint-config-standard": "^34.0.0",
+    "stylelint-order": "^6.0.3",
+    "vitepress": "^1.1.3"
+  },
+  "repository": {
+    "url": "https://gitee.com/verdaccio/ec.git"
+  },
+  "dependencies": {
+    "nx": "^17.2.8"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog",
+      "types": {
+        "feat": {
+          "description": "添加新功能",
+          "emoji": "✨"
+        },
+        "fix": {
+          "description": "修复错误",
+          "emoji": "🐛"
+        },
+        "docs": {
+          "description": "文档变更",
+          "emoji": "📝"
+        },
+        "style": {
+          "description": "代码格式变更",
+          "emoji": "💄"
+        },
+        "refactor": {
+          "description": "重构代码",
+          "emoji": "🔨"
+        },
+        "test": {
+          "description": "添加或修改测试",
+          "emoji": "🚨"
+        },
+        "chore": {
+          "description": "构建或辅助工具变更",
+          "emoji": "🔧"
+        }
+      }
+    }
+  },
+  "changelog": {
+    "preset": "conventionalcommits",
+    "types": {
+      "feat": {
+        "description": "New feature for the user, not a new feature for build script",
+        "title": "Features | 新功能",
+        "emoji": "✨"
+      },
+      "fix": {
+        "description": "Bug fix for the user, not a fix to a build script",
+        "title": "Bug Fixes | Bug 修复",
+        "emoji": "🐛"
+      },
+      "docs": {
+        "description": "Documentation only changes",
+        "title": "Documentation | 文档",
+        "emoji": "📝"
+      },
+      "style": {
+        "description": "Changes that do not affect the meaning of the code (white-space, formatting, missing semi-colons, etc)",
+        "title": "Styles | 样式",
+        "emoji": "💄"
+      },
+      "refactor": {
+        "description": "A code change that neither fixes a bug nor adds a feature",
+        "title": "Code Refactoring | 代码重构",
+        "emoji": "♻️"
+      },
+      "test": {
+        "description": "Adding missing tests or correcting existing tests",
+        "title": "Tests | 测试",
+        "emoji": "🔬"
+      },
+      "chore": {
+        "description": "Changes to the build process or auxiliary tools and libraries such as documentation generation",
+        "title": "Chores | 构建/工具",
+        "emoji": "👷"
+      }
+    }
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org"
+  }
+}

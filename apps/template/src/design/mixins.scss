@@ -1,0 +1,6 @@
+@mixin set-ratio-bg-image($url) {
+  background-image: url($url + "@x1.png");
+  @media (-webkit-min-device-pixel-ratio: 2), (min-device-pixel-ratio: 2) {
+    background-image: url($url + "@x2.png")
+  }
+}

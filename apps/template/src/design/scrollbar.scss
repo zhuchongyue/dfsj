@@ -1,0 +1,36 @@
+// element-plus 的滚动条
+.el-scrollbar__bar.is-horizontal {
+  height: 10px !important;
+}
+
+.el-scrollbar__bar.is-vertical {
+  width: 10px !important;
+}
+
+.el-scrollbar__thumb {
+  background-color: #81d4fa !important;
+}
+
+//  设置滚动条的样式
+::-webkit-scrollbar {
+  width: 10px;
+  height: 8px;
+}
+
+// 滚动条滑块
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background: rgba(58, 192, 254, 0.3);
+}
+
+// 滚动条滑块:hover
+::-webkit-scrollbar-thumb:hover {
+  // background: rgba(0, 0, 0, 0.3);
+  background: rgba(58, 192, 254, 0.4);
+  cursor: pointer;
+}
+
+// 滚动条滑块:焦点不在该窗口的时候
+::-webkit-scrollbar-thumb:window-inactive {
+  background: rgba(58, 192, 254, 0.1);
+}

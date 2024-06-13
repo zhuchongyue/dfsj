@@ -1,0 +1,50 @@
+{
+  "extends": "nx/presets/npm.json",
+  "$schema": "./node_modules/nx/schemas/nx-schema.json",
+  "targetDefaults": {
+    "build": {
+      "dependsOn": [
+        "^build"
+      ]
+    }
+  },
+  "tasksRunnerOptions": {
+    "default": {
+      "runner": "nx-cloud",
+      "options": {
+        "cacheableOperations": [
+          "build",
+          "lint",
+          "test",
+          "e2e"
+        ],
+        "accessToken": "NTI1MWRlMmEtOTBmMS00ODhjLTlhOGYtMzM2NDNmMDdjN2U4fHJlYWQtd3JpdGU="
+      }
+    }
+  },
+  "projects": {
+    "cesium": {
+      "tags": []
+    },
+    "echarts": {
+      "tags": []
+    },
+    "ol": {
+      "tags": [],
+      "implicitDependencies": [
+      ]
+    },
+    "guest": {
+      "tags": []
+    },
+    "utils": {
+      "tags": []
+    },
+    "hooks": {
+      "tags": []
+    },
+    "components": {
+      "tags": []
+    }
+  }
+}

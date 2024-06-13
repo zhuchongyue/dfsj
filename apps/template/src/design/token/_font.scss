@@ -1,0 +1,56 @@
+// 字体相关token
+:root {
+  /* 字体配置 */
+  --ec-font-family: PingFang SC, Microsoft YaHei, Arial Regular;
+  --ec-font-family-medium: PingFang SC, Microsoft YaHei, Arial Medium;
+  --ec-font-size-link-small: 12px;
+  --ec-font-size-link-medium: 13px;
+  --ec-font-size-link-large: 14px;
+  --ec-font-size-mark-small: 12px;
+  --ec-font-size-mark-medium: 13px;
+  --ec-font-size-body-small: 12px;
+  --ec-font-size-body-medium: 13px;
+  --ec-font-size-body-large: 14px;
+  --ec-font-size-title-small: 13px;
+  --ec-font-size-title-medium: 14px;
+  --ec-font-size-title-large: 16px;
+  --ec-font-size-headline-small: 21px;
+  --ec-font-size-headline-medium: 24px;
+  --ec-font-size-headline-large: 28px;
+  --ec-font-size-display-medium: 36px;
+  --ec-font-size-display-large: 48px;
+  --ec-line-height-common: 8px;
+  --ec-line-height-link-small: calc(    var(--ec-font-size-link-small) + var(--ec-line-height-common)  );
+  --ec-line-height-link-medium: calc(    var(--ec-font-size-link-medium) + var(--ec-line-height-common)  );
+  --ec-line-height-link-large: calc(    var(--ec-font-size-link-large) + var(--ec-line-height-common)  );
+  --ec-line-height-mark-small: calc(    var(--ec-font-size-mark-small) + var(--ec-line-height-common)  );
+  --ec-line-height-mark-medium: calc(    var(--ec-font-size-mark-medium) + var(--ec-line-height-common)  );
+  --ec-line-height-body-small: calc(    var(--ec-font-size-body-small) + var(--ec-line-height-common)  );
+  --ec-line-height-body-medium: calc(    var(--ec-font-size-body-medium) + var(--ec-line-height-common)  );
+  --ec-line-height-body-large: calc(    var(--ec-font-size-body-large) + var(--ec-line-height-common)  );
+  --ec-line-height-title-small: calc(    var(--ec-font-size-title-small) + var(--ec-line-height-common)  );
+  --ec-line-height-title-medium: calc(    var(--ec-font-size-title-medium) + var(--ec-line-height-common)  );
+  --ec-line-height-title-large: calc(    var(--ec-font-size-title-medium) + var(--ec-line-height-common)  );
+  --ec-line-height-headline-small: calc(    var(--ec-font-size-headline-small) + var(--ec-line-height-common)  );
+  --ec-line-height-headline-medium: calc(    var(--ec-font-size-headline-medium) + var(--ec-line-height-common)  );
+  --ec-line-height-headline-large: calc(    var(--ec-font-size-headline-large) + var(--ec-line-height-common)  );
+  --ec-line-height-display-medium: calc(    var(--ec-font-size-display-medium) + var(--ec-line-height-common)  );
+  --ec-line-height-display-large: calc(    var(--ec-font-size-display-large) + var(--ec-line-height-common)  );
+  --ec-font-link-small: var(--ec-font-size-link-small) /    var(--ec-line-height-link-small) var(--ec-font-family);
+  --ec-font-link-medium: var(--ec-font-size-link-medium) /    var(--ec-line-height-link-medium) var(--ec-font-family);
+  --ec-font-link-large: var(--ec-font-size-link-large) /    var(--ec-line-height-link-large) var(--ec-font-family);
+  --ec-font-mark-small: 600 var(--ec-font-size-mark-small) /    var(--ec-line-height-mark-small) var(--ec-font-family);
+  --ec-font-mark-medium: 600 var(--ec-font-size-mark-medium) /    var(--ec-line-height-mark-medium) var(--ec-font-family);
+  --ec-font-body-small: var(--ec-font-size-body-small) /    var(--ec-line-height-body-small) var(--ec-font-family);
+  --ec-font-body-medium: var(--ec-font-size-body-medium) /    var(--ec-line-height-body-medium) var(--ec-font-family);
+  --ec-font-body-large: var(--ec-font-size-body-large) /    var(--ec-line-height-body-large) var(--ec-font-family);
+  --ec-font-title-small: var(--ec-font-size-title-small) /    var(--ec-line-height-title-small) var(--ec-font-family);
+  --ec-font-title-medium: var(--ec-font-size-title-medium) /    var(--ec-line-height-title-medium) var(--ec-font-family);
+  --ec-font-title-large: var(--ec-font-size-title-large) /    var(--ec-line-height-title-large) var(--ec-font-family);
+  --ec-font-headline-small: var(--ec-font-size-headline-small) /    var(--ec-line-height-headline-small) var(--ec-font-family);
+  --ec-font-headline-medium: var(--ec-font-size-headline-medium) /    var(--ec-line-height-headline-medium) var(--ec-font-family);
+  --ec-font-headline-large: var(--ec-font-size-headline-large) /    var(--ec-line-height-headline-large) var(--ec-font-family);
+  --ec-font-display-medium: var(--ec-font-size-display-medium) /    var(--ec-line-height-display-medium) var(--ec-font-family);
+  --ec-font-display-large: var(--ec-font-size-display-large) /    var(--ec-line-height-display-large) var(--ec-font-family);
+  /* end 字体配置 */
+}

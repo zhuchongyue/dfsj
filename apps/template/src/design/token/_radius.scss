@@ -1,0 +1,11 @@
+// border-radius相关 token
+:root {
+  /* 圆角配置 */
+  --ec-radius-small: 1px;
+  --ec-radius-default: 2px;
+  --ec-radius-medium: 4px;
+  --ec-radius-large: 6px;
+  --ec-radius-extraLarge: 8px;
+  --ec-radius-round: 999px;
+  --ec-radius-circle: 50%;
+}

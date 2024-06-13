@@ -1,0 +1,32 @@
+$prefix-cls: ec-component-svg-icon;
+
+.#{$prefix-cls} {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: -0.15em;
+  fill: currentColor;
+}
+
+.svg-icon-spin {
+  animation: loadingCircle 1s infinite linear;
+}
+
+
+.app-iconify {
+  display: inline-block;
+  vertical-align: middle;
+
+  &-spin {
+    svg {
+      animation: loadingCircle 1s infinite linear;
+    }
+  }
+}
+
+span.iconify {
+  display: block;
+  min-width: 1em;
+  min-height: 1em;
+  background-color: rgba(225, 223, 223, 0.55);
+  border-radius: 100%;
+}

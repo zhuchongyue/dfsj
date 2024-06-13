@@ -1,0 +1,54 @@
+{
+  "name": "@dfsj/utils",
+  "version": "3.1.1",
+  "description": "通用的项目工具集",
+  "keywords": [
+    "utils",
+    "vue3",
+    "ts"
+  ],
+  "author": "yangbo <1747837358@qq.com>",
+  "homepage": "",
+  "license": "MIT",
+  "main": "dist/index.ts",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE",
+    "CHANGELOG.md"
+  ],
+  "scripts": {
+    "test": "node ./__tests__/utils.test.js",
+    "watch": "rollup --config ./rollup.config.ts --configPlugin typescript -w",
+    "build": "rollup --config ./rollup.config.ts --configPlugin typescript"
+  },
+  "dependencies": {
+    "@babel/runtime": "^7.24.0",
+    "crypto-js": "^4.1.1",
+    "events": "^3.3.0",
+    "localforage": "^1.10.0",
+    "lodash-es": "^4.17.21",
+    "md5": "^2.3.0",
+    "node-schedule": "^2.1.1",
+    "sm-crypto": "^0.3.12",
+    "vue-types": "^5.0.2"
+  },
+  "devDependencies": {
+    "@dfsj/rollup": "workspace:^",
+    "@types/lodash-es": "^4.17.12",
+    "@types/node": "^20.11.3",
+    "@vue/runtime-dom": "^3.4.14",
+    "vue": "^3.4.21"
+  },
+  "types": "dist/index.d.ts",
+  "gitHead": "0b570d86e0ba05e19a5713e24c05b2f0d5aaeb73",
+  "module": "src/index.ts",
+  "browser": "src/index.ts",
+  "publishConfig": {
+    "access": "public"
+  }
+}

@@ -1,0 +1,405 @@
+// 颜色色板
+$primary-color-1: var(--ec-primary-color-1);
+$primary-color-2: var(--ec-primary-color-2);
+$primary-color-3: var(--ec-primary-color-3);
+$primary-color-4: var(--ec-primary-color-4);
+$primary-color-5: var(--ec-primary-color-5);
+$primary-color-6: var(--ec-primary-color-6);
+$primary-color-7: var(--ec-primary-color-7);
+$primary-color-8: var(--ec-primary-color-8);
+$primary-color-9: var(--ec-primary-color-9);
+$primary-color-10: var(--ec-primary-color-10);
+$primary-color-11: var(--ec-primary-color-11);
+$primary-color-12: var(--ec-primary-color-12);
+$primary-color-13: var(--ec-primary-color-13);
+
+$warning-color-1: var(--ec-warning-color-1);
+$warning-color-2: var(--ec-warning-color-2);
+$warning-color-3: var(--ec-warning-color-3);
+$warning-color-4: var(--ec-warning-color-4);
+$warning-color-5: var(--ec-warning-color-5);
+$warning-color-6: var(--ec-warning-color-6);
+$warning-color-7: var(--ec-warning-color-7);
+$warning-color-8: var(--ec-warning-color-8);
+$warning-color-9: var(--ec-warning-color-9);
+$warning-color-10: var(--ec-warning-color-10);
+
+$error-color-1: var(--ec-error-color-1);
+$error-color-2: var(--ec-error-color-2);
+$error-color-3: var(--ec-error-color-3);
+$error-color-4: var(--ec-error-color-4);
+$error-color-5: var(--ec-error-color-5);
+$error-color-6: var(--ec-error-color-6);
+$error-color-7: var(--ec-error-color-7);
+$error-color-8: var(--ec-error-color-8);
+$error-color-9: var(--ec-error-color-9);
+$error-color-10: var(--ec-error-color-10);
+
+$success-color-1: var(--ec-success-color-1);
+$success-color-2: var(--ec-success-color-2);
+$success-color-3: var(--ec-success-color-3);
+$success-color-4: var(--ec-success-color-4);
+$success-color-5: var(--ec-success-color-5);
+$success-color-6: var(--ec-success-color-6);
+$success-color-7: var(--ec-success-color-7);
+$success-color-8: var(--ec-success-color-8);
+$success-color-9: var(--ec-success-color-9);
+$success-color-10: var(--ec-success-color-10);
+
+$neutral-color-1: var(--ec-neutral-color-1);
+$neutral-color-2: var(--ec-neutral-color-2);
+$neutral-color-3: var(--ec-neutral-color-3);
+$neutral-color-4: var(--ec-neutral-color-4);
+$neutral-color-5: var(--ec-neutral-color-5);
+$neutral-color-6: var(--ec-neutral-color-6);
+$neutral-color-7: var(--ec-neutral-color-7);
+$neutral-color-8: var(--ec-neutral-color-8);
+$neutral-color-9: var(--ec-neutral-color-9);
+$neutral-color-10: var(--ec-neutral-color-10);
+$neutral-color-11: var(--ec-neutral-color-11);
+$neutral-color-12: var(--ec-neutral-color-12);
+$neutral-color-13: var(--ec-neutral-color-13);
+$neutral-color-14: var(--ec-neutral-color-14);
+
+// 文字 & 图标 颜色
+$font-white-1: var(--ec-font-white-1);
+$font-white-2: var(--ec-font-white-2);
+$font-white-3: var(--ec-font-white-3);
+$font-white-4: var(--ec-font-white-4);
+
+$font-gray-1: var(--ec-font-gray-1);
+$font-gray-2: var(--ec-font-gray-2);
+$font-gray-3: var(--ec-font-gray-3);
+$font-gray-4: var(--ec-font-gray-4);
+////////////////////////////////////////////////文字//////////////////////////////
+
+$font-dark-1:var(--ec-font-dark-1);//强调/主要文字
+$font-dark-2:var(--ec-font-dark-2);//次强调文字
+$font-dark-3:var(--ec-font-dark-3);//次要信息文字
+$font-dark-4:var(--ec-font-dark-4);//辅助文字1
+$font-dark-5:var(--ec-font-dark-5);//辅助文字2
+
+$font-normal-1:var(--ec-font-normal-1);
+$font-normal-2:var(--ec-font-normal-2);//浅色链接、提示文字、一般状态
+$font-normal-3:var(--ec-font-normal-3);//深色链接文字
+
+//'--ec-font-error';//错误状态文字
+//'--ec-font-warning';//告警提醒状态文字
+//'--ec-font-success';//成功提示文字
+
+$font-primary-1:var(--ec-font-primary-1);
+$font-primary-2:var(--ec-font-primary-2);//表头文字、主色按钮文字
+$font-primary-3:var(--ec-font-primary-3);//小标题文字
+
+
+
+
+
+// 基础颜色
+$primary-color: var(--ec-primary-color); // 色彩-品牌-可操作
+$warning-color: var(--ec-warning-color); // 色彩-功能-警告
+$error-color: var(--ec-error-color); // 色彩-功能-失败
+$success-color: var(--ec-success-color); // 色彩-功能-成功
+
+// 基础颜色的扩展 用于 hover / 聚焦 / 禁用 / 点击 等状态
+$primary-color-hover: var(--ec-primary-color-hover); // hover态
+$primary-color-focus: var(--ec-primary-color-focus); // focus态，包括鼠标和键盘
+$primary-color-active: var(--ec-primary-color-active); // 点击态
+$primary-color-disabled: var(--ec-primary-color-disabled); // 禁用态
+$primary-color-light: var(--ec-primary-color-light); // 浅色的选中态
+$primary-color-light-hover: var(--ec-primary-color-light-hover);
+
+// 警告色扩展
+$warning-color-hover: var(--ec-warning-color-hover);
+$warning-color-focus: var(--ec-warning-color-focus);
+$warning-color-active: var(--ec-warning-color-active);
+$warning-color-disabled: var(--ec-warning-color-disabled);
+$warning-color-light: var(--ec-warning-color-light);
+$warning-color-light-hover: var(--ec-warning-color-light-hover);
+
+// 失败/错误色扩展
+$error-color-hover: var(--ec-error-color-hover);
+$error-color-focus: var(--ec-error-color-focus);
+$error-color-active: var(--ec-error-color-active);
+$error-color-disabled: var(--ec-error-color-disabled);
+$error-color-light: var(--ec-error-color-light);
+$error-color-light-hover: var(--ec-error-color-light-hover);
+
+// 成功色扩展
+$success-color-hover: var(--ec-success-color-hover);
+$success-color-focus: var(--ec-success-color-focus);
+$success-color-active: var(--ec-success-color-active);
+$success-color-disabled: var(--ec-success-color-disabled);
+$success-color-light: var(--ec-success-color-light);
+$success-color-light-hover: var(--ec-success-color-light-hover);
+
+// 遮罩
+$mask-active: var(--ec-mask-active); // 遮罩-弹出
+$mask-disabled: var(--ec-mask-disabled); // 遮罩-禁用
+
+// 背景色
+$bg-color-page: var(--ec-bg-color-page); // 色彩 - page
+$bg-color-container: var(--ec-bg-color-container); // 色彩 - 容器
+$bg-color-container-hover: var(
+  --ec-bg-color-container-hover
+); // 色彩 - 容器 - hover
+$bg-color-container-active: var(
+  --ec-bg-color-container-active
+); // 色彩 - 容器 - active
+$bg-color-container-select: var(
+  --ec-bg-color-container-select
+); // 色彩 - 容器 - select
+
+$bg-color-secondarycontainer: var(
+  --ec-bg-color-secondarycontainer
+); // 色彩 - 次级容器
+$bg-color-secondarycontainer-hover: var(
+  --ec-bg-color-secondarycontainer-hover
+); // 色彩 - 次级容器 - hover
+$bg-color-secondarycontainer-active: var(
+  --ec-bg-color-secondarycontainer-active
+); // 色彩 - 次级容器 - active
+
+$bg-color-component: var(--ec-bg-color-component); // 色彩  - 组件
+$bg-color-component-hover: var(
+  --ec-bg-color-component-hover
+); // 色彩 - 组件 - hover
+$bg-color-component-active: var(
+  --ec-bg-color-component-active
+); // 色彩 - 组件 - active
+
+$bg-color-secondarycomponent: var(
+  --ec-bg-color-secondarycomponent
+); // 色彩 - 次级组件
+$bg-color-secondarycomponent-hover: var(
+  --ec-bg-color-secondarycomponent-hover
+); // 色彩 - 次级组件 - hover
+$bg-color-secondarycomponent-active: var(
+  --ec-bg-color-secondarycomponent-active
+); // 色彩 - 次级组件 - active
+
+$bg-color-component-disabled: var(
+  --ec-bg-color-component-disabled
+); // 色彩 - 组件 - disabled
+
+// TODO: 考虑是否在组件内部做判断，不增加额外变量
+// 特殊组件背景色，目前只用于 button、input 组件多主题场景，浅色主题下固定为白色，深色主题下为 transparent 适配背景颜色
+$bg-color-specialcomponent: var(--ec-bg-color-specialcomponent);
+
+// 文本颜色
+$text-color-primary: var(--ec-text-color-primary); // 色彩-文字-主要
+$text-color-secondary: var(--ec-text-color-secondary); // 色彩-文字-次要
+$text-color-placeholder: var(
+  --ec-text-color-placeholder
+); // 色彩-文字-占位符/说明
+$text-color-disabled: var(--ec-text-color-disabled); // 色彩-文字-禁用
+$text-color-anti: var(--ec-text-color-anti); // 色彩-文字-反色
+$text-color-brand: var(--ec-text-color-brand); // 色彩-文字-品牌
+$text-color-link: var(--ec-text-color-link); // 色彩-文字-链接
+
+// 分割线
+$border-level-1-color: var(--ec-border-level-1-color);
+$component-stroke: var(--ec-component-stroke);
+// 边框
+$border-level-2-color: var(--ec-border-level-2-color);
+$component-border: var(--ec-component-border);
+
+// shadow
+
+// 基础/下层 投影 hover 使用的组件包括：表格 /
+$shadow-1: var(--ec-shadow-1);
+// 中层投影 下拉 使用的组件包括：下拉菜单 / 气泡确认框 / 选择器 /
+$shadow-2: var(--ec-shadow-2);
+// 上层投影（警示/弹窗）使用的组件包括：全局提示 / 消息通知
+$shadow-3: var(--ec-shadow-3);
+
+// 内投影 用于弹窗类组件（气泡确认框 / 全局提示 / 消息通知）的内描边
+$shadow-inset-top: var(--ec-shadow-inset-top);
+$shadow-inset-right: var(--ec-shadow-inset-right);
+$shadow-inset-bottom: var(--ec-shadow-inset-bottom);
+$shadow-inset-left: var(--ec-shadow-inset-left);
+$shadow-inset: $shadow-inset-top, $shadow-inset-right, $shadow-inset-bottom,
+  $shadow-inset-left;
+
+// 融合阴影
+$shadow-2-inset: $shadow-2, $shadow-inset;
+$shadow-3-inset: $shadow-3, $shadow-inset;
+
+$size-1: var(--ec-size-1);
+$size-2: var(--ec-size-2);
+$size-3: var(--ec-size-3);
+$size-4: var(--ec-size-4);
+$size-5: var(--ec-size-5);
+$size-6: var(--ec-size-6);
+$size-7: var(--ec-size-7);
+$size-8: var(--ec-size-8);
+$size-9: var(--ec-size-9);
+$size-10: var(--ec-size-10);
+$size-11: var(--ec-size-11);
+$size-12: var(--ec-size-12);
+$size-13: var(--ec-size-13);
+$size-14: var(--ec-size-14);
+$size-15: var(--ec-size-15);
+$size-16: var(--ec-size-16);
+
+// component 组件尺寸高度相关 token
+$comp-size-xxxs: var(--ec-comp-size-xxxs);
+$comp-size-xxs: var(--ec-comp-size-xxs);
+$comp-size-xs: var(--ec-comp-size-xs);
+$comp-size-s: var(--ec-comp-size-s);
+$comp-size-m: var(--ec-comp-size-m);
+$comp-size-l: var(--ec-comp-size-l);
+$comp-size-xl: var(--ec-comp-size-xl);
+$comp-size-xxl: var(--ec-comp-size-xxl);
+$comp-size-xxxl: var(--ec-comp-size-xxxl);
+$comp-size-xxxxl: var(--ec-comp-size-xxxxl);
+$comp-size-xxxxxl: var(--ec-comp-size-xxxxxl);
+
+// popup 弹出层整体边距 token
+$pop-padding-s: var(--ec-pop-padding-s);
+$pop-padding-m: var(--ec-pop-padding-m);
+$pop-padding-l: var(--ec-pop-padding-l);
+$pop-padding-xl: var(--ec-pop-padding-xl);
+$pop-padding-xxl: var(--ec-pop-padding-xxl);
+
+// component 组件左右边距 token
+$comp-paddingLR-xxs: var(--ec-comp-paddingLR-xxs);
+$comp-paddingLR-xs: var(--ec-comp-paddingLR-xs);
+$comp-paddingLR-s: var(--ec-comp-paddingLR-s);
+$comp-paddingLR-m: var(--ec-comp-paddingLR-m);
+$comp-paddingLR-l: var(--ec-comp-paddingLR-l);
+$comp-paddingLR-xl: var(--ec-comp-paddingLR-xl);
+$comp-paddingLR-xxl: var(--ec-comp-paddingLR-xxl);
+
+// component 组件上下边距 token
+$comp-paddingTB-xxs: var(--ec-comp-paddingTB-xxs);
+$comp-paddingTB-xs: var(--ec-comp-paddingTB-xs);
+$comp-paddingTB-s: var(--ec-comp-paddingTB-s);
+$comp-paddingTB-m: var(--ec-comp-paddingTB-m);
+$comp-paddingTB-l: var(--ec-comp-paddingTB-l);
+$comp-paddingTB-xl: var(--ec-comp-paddingTB-xl);
+$comp-paddingTB-xxl: var(--ec-comp-paddingTB-xxl);
+
+// component 组件间距 token
+$comp-margin-xxs: var(--ec-comp-margin-xxs);
+$comp-margin-xs: var(--ec-comp-margin-xs);
+$comp-margin-s: var(--ec-comp-margin-s);
+$comp-margin-m: var(--ec-comp-margin-m);
+$comp-margin-l: var(--ec-comp-margin-l);
+$comp-margin-xl: var(--ec-comp-margin-xl);
+$comp-margin-xxl: var(--ec-comp-margin-xxl);
+$comp-margin-xxxl: var(--ec-comp-margin-xxxl);
+$comp-margin-xxxxl: var(--ec-comp-margin-xxxxl);
+
+// Spacer 【deprecated】
+$spacer: 8px;
+$spacer-s: $spacer * .5; // 间距-4
+$spacer-m: $spacer * .75; // 间距-6
+$spacer-l: $spacer * 1.5; // 间距-12
+$spacer-1: $spacer; // 间距-8
+$spacer-2: $spacer * 2; // 间距-16
+$spacer-3: $spacer * 3; // 间距-24
+$spacer-4: $spacer * 4; // 间距-32
+$spacer-5: $spacer * 5; // 间距-大-40
+$spacer-6: $spacer * 6; // 间距-大-48
+$spacer-7: $spacer * 7; // 间距-大-48
+$spacer-8: $spacer * 8; // 间距-大-48
+$spacer-9: $spacer * 9; // 间距-大-48
+$spacer-10: $spacer * 10; // 间距-大-80
+
+$text-line-height-s: var(--ec-line-height-body-small);
+$text-line-height-base: var(--ec-line-height-body-medium);
+$text-line-height-l: var(--ec-line-height-body-large);
+$text-line-height-xl: var(--ec-line-height-title-large);
+$text-line-height-xxl: var(--ec-line-height-headline-large);
+
+// Font
+$font-size: 10px;
+$font-size-s: var(--ec-font-size-body-small);
+$font-size-base: var(--ec-font-size-body-medium);
+$font-size-l: var(--ec-font-size-body-large);
+$font-size-xl: var(--ec-font-size-title-large);
+$font-size-xxl: var(--ec-font-size-headline-large);
+
+$font-family: var(--ec-font-family); // 字体-磅数-常规
+$font-family-medium: var(--ec-font-family-medium); // 字体-磅数-粗体
+
+// 使用以下与Design Token对应的font token开发组件对应字体、行高
+$font-link-small: var(--ec-font-link-small);
+$font-link-medium: var(--ec-font-link-medium);
+$font-link-large: var(--ec-font-link-large);
+$font-mark-small: var(--ec-font-mark-small);
+$font-mark-medium: var(--ec-font-mark-medium);
+$font-body-small: var(--ec-font-body-small);
+$font-body-medium: var(--ec-font-body-medium);
+$font-body-large: var(--ec-font-body-large);
+$font-title-small: var(--ec-font-title-small);
+$font-title-medium: var(--ec-font-title-medium);
+$font-title-large: var(--ec-font-title-large);
+$font-headline-small: var(--ec-font-headline-small);
+$font-headline-medium: var(--ec-font-headline-medium);
+$font-headline-large: var(--ec-font-headline-large);
+$font-display-medium: var(--ec-font-display-medium);
+$font-display-large: var(--ec-font-display-large);
+
+// Border Radius
+$border-radius-small: var(--ec-radius-small); // 圆角-2
+$border-radius-default: var(--ec-radius-default); // 圆角-3
+$border-radius-medium: var(--ec-radius-medium); // 圆角-6
+$border-radius-large: var(--ec-radius-large); // 圆角-9
+$border-radius-extraLarge: var(--ec-radius-extraLarge); // 圆角-12
+$border-radius-round: var(--ec-radius-round); // 圆角-999
+$border-radius-circle: var(--ec-radius-circle); // 圆角-全圆角
+
+// 表单相关
+$form-height: 30px;
+$form-text-color: $text-color-primary;
+$form-bg-color: $bg-color-container;
+$form-border-color: $border-level-2-color;
+
+// 图标尺寸
+$icon-default: 16px;
+$icon-l: 24px;
+
+// 滚动条颜色
+$scrollbar-color: var(--ec-scrollbar-color);
+// 滚动条悬浮颜色
+$scrollbar-hover-color: var(--ec-scrollbar-hover-color);
+// 滚动条轨道颜色
+$scroll-track-color: var(--ec-scroll-track-color);
+
+// 响应式断点
+$screen-xs: 320px;
+$screen-xs-min: $screen-xs;
+$screen-sm: 768px;
+$screen-sm-min: $screen-sm;
+$screen-md: 992px;
+$screen-md-min: $screen-md;
+$screen-lg: 1200px;
+$screen-lg-min: $screen-lg;
+$screen-xl: 1400px;
+$screen-xl-min: $screen-xl;
+$screen-xxl: 1880px;
+$screen-xxl-min: $screen-xxl;
+
+// 动画
+$anim-time-fn-easing: cubic-bezier(.38, 0, .24, 1);
+$anim-time-fn-ease-out: cubic-bezier(0, 0, .15, 1);
+$anim-time-fn-ease-in: cubic-bezier(.82, 0, 1, .9);
+$anim-duration-base: .2s;
+$anim-duration-moderate: .24s;
+$anim-duration-slow: .28s;
+
+// 统一管理各组件层级关系
+$z-index-back-top: 300;
+$z-index-affix: 500;
+$z-index-drawer: 1500;
+$z-index-dialog: 2500;
+$z-index-image-viewer: 3000;
+$z-index-loading: 3500;
+$z-index-message: 5000;
+$z-index-Popup: 5500;
+$z-index-Tooltip: 5600;
+$z-index-Notification: 6000;
+$z-index-dragging: 6500;
+$z-index-guide: 999999;

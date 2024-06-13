@@ -1,0 +1,109 @@
+.el-table {
+    --el-table-header-text-color: #11848f !important;
+
+    table {
+        margin: 0 !important;
+    }
+
+    tbody .el-table__cell {
+        padding: 2px 0;
+    }
+
+    .cell {
+        padding: 0 2px;
+        font-size: 16px;
+
+        @apply cursor-pointer;
+    }
+
+    th {
+        font-family: SourceHanSansCN-Bold;
+        font-size: 16px;
+        font-weight: normal;
+
+        &.el-table__cell {
+            box-sizing: border-box;
+            border-width: 0px 0px 1px;
+            border-color: #dcdcdc;
+            border-style: solid;
+            border-right: 2px solid #fff !important;
+            background: #e5fbf6 !important;
+
+            &:last-child {
+                border-right: none;
+            }
+        }
+    }
+
+    .el-table__body tr td.el-table__cell {
+        border-right: 2px solid #fff !important;
+
+        &:last-child {
+            border-right: none;
+        }
+    }
+
+    .el-table__footer tr td.el-table__cell {
+        border-right: 2px solid #fff !important;
+
+        &:last-child {
+            border-right: none;
+        }
+    }
+
+    /*// 基偶行斑马纹*/
+
+    &.el-table--striped .el-table__body tr.el-table__row--striped {
+        /*// background: red!important;*/
+
+        td.el-table__cell {
+            box-sizing: border-box;
+
+            /* 中性色/neutral4 */
+            border-width: 0px 0px 1px;
+            border-color: #dcdcdc;
+            border-style: solid;
+            background: #f0f2f5;
+
+            @apply cursor-pointer;
+        }
+    }
+
+    /** 当前选中行 */
+
+    tr.current-row > td {
+        background: #91caf9 !important;
+    }
+
+    .el-table--enable-row-hover .el-table__body tr:hover > td {
+        background: #d3eafd !important;
+    }
+
+    .el-table__footer td {
+        background: #fcfce8 !important;
+    }
+
+    /*// 表格输入*/
+
+    .el-table__row {
+        .cell:has(.el-input) {
+            padding-right: 0px !important;
+
+            /*// 可选中所有td下包含unfoldTable的class标签的td属性*/
+            padding-left: 0px !important;
+        }
+
+        .el-link {
+            line-height: 1 !important;
+        }
+
+        .el-input {
+            /*// .el-input--small*/
+            --el-input-height: var(--el-component-size-small);
+
+            font-size: 0.75rem;
+
+            /*// margin: 0px -10px;*/
+        }
+    }
+}

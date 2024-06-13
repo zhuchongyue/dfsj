@@ -1,0 +1,39 @@
+#app {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  font-family: SourceHanSansCN-Regular, 'PingFang SC', 'Hiragino Sans GB',
+  'Microsoft YaHei', '微软雅黑', Arial, sans-serif;
+}
+html,
+body {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+  font-family: SourceHanSansCN-Regular, 'PingFang SC', 'Hiragino Sans GB',
+  'Microsoft YaHei', '微软雅黑', Arial, sans-serif;
+  &.color-weak {
+    filter: invert(80%)!important;
+  }
+  &.gray-mode {
+    filter: grayscale(100%);
+    filter: progid:dximagetransform.microsoft.basicimage(grayscale=1)!important;
+  }
+}
+a:focus,
+a:active,
+button,
+div,
+svg,
+span {
+  outline: none;
+}
+
+// 保持 和 windi 一样的全局样式，减少升级带来的影响
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}

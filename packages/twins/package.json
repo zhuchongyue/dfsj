@@ -1,0 +1,49 @@
+{
+  "name": "@dfsj/twins",
+  "version": "3.0.0",
+  "private": true,
+  "description": "孪生组件",
+  "keywords": [
+    "threejs",
+    "webgl",
+    "webgis"
+  ],
+  "author": "yangbo <1747837358@qq.com>",
+  "homepage": "",
+  "license": "MIT",
+  "main": "index.ts",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE",
+    "CHANGELOG.md"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://gitee.com/verdaccio/ec.git"
+  },
+  "scripts": {
+    "test": "node ./__tests__/@dfsj/twins.test.js"
+  },
+  "dependencies": {
+    "@babel/runtime": "^7.24.0",
+    "@dfsj/utils": "workspace:^3.0.0",
+    "@photo-sphere-viewer/autorotate-plugin": "5.1.6",
+    "@photo-sphere-viewer/compass-plugin": "5.1.6",
+    "@photo-sphere-viewer/core": "5.1.6",
+    "@photo-sphere-viewer/gallery-plugin": "5.1.6",
+    "@photo-sphere-viewer/markers-plugin": "5.1.6"
+  },
+  "gitHead": "9e1da3cf1632f8f25f64ab19844b9292da482f43",
+  "devDependencies": {
+    "@dfsj/rollup": "workspace:^",
+    "@types/node": "^20.11.3"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

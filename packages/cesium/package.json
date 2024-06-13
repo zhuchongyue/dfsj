@@ -1,0 +1,50 @@
+{
+  "name": "@dfsj/cesium",
+  "version": "3.1.1",
+  "description": "基于@cesium/engine 封装的3维地图可视化库",
+  "keywords": [
+    "cesium",
+    "webgis",
+    "webgl",
+    "3d"
+  ],
+  "author": "yangbo <1747837358@qq.com>",
+  "homepage": "",
+  "license": "MIT",
+  "main": "dist/index.ts",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE",
+    "CHANGELOG.md"
+  ],
+  "scripts": {
+    "test": "node ./__tests__/cesium.test.js",
+    "watch": "rollup --config ./rollup.config.ts --configPlugin typescript -w",
+    "build": "rollup --config ./rollup.config.ts --configPlugin typescript"
+  },
+  "devDependencies": {
+    "@dfsj/rollup": "workspace:^",
+    "@types/node": "^20.11.3"
+  },
+  "dependencies": {
+    "@babel/runtime": "^7.24.0",
+    "@cesium/engine": "6.1.1",
+    "@dfsj/utils": "^3.1.1",
+    "@turf/turf": "^6.5.0",
+    "echarts": "^5.4.1",
+    "supercluster": "^8.0.1",
+    "tslib": "^2.5.0"
+  },
+  "gitHead": "0b570d86e0ba05e19a5713e24c05b2f0d5aaeb73",
+  "module": "src/index.js",
+  "browser": "src/index.js",
+  "types": "dist/index.d.ts",
+  "publishConfig": {
+    "access": "public"
+  }
+}

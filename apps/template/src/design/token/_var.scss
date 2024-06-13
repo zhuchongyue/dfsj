@@ -1,0 +1,111 @@
+:root{
+  // 文字 & 图标 颜色
+  --ec-font-white-1: rgba(255, 255, 255, 100%);
+  --ec-font-white-2: rgba(255, 255, 255, 55%);
+  --ec-font-white-3: rgba(255, 255, 255, 35%);
+  --ec-font-white-4: rgba(255, 255, 255, 22%);
+  --ec-font-gray-1: rgba(0, 0, 0, 90%);
+  --ec-font-gray-2: rgba(0, 0, 0, 60%);
+  --ec-font-gray-3: rgba(0, 0, 0, 40%);
+  --ec-font-gray-4: rgba(0, 0, 0, 26%);
+
+  // 基础颜色
+  --ec-primary-color: var(--ec-primary-color-7);     // 色彩-品牌-可操作
+  --ec-warning-color: var(--ec-warning-color-5); // 色彩-功能-警告
+  --ec-error-color: var(--ec-error-color-6);     // 色彩-功能-失败
+  --ec-success-color: var(--ec-success-color-5); // 色彩-功能-成功
+
+  // 基础颜色的扩展 用于 hover / 聚焦 / 禁用 / 点击 等状态
+  --ec-primary-color-hover: var(--ec-primary-color-6);     // hover态
+  --ec-primary-color-focus: var(--ec-primary-color-2);     // focus态，包括鼠标和键盘
+  --ec-primary-color-active: var(--ec-primary-color-8);    // 点击态
+  --ec-primary-color-disabled: var(--ec-primary-color-3);  // 禁用态
+  --ec-primary-color-light: var(--ec-primary-color-1);     // 浅色的选中态
+  --ec-primary-color-light-hover: var(--ec-primary-color-2);
+
+  // 警告色扩展
+  --ec-warning-color-hover: var(--ec-warning-color-4);
+  --ec-warning-color-focus: var(--ec-warning-color-2);
+  --ec-warning-color-active: var(--ec-warning-color-6);
+  --ec-warning-color-disabled: var(--ec-warning-color-3);
+  --ec-warning-color-light: var(--ec-warning-color-1);
+  --ec-warning-color-light-hover: var(--ec-warning-color-2);
+
+  // 失败/错误色扩展
+  --ec-error-color-hover: var(--ec-error-color-5);
+  --ec-error-color-focus: var(--ec-error-color-2);
+  --ec-error-color-active: var(--ec-error-color-7);
+  --ec-error-color-disabled: var(--ec-error-color-3);
+  --ec-error-color-light: var(--ec-error-color-1);
+  --ec-error-color-light-hover: var(--ec-error-color-2);
+
+  // 成功色扩展
+  --ec-success-color-hover: var(--ec-success-color-4);
+  --ec-success-color-focus: var(--ec-success-color-2);
+  --ec-success-color-active: var(--ec-success-color-6);
+  --ec-success-color-disabled: var(--ec-success-color-3);
+  --ec-success-color-light: var(--ec-success-color-1);
+  --ec-success-color-light-hover: var(--ec-success-color-2);
+
+  // 遮罩
+  --ec-mask-active: rgba(0, 0, 0, 60%); // 遮罩-弹出
+  --ec-mask-disabled: rgba(255, 255, 255, 60%); // 遮罩-禁用
+
+  // 背景色
+  --ec-bg-color-page: var(--ec-neutral-color-2);                        // 色彩 - page
+  --ec-bg-color-container: #fff;                                // 色彩 - 容器
+  --ec-bg-color-container-hover: var(--ec-neutral-color-1);             // 色彩 - 容器 - hover
+  --ec-bg-color-container-active: var(--ec-neutral-color-3);            // 色彩 - 容器 - active
+  --ec-bg-color-container-select: #fff;                         // 色彩 - 容器 - select
+  --ec-bg-color-secondarycontainer: var(--ec-neutral-color-1);          // 色彩 - 次级容器
+  --ec-bg-color-secondarycontainer-hover: var(--ec-neutral-color-2);    // 色彩 - 次级容器 - hover
+  --ec-bg-color-secondarycontainer-active: var(--ec-neutral-color-4);   // 色彩 - 次级容器 - active
+  --ec-bg-color-component: var(--ec-neutral-color-3);                   // 色彩 - 组件
+  --ec-bg-color-component-hover: var(--ec-neutral-color-4);             // 色彩 - 组件 - hover
+  --ec-bg-color-component-active: var(--ec-neutral-color-6);            // 色彩 - 组件 - active
+  --ec-bg-color-secondarycomponent: var(--ec-neutral-color-4);          // 色彩 - 次级组件
+  --ec-bg-color-secondarycomponent-hover: var(--ec-neutral-color-5);    // 色彩 - 次级组件 - hover
+  --ec-bg-color-secondarycomponent-active: var(--ec-neutral-color-6);   // 色彩 - 次级组件 - active
+  --ec-bg-color-component-disabled: var(--ec-neutral-color-2);          // 色彩 - 组件 - disabled
+
+  // 特殊组件背景色，目前只用于 button、input 组件多主题场景，浅色主题下固定为白色，深色主题下为 transparent 适配背景颜色
+  --ec-bg-color-specialcomponent: #fff;
+  /* 字体颜色 */
+  --ec-text-color-primary: var(--ec-font-gray-1);      // 色彩-文字-主要
+  --ec-text-color-secondary: var(--ec-font-gray-2);    // 色彩-文字-次要
+  --ec-text-color-placeholder: var(--ec-font-gray-3);  // 色彩-文字-占位符/说明
+  --ec-text-color-disabled: var(--ec-font-gray-4);    // 色彩-文字-禁用
+  --ec-text-color-anti: #fff;                      // 色彩-文字-反色
+  --ec-text-color-brand: var(--ec-primary-color-7);           // 色彩-文字-品牌
+  --ec-text-color-link: var(--ec-primary-color-8);            // 色彩-文字-链接
+
+  // 分割线
+  --ec-border-level-1-color: var(--ec-neutral-color-3);
+  --ec-component-stroke: var(--ec-neutral-color-3);
+  // 边框
+  --ec-border-level-2-color: var(--ec-neutral-color-4);
+  --ec-component-border: var(--ec-neutral-color-4);
+
+  // 基础/下层 投影 hover 使用的组件包括：表格 /
+  --ec-shadow-1: 0 1px 10px rgba(0, 0, 0, 5%), 0 4px 5px rgba(0, 0, 0, 8%), 0 2px 4px -1px rgba(0, 0, 0, 12%);
+  // 中层投影 下拉 使用的组件包括：下拉菜单 / 气泡确认框 / 选择器 /
+  --ec-shadow-2: 0 3px 14px 2px rgba(0, 0, 0, 5%), 0 8px 10px 1px rgba(0, 0, 0, 6%), 0 5px 5px -3px rgba(0, 0, 0, 10%);
+  // 上层投影（警示/弹窗）使用的组件包括：全局提示 / 消息通知
+  --ec-shadow-3: 0 6px 30px 5px rgba(0, 0, 0, 5%), 0 16px 24px 2px rgba(0, 0, 0, 4%), 0 8px 10px -5px rgba(0, 0, 0, 8%);
+
+  // 内投影 用于弹窗类组件（气泡确认框 / 全局提示 / 消息通知）的内描边
+  --ec-shadow-inset-top: inset 0 .5px 0 #dcdcdc;
+  --ec-shadow-inset-right: inset .5px 0 0 #dcdcdc;
+  --ec-shadow-inset-bottom: inset 0 -.5px 0 #dcdcdc;
+  --ec-shadow-inset-left: inset -.5px 0 0 #dcdcdc;
+
+  // table 特定阴影
+  --ec-table-shadow-color: rgba(0, 0, 0, 8%);
+
+  // 滚动条颜色
+  --ec-scrollbar-color: rgba(0, 0, 0, 10%);
+  // 滚动条悬浮颜色（ hover ）
+  --ec-scrollbar-hover-color: rgba(0, 0, 0, 30%);
+  // 滚动条轨道颜色，不能是带透明度，否则纵向滚动时，横向滚动条会穿透
+  --ec-scroll-track-color: #fff;
+}

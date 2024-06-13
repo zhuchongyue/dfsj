@@ -1,0 +1,52 @@
+.component.stateful {
+  position: relative;
+  flex: 1;
+
+  .stateful--content {
+    display: flex;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+  }
+
+  .stateful--content.cover {
+    filter: blur(1.25px);
+  }
+
+  .stateful--cover {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .cover--icon {
+      margin-right: 10px;
+    }
+
+    .cover--box {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 50px 70px;
+      border-radius: 0.8rem;
+      box-shadow: 0.1rem 0.1rem 1.5rem 0.1rem rgba(64, 72, 191, 0.15);
+      position: relative;
+      overflow: hidden;
+      width: auto;
+      height: auto;
+    }
+
+    .cover--text {
+      font-size: 20px;
+      margin-bottom: 2px;
+      font-weight: 400;
+      text-shadow: 0 0 rgba(64, 72, 191, 0.3);
+    }
+  }
+}

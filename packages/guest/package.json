@@ -1,0 +1,47 @@
+{
+  "name": "@dfsj/guest",
+  "version": "3.1.1",
+  "description": "访问系统权限校验sdk",
+  "keywords": [
+    "guest",
+    "digest"
+  ],
+  "author": "yangbo <1747837358@qq.com>",
+  "homepage": "",
+  "license": "MIT",
+  "main": "dist/index.ts",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE",
+    "CHANGELOG.md"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://gitee.com/verdaccio/ec.git"
+  },
+  "scripts": {
+    "test": "node ./__tests__/@dfsj/guest.test.js",
+    "watch": "rollup --config ./rollup.config.ts --configPlugin typescript -w",
+    "build": "rollup --config ./rollup.config.ts --configPlugin typescript"
+  },
+  "gitHead": "0b570d86e0ba05e19a5713e24c05b2f0d5aaeb73",
+  "devDependencies": {
+    "@dfsj/rollup": "workspace:^",
+    "@types/node": "^20.11.3"
+  },
+  "module": "src/index.ts",
+  "browser": "src/index.ts",
+  "types": "dist/index.d.ts",
+  "dependencies": {
+    "@babel/runtime": "^7.24.0",
+    "@dfsj/utils": "^3.1.1"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

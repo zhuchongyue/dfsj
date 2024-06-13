@@ -1,0 +1,32 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "outDir": "dist",
+    "target": "ESNext",
+    "skipLibCheck": true,
+    "noImplicitAny": false,
+    "types": [
+      "node"
+    ],
+    "typeRoots": [
+      "../../node_modules/@types",
+      "./node_modules/@types"
+    ]
+  },
+  "include": [
+    "src",
+    "src/**/*.ts",
+    "src/**/*.d.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "**/**/*.test.ts",
+    "**/**/*.stories.tsx",
+    "**/**/*.md",
+    "dist",
+    ".test",
+    "_docs",
+    "__tests__",
+    "**/*/__tests__"
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "outDir": "dist",
+    "target": "ESNext",
+    "skipLibCheck": true,
+    "noImplicitAny": false,
+    "types": [
+      "node"
+    ],
+    "typeRoots": [
+      "../../node_modules/@types",
+      "./node_modules/@types",
+      "typings"
+    ]
+  },
+  "exclude": [
+    "node_modules"
+  ],
+  "include": [
+    "typings/**/*.d.ts",
+    "typings/**/*.ts",
+    "src/**/*.ts",
+    "src/**/*.d.ts",
+    "src/**/*.tsx",
+    "src/**/*.vue"
+  ],
+  "typeAcquisition": {
+    "include": [
+      "typings/**/*"
+    ]
+  }
+}

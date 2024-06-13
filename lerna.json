@@ -1,0 +1,50 @@
+{
+  "$schema": "node_modules/lerna/schemas/lerna-schema.json",
+  "version": "independent",
+  "npmClient": "pnpm",
+  "changelogPreset": "./node_modules/conventional-changelog-conventionalcommits",
+  "packages": [
+    "packages/echarts",
+    "packages/guest",
+    "packages/hooks",
+    "packages/ol",
+    "packages/cesium",
+    "packages/utils",
+    "packages/components",
+    "apps/template"
+  ],
+  "command": {
+    "version": {
+      "ignore": "@dfsj/template"
+    },
+    "publish": {
+      "conventionalCommits": true,
+      "registry": "https://registry.npmjs.org/",
+      "message": "chore(release): publish",
+      "changelogPreset": "angular",
+      "versionPrefix": "v-",
+      "changelogFilename": "RELEASE_NOTES.md",
+      "conventionalRecommendedBump": true,
+      "conventionalChangelogArgs": {
+        "preset": "angular",
+        "releaseCount": 0
+      },
+      "conventionalCommitsParserOpts": {
+        "headerPattern": "^\\[(.*)\\] (.*)$",
+        "headerCorrespondence": [
+          "type",
+          "subject"
+        ],
+        "noteKeywords": [
+          "BREAKING CHANGE",
+          "BREAKING CHANGES"
+        ]
+      }
+    }
+  },
+  "changelog": {
+    "preset": "conventionalcommits",
+    "from": "v1.0.0",
+    "to": "HEAD"
+  }
+}

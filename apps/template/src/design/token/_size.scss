@@ -1,0 +1,68 @@
+// size/margin/padding相关 token
+:root {
+  --ec-size-1: 2px;
+  --ec-size-2: 4px;
+  --ec-size-3: 6px;
+  --ec-size-4: 8px;
+  --ec-size-5: 12px;
+  --ec-size-6: 16px;
+  --ec-size-7: 20px;
+  --ec-size-8: 24px;
+  --ec-size-9: 28px;
+  --ec-size-10: 32px;
+  --ec-size-11: 36px;
+  --ec-size-12: 40px;
+  --ec-size-13: 48px;
+  --ec-size-14: 56px;
+  --ec-size-15: 64px;
+  --ec-size-16: 72px;
+
+  //全局 component 组件尺寸高度相关 token
+  --ec-comp-size-xxxs: var(--ec-size-6);
+  --ec-comp-size-xxs: var(--ec-size-7);
+  --ec-comp-size-xs: var(--ec-size-8);
+  --ec-comp-size-s: var(--ec-size-9);
+  --ec-comp-size-m: var(--ec-size-10);
+  --ec-comp-size-l: var(--ec-size-11);
+  --ec-comp-size-xl: var(--ec-size-12);
+  --ec-comp-size-xxl: var(--ec-size-13);
+  --ec-comp-size-xxxl: var(--ec-size-14);
+  --ec-comp-size-xxxxl: var(--ec-size-15);
+  --ec-comp-size-xxxxxl: var(--ec-size-16);
+
+  //全局 popup 弹出层整体边距 token
+  --ec-pop-padding-s: var(--ec-size-2);
+  --ec-pop-padding-m: var(--ec-size-3);
+  --ec-pop-padding-l: var(--ec-size-4);
+  --ec-pop-padding-xl: var(--ec-size-5);
+  --ec-pop-padding-xxl: var(--ec-size-6);
+
+  //全局 component 组件左右边距 token
+  --ec-comp-paddingLR-xxs: var(--ec-size-1);
+  --ec-comp-paddingLR-xs: var(--ec-size-2);
+  --ec-comp-paddingLR-s: var(--ec-size-4);
+  --ec-comp-paddingLR-m: var(--ec-size-5);
+  --ec-comp-paddingLR-l: var(--ec-size-6);
+  --ec-comp-paddingLR-xl: var(--ec-size-8);
+  --ec-comp-paddingLR-xxl: var(--ec-size-10);
+
+  //全局 component 组件上下边距 token
+  --ec-comp-paddingTB-xxs: var(--ec-size-1);
+  --ec-comp-paddingTB-xs: var(--ec-size-2);
+  --ec-comp-paddingTB-s: var(--ec-size-4);
+  --ec-comp-paddingTB-m: var(--ec-size-5);
+  --ec-comp-paddingTB-l: var(--ec-size-6);
+  --ec-comp-paddingTB-xl: var(--ec-size-8);
+  --ec-comp-paddingTB-xxl: var(--ec-size-10);
+
+  //全局 component 组件间距 token
+  --ec-comp-margin-xxs: var(--ec-size-1);
+  --ec-comp-margin-xs: var(--ec-size-2);
+  --ec-comp-margin-s: var(--ec-size-4);
+  --ec-comp-margin-m: var(--ec-size-5);
+  --ec-comp-margin-l: var(--ec-size-6);
+  --ec-comp-margin-xl: var(--ec-size-7);
+  --ec-comp-margin-xxl: var(--ec-size-8);
+  --ec-comp-margin-xxxl: var(--ec-size-10);
+  --ec-comp-margin-xxxxl: var(--ec-size-12);
+}

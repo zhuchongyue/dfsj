@@ -1,0 +1,54 @@
+{
+  "compilerOptions": {
+//    "disableSizeLimit": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "declaration": true,
+    "declarationDir": "dist",
+    "verbatimModuleSyntax": false, //引入import
+    "useDefineForClassFields": true,
+    "allowUnusedLabels": true,
+    "noUnusedLocals": false, //声明未使用
+    "noUnusedParameters": false, //声明未使用
+    "noImplicitAny": false, //允许any类型
+    "strict": false,
+    "removeComments": true,
+    "noLib": false,
+    "allowJs": true,
+    "checkJs":true,
+    "emitDecoratorMetadata": true,
+    "esModuleInterop": true,
+    "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
+    "target": "esnext",
+    "strictNullChecks": false,
+    "sourceMap": true,
+    /* 高级选项 */
+    "forceConsistentCasingInFileNames": true,//是否区分文件系统大小写规则
+    "extendedDiagnostics": false,//是否查看 TS 在编译时花费的时间
+    "noEmitOnError": true,//有错误时不进行编译
+    "resolveJsonModule": true,//是否解析 JSON 模块
+    "jsx": "preserve",
+//    "typeRoots": ["./node_modules/@types/", "./src/types/", "./types/"],
+//    "extendedDiagnostics": true,'
+    "lib": [
+      "esnext",
+      "dom",
+      "dom.iterable"
+    ],
+    "paths": {
+      "/@/packages/*": ["./packages/*"],
+      "@dfsj/*": ["./packages/*"]
+    }
+  },
+  "include": [],
+  "exclude": [
+    "node_modules",
+    "**/*.spec.ts",
+    "**/*.test.ts",
+    "__tests__",
+    "dist",
+    "**/*.js",
+  ]
+}
+

@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="zh_CN" id="htmlRoot">
+<head>
+    <meta charset="UTF-8"/>
+    <link rel="icon" type="image/svg+xml" href="/vite.svg"/>
+    <script type="text/javascript" src="/config/env.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title><%= title %></title>
+</head>
+<body>
+<script>
+    (() => {
+        var htmlRoot = document.getElementById('htmlRoot');
+        var theme = window.localStorage.getItem('__APP__DARK__MODE__');
+        if (htmlRoot && theme) {
+            htmlRoot.setAttribute('data-theme', theme);
+            theme = htmlRoot = null;
+        }
+    })();
+</script>
+<div id="app"></div>
+<!--    <script type="module" src="/src/main.ts"></script>-->
+</body>
+</html>
