@@ -115,3 +115,9 @@ export declare interface Theme {
   thumbnail:string,
   colors:object
 }
+
+declare global {
+  interface Window {
+    globalEnvs: any;
+  }
+}

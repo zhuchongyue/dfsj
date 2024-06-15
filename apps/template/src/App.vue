@@ -2,6 +2,8 @@
 // import "@dfsj/components/dist/index.min.css"
 // import "@dfsj/echarts/dist/index.min.css"
 // import * as ECCesium from '@dfsj/cesium'
+
+import '@dfsj/cesium/src/themes/index.js';
 import * as ECHooks from '@dfsj/hooks'
 import * as ECComponents from '@dfsj/components'
 // import * as ECGuest from '@dfsj/guest'
@@ -11,10 +13,7 @@ import * as ECUtils from '@dfsj/utils'
 import zhCn from 'element-plus/dist/locale/zh-cn.js';
 import {computed, reactive, ref} from 'vue';
 import AppProvider from '/@/components/Application/src/AppProvider.vue';
-import FixedLayout from "./layouts/fixed/FixedLayout.vue";
-import DynamicLayout from "./layouts/dynamic/DynamicLayout.vue";
 import MapLayout from "./layouts/map/MapLayout.vue";
-import UsageLayout from "../layouts/usage/UsageLayout.vue";
 import Visual from "@/components/Visual/Visual.vue";
 // console.log({ ECCesium })
 console.log({ECHooks})
@@ -38,6 +37,8 @@ const buttonConfig = reactive({autoInsertSpace: false});
         :size="assemblySize"
         :button="buttonConfig"
     >
+
+      <MapLayout />
       <!--    todo 左侧大屏-->
       <!--      <FixedLayout/>-->
 

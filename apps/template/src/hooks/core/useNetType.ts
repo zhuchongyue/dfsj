@@ -1,11 +1,10 @@
-import {NetEnum} from "/src/enums/netEnum";
-import { isDevMode as DevMode } from '/src/utils/env';
+import {NetEnum} from "/@/enums/netEnum";
+import {toRaw,reactive,unref} from "vue";
+import { isDevMode as DevMode } from '/@/utils/env';
 /***
  * 是否是开发环境
  */
 export const isDev = () => {
-    // const mode = import.meta.env.MODE
-    // return mode?.indexOf('development') != -1;
     return DevMode()
 }
 /**
@@ -23,7 +22,7 @@ const isValidDomain = () => {
 /***
  *  检验正确的ip地址
  */
-const isValidIP = (ip) => {
+const isValidIP = (ip:any) => {
     const reg = /^(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])$/
     return reg.test(ip);
 }
@@ -31,7 +30,7 @@ const isValidIP = (ip) => {
  * 计算ip数值
  * @param ipAddress
  */
-export const getIpNum = (ipAddress) => {/*获取IP数*/
+export const getIpNum = (ipAddress:any) => {/*获取IP数*/
     let ip = ipAddress.split(".");
     let a = parseInt(ip[0]);
     let b = parseInt(ip[1]);
@@ -46,10 +45,9 @@ export const getIpNum = (ipAddress) => {/*获取IP数*/
  * @param begin
  * @param end
  */
-export const isContain = (userIp, begin, end) => {
+export const isContain = (userIp:any, begin:any, end:any) => {
     return (userIp >= begin) && (userIp <= end);
 }
-
 export function useNetType() {
     /***
      * 1、开发环境下（localhost:xxx、172.0.0.1:xxx、192.168.x.x:xxx、10.10.x.x:xx）
@@ -58,39 +56,31 @@ export function useNetType() {
      * 2、生产环境下（域名、政务网59、互联网120、专网10）
      *     分别访问对应的网段ip下的服务地址
      */
-        let location: string | any = window.location.href;
+    let location: string | any = window.location.href;
     // let location = 'http://192.42.245.59:8081/'
     const isDevMode = isDev()
     const isInner = false;
-    const state = reactive({
+    const state = reactive<{isDev:boolean,isInner:boolean,net:any}>({
         isDev: isDevMode,
         isInner: isInner,
         net: null,
     })
     state.net = NetEnum.INTERNET;
     if (isDevMode) {
-
     } else {
         /***
          * 1、检查是不是域名访问
          */
         if (isValidDomain()) {
-
         } else {
             state.isInner = true;
-            /**
-             * ip情况
-             * */
-                //获取服务器ip地址
+            /*** ip情况 获取服务器ip地址   * */
             const reg = /\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}/;
-            const ip = reg.exec(location)[0];
-            if (!isValidIP(ip)) throw Error('不合法的ip地址！');
+            const ip = reg.exec(location)?.[0];
+            if (!ip && !isValidIP(ip)) throw Error('不合法的ip地址！');
             let ipNum = getIpNum(ip);
-
             console.log('服务器ip', ip, isValidIP(ip), ipNum);
-            /**
-             * 专网
-             */
+            /**  * 专网*/
             if (isContain(ipNum, getIpNum("10.0.0.0"), getIpNum("10.255.255.255"))
                 || isContain(ipNum, getIpNum("172.0.0.0"), getIpNum("172.255.255.255"))
                 || isContain(ipNum, getIpNum("192.0.0.0"), getIpNum("192.255.255.255"))

@@ -48,3 +48,14 @@ export enum RouterTransitionEnum {
   FADE_BOTTOM = 'fade-bottom',
   FADE_SCALE = 'fade-scale',
 }
+//gis平台
+export enum GisPlatformEnum {
+   OPENLAYERS = 'openlayers', //二维平台
+   CESIUM = 'cesium',//三维平台
+}
+//gis投影
+export enum GisProjectionEnum {
+  EPSG4326 = 'EPSG:4326', //84
+  EPSG3857 = 'EPSG:3857',//墨卡托
+  EPSG4490 = 'EPSG:4490',//2000
+}

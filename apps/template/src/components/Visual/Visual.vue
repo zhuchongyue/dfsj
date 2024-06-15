@@ -107,5 +107,7 @@ const click = (origin,key:Symbol)=>{
 <style lang="scss">
 $prefix-cls: #{$namespace}-component-Visual-page;
 .#{$prefix-cls} {
+  position: fixed;
+  z-index: 100;
 }
 </style>

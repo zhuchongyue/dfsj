@@ -8,6 +8,12 @@ window.globalEnvs = {
     // geoserverUrl:'http://58.42.237.172:8185/geoserver', //底图服务
     geoserverUrl: 'http://rkgeo.dfsjcloud.com/geoserver',//底图服务
     // geoserverUrl:'http://10.10.10.50:9100/geoserver' //底图服务
+    //TODO 网络相关
+    net: -1, // -1  根据自定义程序判断 //网络环境，0：互联网，1：安监网，3：政务外网
+    //TODO 矢量上图相关
+    geomType: 1, //geomType 0 wkt 1 wkb 默认为 0   有几个单元上图数据传输大 使用wkb减少1/3的大小
+
+    //TODO 登录相关
     appid: 'wx1328f7f44e7669d4',
     redirect_uri: 'http://gzndy.dfsjcloud.com/login',
     wxlogin: true,  //微信登录
