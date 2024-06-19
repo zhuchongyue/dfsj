@@ -16,8 +16,8 @@ export type WindowOptions = {
     modally?: boolean,
     prevent?: boolean,
     maximizer?: boolean,
-    header:boolean,
-    footer:boolean,
+    header?:boolean,
+    footer?:boolean,
 };
 export interface WindowState {
     items: WindowOptions[];

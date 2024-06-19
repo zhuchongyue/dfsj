@@ -1,5 +1,4 @@
 import {defineAsyncComponent} from 'vue';
-import basemap from "@/layouts/map/config/basemap.ts";
 
 const toolboxCfg = [
     {
@@ -35,11 +34,6 @@ const toolboxCfg = [
         component: defineAsyncComponent(
             () => import('/src/layouts/map/components/ToolBox/components/BaseMap.vue')
         ),
-        props: {
-            get basemap() {
-                return basemap
-            }
-        },
         closeOnContentClick: true,
     }, {
         label: '专题',

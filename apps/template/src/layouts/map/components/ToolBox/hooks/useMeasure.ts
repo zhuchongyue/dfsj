@@ -1,5 +1,5 @@
 import {onMounted} from "vue";
-import {Measure} from "/@/packages/ol";
+import {Measure} from "@dfsj/ol";
 import {getGis, GisSymbolKey} from "/@/core/GisCache";
 
 

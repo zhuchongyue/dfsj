@@ -2,14 +2,17 @@
 import {useDesign} from "/@/hooks/web/useDesign";
 import {Icon} from "@dfsj/components";
 import {reactive,ref} from "vue";
-import {useFlyTo} from "/@/core/Resource/hooks/useFlyto";
-import Util from "/@/packages/ol/src/modules/utils/Util";
+import {useFlyto} from "@/core/adapter/useFlyto.ts";
+import {platformBasicProps} from "@/layouts/map/props.ts";
 const Mode       = {DECIMAL: 1, DEGREE: 0};
 const mode       = ref(Mode.DECIMAL);
 const {prefixCls} = useDesign('tool-box-locator');
+const props = defineProps({
+  ...platformBasicProps,
+})
 const loginForm = reactive({
-  longitude: "",
-  latitude: "",
+  longitude: "106.630153",
+  latitude: "26.647661",
 });
 function rule(side): Function {
   return (rule: any, value: any, callback: any) => {
@@ -46,7 +49,7 @@ const rules = reactive<any>({
   latitude: [{ validator: rule(1), trigger: 'blur' }],
 })
 
-const { fly , flyHome,dispose} = useFlyTo({enableDisposeOnUnmount: false})
+const { fly , flyHome,dispose} = useFlyto(props.gisKey , {enableDisposeOnUnmount: false})
 function onFlyTo() {
   let lon:any = loginForm.longitude, lat :any= loginForm.latitude;
   if (mode.value === Mode.DEGREE) {
@@ -57,7 +60,7 @@ function onFlyTo() {
   const coordinate = [ +lon,+lat ]
 
   fly(coordinate , {
-    attr:{id: Util.uuid()},
+    attr:{ },
     focus:false,
     marker: true,
   })
@@ -68,7 +71,7 @@ function handleClear() {
 </script>
 
 <template>
-  <div :class="prefixCls">
+  <div :class="`${prefixCls} relative z-10 w-full pointer-events-auto`">
     <div class="tbl-item item-section" @click.stop="()=>flyHome()">
       <Icon class="item-section-icon" size="24" :icon="'mdi:home'"/>
       <span>地图初始视角</span>
@@ -86,7 +89,7 @@ function handleClear() {
 <!--    </div>-->
 
     <div class="locator-fly">
-      <div class="between-icon">
+      <div class="between-icon flex items-center justify-center">
         <Icon size="24"
               @click.stop="mode=1-mode"
               :icon="'mdi:swap-vertical-bold'"/>
@@ -110,7 +113,7 @@ function handleClear() {
           </el-form-item>
         </el-form>
       </div>
-      <div class="between-icon">
+      <div class="between-icon flex items-center justify-center">
         <Icon size="24" :icon="'mdi:send-check'" @click.stop="onFlyTo"/>
       </div>
     </div>
@@ -127,7 +130,6 @@ function handleClear() {
 $prefixCls: #{$namespace}-tool-box-locator;
 $WRAP_WIDTH: 260px;
 .#{$prefixCls} {
-  @apply relative z-10 w-full pointer-events-auto;
   min-width: $WRAP_WIDTH;
   .locator-fly { 
     width: 100%;
@@ -139,7 +141,6 @@ $WRAP_WIDTH: 260px;
 
   .between-icon {
     width: 45px;
-    @apply flex items-center justify-center;
   }
 
   .el-input__wrapper {

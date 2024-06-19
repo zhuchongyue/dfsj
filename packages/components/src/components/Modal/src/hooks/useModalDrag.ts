@@ -12,7 +12,7 @@ export interface UseModalDragMoveContext {
 }
 
 export function useModalDragMove(context: UseModalDragMoveContext) {
-  console.log('拖拽..............................................................');
+
   const moving = ref(false);
   const locator = reactive({ top: null, bottom: null, left: null, right: null });
   const sign = reactive({ x: undefined, y: undefined, l: undefined, t: undefined });
@@ -48,7 +48,6 @@ export function useModalDragMove(context: UseModalDragMoveContext) {
             const ex = context.props.extent;
             const dx = event.x - sign.x;
             const dy = event.y - sign.y;
-            console.log('that.refs', that.refs, that);
             const br = that.refs.body.getBoundingClientRect();
             const el = ex.left != null ? ex.left : -Number.MAX_VALUE;
             const et = ex.top != null ? ex.top : -Number.MAX_VALUE;
@@ -65,6 +64,8 @@ export function useModalDragMove(context: UseModalDragMoveContext) {
             locator.left = sign.l + Δx;
             locator.top = sign.t + Δy;
           }
+          locator.right = "unset !important";
+          locator.bottom = "unset !important";
           that.emit('update:offset', locator);
         }
       };
@@ -81,11 +82,9 @@ export function useModalDragMove(context: UseModalDragMoveContext) {
     const { proxy } = that;
     // const dragWraps = document.querySelectorAll('.ant-modal-wrap');
     const dragWrap = proxy.$el;
-    console.log('dragWrap', dragWrap);
     if (!dragWrap) return;
     const display = getStyle(dragWrap, 'display');
     const draggable = dragWrap.getAttribute('data-drag') ?? true;
-    console.log({ display, draggable });
     if (display !== 'none') {
       // 拖拽位置
       if (draggable === null || unref(context.destroyOnClose)) {

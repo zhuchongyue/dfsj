@@ -38,7 +38,7 @@ export default interface LayerPlayer {
   /**
    * 更新所有图层。不同的实现更新策略不一样。
    */
-  update(): void;
+  update(index:number): void;
   /**
    * 删除所有图层，已叠加到地图中的图层会被移除。所引用的资源会被释放。
    */

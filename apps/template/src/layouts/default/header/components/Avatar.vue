@@ -38,6 +38,7 @@ import PasswordDialog from "./PasswordDialog.vue";
 import {Icon} from "@dfsj/components";
 import {PageEnum} from "/@/enums/pageEnum";
 import {useUserStore} from "/@/store/modules/user";
+import {useRootStoreWithOut} from "@/store/root.ts";
 // import {addDialog} from "/@/components/Dialog";
 const userStore = useUserStore();
 const username = computed(() => userStore.getUserInfo?.realName);
@@ -71,15 +72,12 @@ function handleAccount() {
 }
 
 function handleEdit() {
-  // addDialog({
-  //   title: "修改密码",
-  //   width: '30rem',
-  //   height: '350px',
-  //   // contentRenderer: () => (ReportForm)//import("./components/reportForm/index.vue")
-  //   contentRenderer:markRaw(defineAsyncComponent(() => import("/@/views/flood/system/userInfo/components/changPsw.vue"))),
-  //   // hideFooter: true
-  // })
-
+  useRootStoreWithOut().window.open({
+    id: 'edit-user',
+    title: "修改密码",
+    sizes:['30rem','350px'],
+    content:() => import("/@/views/system/userInfo/components/UserPsw.vue"),
+  })
 }
 </script>
 

@@ -193,6 +193,7 @@ const globalPlatformBaseMap = {
             methods: 'createXYZImageryLayer',
             thumbnail: '/images/map/thumb.c.img.png',
             name: '影像',
+            isDefault: true,
             options: {
                 url: `http://dxdm.dfsjcloud.com/terrain1/DataServer?T=img_w&x={x}&y={y}&l={z}&tk=5fe3eb4fdcabe2837a926e9ffeb8df75`,
                 layer: 'img',

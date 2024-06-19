@@ -1,7 +1,5 @@
 import { defHttp, gatewayHttp } from '/@/utils/http/axios';
 
-import { FileCenterUploadURL } from './config';
-
 export const enum Api {
   findDictionaryByType = '/station-service/dictionary/findDictionaryByType',
   appHeart = '/system/user/heart', //心跳接口/用于获取服务器时间和统计在线用户
@@ -10,7 +8,6 @@ export const enum Api {
   adcdTreeByLevel = '/station-service/adcd/findAdcdTreeByLevel', //行政区域
   wscdTreeByParentId = '/station-service/adcd/findWscdTreeByParentId', //流域
   stationMap = '/rtu-service/stationObj/getStationMap', //站点分布的站点上图
-  menuList = '/station-service/module/list', //菜单
   // menuList ='/mock/module/list',//菜单baseUrl
   stationRealData = '/rtu-service/stationData/findRealData', //点位实时数据
   // 按区域(行政区域、流域)统计断面数量
@@ -134,7 +131,7 @@ export const getRsvrForecast = (params) => {
  * */
 export const uploadFileForLine = (url, params, config) => {
   return defHttp.uploadFile(
-    { url: url || FileCenterUploadURL, ...config },
+    { url: url , ...config },
     params,
     { isReturnResponse: true }
   );
@@ -304,20 +301,14 @@ export const getSectionCountByAreaCode = (params) => {
   return defHttp.post({ url: Api.sectionCount, params });
 };
 
-/**
- *
- * 获取用户的菜单信息
- */
-export const getMenuList = (params) => {
-  return defHttp.post({ url: Api.menuList, params });
-};
+
 
 /**
  * 上传文件
  * */
 export const uploadFile = (url, params, config) => {
   return gatewayHttp.uploadFile(
-    { url: url || FileCenterUploadURL, ...config },
+    { url: url  , ...config },
     params,
     { isReturnResponse: true }
   );

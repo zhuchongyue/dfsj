@@ -1,4 +1,5 @@
 import {getGis, GisSymbolKey} from "@/core/GisCache.ts";
+import {usePlatformStoreWithOut} from "@/store/modules/platform.ts";
 
 /**
  * 用于2,3维切换底图。
@@ -7,7 +8,6 @@ export function useBaseMapSwitch(key: symbol = GisSymbolKey.deriveDemo) {
     /** 开始切换*/
     function onSwitch(config:any, {index}: any) {
         const map = getGis(key);
-        console.log('map', map)
         const _key = 'layerName';
         const value = config.layerName;
         if (map?.camera) {
@@ -15,6 +15,9 @@ export function useBaseMapSwitch(key: symbol = GisSymbolKey.deriveDemo) {
         } else {
             map?.changeBaseLayer?.(_key, value);
         }
+        usePlatformStoreWithOut().setInstance(key,{
+            mapIndex:index as number
+        })
         loadAdditional()
         removeAdditional()
     }

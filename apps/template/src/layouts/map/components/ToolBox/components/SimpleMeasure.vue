@@ -1,17 +1,16 @@
 <script setup lang="ts">
 import {useDesign} from "/@/hooks/web/useDesign";
 import {Icon} from "@dfsj/components";
-// import CompositeLocator from "/@/layouts/map/components/ToolBox/components/CompositeLocator.vue";
 import {onBeforeUnmount, onMounted} from "vue";
-import {Measure} from "/@/packages/ol";
 import {getGis, GisSymbolKey} from "/@/core/GisCache";
 import {EMeasure, useMeasure } from "/@/layouts/map/components/ToolBox/hooks/useMeasure";
-
+import {platformBasicProps} from "@/layouts/map/props.ts";
 const {prefixCls} = useDesign('tool-box-maptools');
-const { handleDraw ,handleClear } = useMeasure()
-
+const props = defineProps({
+  ...platformBasicProps,
+})
+const { handleDraw ,handleClear } = useMeasure();
 let measure: any = null;
-
 interface IMapTool {
   icon: string,
   handle: Function,
@@ -101,10 +100,10 @@ onBeforeUnmount(()=>{
 </script>
 
 <template>
-  <div :class="prefixCls">
+  <div :class="`${prefixCls} flex flex-col justify-center bg-white`">
 <!--    <CompositeLocator/>-->
-    <div class="tb-item cursor-pointer item-section pointer-events-auto" v-for="(t , i) in toolListCfg"
-         :key="t?.key + 'tb'"
+    <div class="tb-item cursor-pointer item-section pointer-events-auto flex items-center" v-for="(t , i) in toolListCfg"
+         :key="t?.key + i + 'tb'"
          @click.stop="t?.handle?.(t.key)"
     >
       <Icon size="24" class="item-section-icon" :icon="t.icon"/>
@@ -117,12 +116,9 @@ onBeforeUnmount(()=>{
 $prefixCls: #{$namespace}-tool-box-maptools;
 $WRAP_WIDTH: 260px;
 .#{$prefixCls} {
-  @apply flex flex-col justify-center bg-white;
   max-width: $WRAP_WIDTH;
   min-width: 150px;
-
   .tb-item {
-    @apply flex items-center;
   }
 }
 

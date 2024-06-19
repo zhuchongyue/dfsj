@@ -2,10 +2,11 @@ import {GisPlatformEnum} from "@/enums/appEnum.ts";
 import {useUserStoreWithOut} from "@/store/modules/user.ts";
 import Website from "@/config/Website.ts";
 import {GisSymbolKey} from "@/core/GisCache.ts";
+import {deepMerge} from '@dfsj/utils';
 import globalPlatformBaseMap from "@/layouts/map/config/global/global.ts";
 const platformViewConfig = {
     [GisPlatformEnum.CESIUM]: {
-        target: GisSymbolKey.deriveDemo.toString(),
+        target: GisSymbolKey.default.toString(),
         options: {
             timeline: false, // 显示时间轴刻度
             animation: false, // 显示时间轴动画按钮
@@ -27,9 +28,7 @@ const platformViewConfig = {
                 enableLighting: true, // 是否开启灯光，开启后地球会根据当前时间启用灯光
             },
         },
-        widget:{
-
-        },
+        widget: {},
         //初始的定位信息
         defaultView: {
             alt: 704208.9648567601,
@@ -83,7 +82,14 @@ const platformViewConfig = {
         baseLayers: globalPlatformBaseMap[GisPlatformEnum.OPENLAYERS],
     }
 }
-
+const deepMergePlatformViewConfig = (opt: Object) => {
+    return deepMerge({
+            ...platformViewConfig
+        },
+        opt || {}
+    )
+}
 export {
-    platformViewConfig
+    platformViewConfig,
+    deepMergePlatformViewConfig
 }

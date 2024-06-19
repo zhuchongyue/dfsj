@@ -34,7 +34,7 @@ import {useDesign} from '/@/hooks/web/useDesign';
 import {useUserStore} from '/@/store/modules/user';
 import {useLockStore} from '/@/store/modules/lock';
 import headerImg from '/@/assets/images/header.jpg';
-import {closeAllDialog} from "/@/components/Dialog";
+import {useRootStoreWithOut} from "@/store/root.ts";
 export default defineComponent({
   name: 'LockModal',
   setup() {
@@ -64,7 +64,7 @@ export default defineComponent({
             isLock: true,
             pwd: ruleForm.password,
           });
-          closeAllDialog()
+          useRootStoreWithOut().window.hide('lock-modal-page')
           await ruleFormRef.value?.resetFields();
         } else {
           console.log('error submit!', fields)

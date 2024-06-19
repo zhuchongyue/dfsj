@@ -11,15 +11,14 @@
 </template>
 
 <script setup lang="ts">
-
 import {Icon} from "@dfsj/components";
-import {defineAsyncComponent} from "vue";
+import {useRootStoreWithOut} from "@/store/root.ts";
 function handleLock() {
-  // addDialog({
-  //   title:'锁定屏幕',
-  //   height:'40vh',
-  //   width:'60vh',
-  //   contentRenderer:defineAsyncComponent(()=>import("/@/views/sys/lock/LockModal.vue"))
-  // });
+  useRootStoreWithOut().window.open({
+    id:'lock-modal-page',
+    title:'锁定屏幕',
+    sizes:['60vh','40vh'],
+    content:()=>import("/@/views/sys/lock/LockModal.vue")
+  })
 }
 </script>

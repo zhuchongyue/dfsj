@@ -34,8 +34,8 @@ function doLocator(offset, sizes, locator, offsetable, sizeable) {
 		})
 	let top = offsetable && ensure(locator.top != null ? locator.top : offset && offset.top)
 	let lft = offsetable && ensure(locator.left != null ? locator.left : offset && offset.left)
-	const rgt = offsetable && ensure(offset && offset.right)
-	const bom = offsetable && ensure(offset && offset.bottom)
+	const rgt = offsetable && ensure(locator.right || offset && offset.right)
+	const bom = offsetable && ensure(locator.bottom || offset && offset.bottom)
 	const wid = siz && siz[0]
 	const hei = siz && siz[1]
 	let transformX, transformY, transform

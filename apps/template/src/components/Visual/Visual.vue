@@ -18,7 +18,7 @@ import VisualPlayer from "@/components/Visual/VisualPlayer.vue";
 import {emitter} from "@dfsj/utils";
 import {EMittLayerPlayable} from "@/enums/mittTypeEnum.ts";
 import {GisSymbolKey} from "@/core/GisCache.ts";
-import {players} from "@/components/Visual/mock";
+import {players, rsvrPlayer} from "@/components/Visual/mock";
 import LayerTitle from "@/components/Layer/LayerTitle.vue";
 const target = players[0]
 // const model: NodeModel = new NodeModel({...def});
@@ -75,31 +75,31 @@ const click = (origin,key:Symbol)=>{
     >
       <LayerTitle  :layer-title-key="GisSymbolKey.default"/>
     </BasicModal>
-    <BasicModal
-        :visible="true"
-        :footer="false"
-        :header="false"
-        @close="visible = false"
-        :offset="{ top: '400px', left: '15%' }"
-    >
-    <LayerTitle  :layer-title-key="GisSymbolKey.deriveDemo"/>
-    </BasicModal>
+<!--    <BasicModal-->
+<!--        :visible="true"-->
+<!--        :footer="false"-->
+<!--        :header="false"-->
+<!--        @close="visible = false"-->
+<!--        :offset="{ top: '400px', left: '15%' }"-->
+<!--    >-->
+<!--    <LayerTitle  :layer-title-key="GisSymbolKey.deriveDemo"/>-->
+<!--    </BasicModal>-->
     <div>
       <span>{{GisSymbolKey.default}}</span>
       <el-button
-          v-for="(origin,index) in players"
+          v-for="(origin,index) in players.concat(rsvrPlayer)"
           :key="origin.id"
           @click="click(origin,GisSymbolKey.default)">{{ origin.label }}</el-button>
     </div>
 
-    <span>{{GisSymbolKey.deriveDemo}}</span>
-    <el-button
-        v-for="(origin,index) in players"
-        :key="origin.id"
-        @click="click(origin,GisSymbolKey.deriveDemo)">{{ origin.label }}</el-button>
-    <VisualPlayer :offset="{ top: '500px', right: '20%' }" :play-key="GisSymbolKey.default"/>
+<!--    <span>{{GisSymbolKey.deriveDemo}}</span>-->
+<!--    <el-button-->
+<!--        v-for="(origin,index) in players"-->
+<!--        :key="origin.id"-->
+<!--        @click="click(origin,GisSymbolKey.deriveDemo)">{{ origin.label }}</el-button>-->
+    <VisualPlayer :offset="{ bottom: '50px', left: '20%' }" :play-key="GisSymbolKey.default"/>
 
-    <VisualPlayer :play-key="GisSymbolKey.deriveDemo"/> />
+<!--    <VisualPlayer :play-key="GisSymbolKey.deriveDemo"/> />-->
 
   </div>
 </template>

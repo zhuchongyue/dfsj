@@ -1,58 +1,30 @@
 import {ElMessage, ElMessageBox} from 'element-plus';
 import {defineStore} from 'pinia';
-// import { usePermissionStore } from '/@/store/modules/permission';
 import {RouteRecordRaw} from 'vue-router';
-
-import {GetUserInfoModel, LoginParams,} from '/@/api/sys/model/userModel';
-import {doLogout, getUserInfo, loginApi, phoneLoginApi, queryFunctionCfgInfoApi,} from '/@/api/user';
+import {GetUserInfoModel, LoginParams,} from '/@/api/model/user.model.ts';
+import {doLogout, getUserInfo, loginApi, phoneLoginApi,} from '/@/api/user';
 import {
   DB_DICT_DATA_KEY,
-  EXPIRES_IN_KEY,
   LOGIN_INFO_KEY,
   LOGIN_REMEMBER_ME,
-  REFRESH_TOKEN_KEY,
   ROLES_KEY,
   TENANT_ID,
   TOKEN_KEY,
-  TOKEN_TYPE_KEY,
   USER_INFO_KEY,
 } from '/@/enums/cacheEnum';
 import {PageEnum} from '/@/enums/pageEnum';
 import {RoleEnum} from '/@/enums/roleEnum';
 import {useGlobSetting} from '/@/hooks/setting';
 import {useI18n} from '/@/hooks/web/useI18n';
-// import { useI18n } from '/@/hooks/web/useI18n';
-// import { useMessage } from '/@/hooks/web/useMessage';
 import {router} from '/@/router';
 import {PAGE_NOT_FOUND_ROUTE} from '/@/router/routes/basic';
 import {store} from '/@/store';
 import {usePermissionStore} from '/@/store/modules/permission';
 import {getAuthCache, setAuthCache} from '/@/utils/auth';
-// import { isArray } from '/@/utils/is';
 import {isArray} from "@dfsj/utils"
-
 import type {ErrorMessageMode} from '/#/axios';
 import type {LoginInfo, UserInfo} from '/#/store';
 
-// import { useSso } from '/@/hooks/web/useSso';
-interface FunctionCfgItemInfo {
-  code: string;
-  desc: string;
-  name: string;
-  isChecked?: boolean;
-  param?: any;
-}
-interface FunctionCfgItem {
-  code: string;
-  desc: string;
-  name: string;
-  infos: FunctionCfgItemInfo[];
-}
-interface FunctionCfgInfo {
-  forecast: FunctionCfgItem;
-  homePageWarn?: FunctionCfgItem;
-  homePagePanel?: FunctionCfgItem;
-}
 interface UserState {
   userInfo: Nullable<UserInfo>;
   token?: string;
@@ -62,7 +34,6 @@ interface UserState {
   lastUpdateTime: number;
   tenantid?: string | number;
   loginInfo?: Nullable<LoginInfo>;
-  functionCfgInfo: FunctionCfgInfo;
 }
 
 export const useUserStore = defineStore({
@@ -70,11 +41,6 @@ export const useUserStore = defineStore({
   state: (): UserState => ({
     // 用户信息
     userInfo: null,
-    // token
-    token: undefined,
-    token_type: undefined,
-    refresh_token: undefined,
-    expires_in: undefined,
     // 角色列表
     roleList: [],
     // 字典
@@ -85,7 +51,6 @@ export const useUserStore = defineStore({
     lastUpdateTime: 0,
     //登录返回信息
     loginInfo: null,
-    functionCfgInfo: null,
   }),
   getters: {
     getRememberMe() {
@@ -105,13 +70,13 @@ export const useUserStore = defineStore({
       return this.token || getAuthCache<string>(TOKEN_KEY);
     },
     getTokenType(): string {
-      return this.token_type || getAuthCache<string>(TOKEN_TYPE_KEY);
+      return this.getLoginInfo.token_type;
     },
     getRefreshToken(): string {
-      return this.refresh_token || getAuthCache<string>(REFRESH_TOKEN_KEY);
+      return this.getLoginInfo.refresh_token;
     },
-    getExpiresIn(): string {
-      return this.expires_in || getAuthCache<string>(EXPIRES_IN_KEY);
+    getExpiresIn(): number {
+      return this.getLoginInfo.expires_in;
     },
     getAllDictItems(): [] {
       return this.dictItems || getAuthCache(DB_DICT_DATA_KEY);
@@ -126,9 +91,6 @@ export const useUserStore = defineStore({
     },
     getLastUpdateTime(): number {
       return this.lastUpdateTime;
-    },
-    getFunctionCfgInfo(): FunctionCfgInfo {
-      return this.functionCfgInfo;
     },
     getTenant(): string | number {
       return this.tenantid || getAuthCache<string | number>(TENANT_ID);
@@ -165,24 +127,9 @@ export const useUserStore = defineStore({
       let userStr = JSON.stringify(user);
       localStorage.setItem(LOGIN_REMEMBER_ME, userStr);
     },
-    setFunctionCfgInfo(info: FunctionCfgInfo) {
-      this.functionCfgInfo = info;
-    },
     setToken(info: string | undefined) {
       this.token = info ? info : ''; // for null or undefined value
       setAuthCache(TOKEN_KEY, info);
-    },
-    setRefreshToken(info: string | undefined) {
-      this.refresh_token = info ? info : ''; // for null or undefined value
-      setAuthCache(REFRESH_TOKEN_KEY, info);
-    },
-    setTokenType(info: string | undefined) {
-      this.token_type = info ? info : ''; // for null or undefined value
-      setAuthCache(TOKEN_TYPE_KEY, info);
-    },
-    setExpiresIn(info: string | undefined) {
-      this.expires_in = info ? info : ''; // for null or undefined value
-      setAuthCache(EXPIRES_IN_KEY, info);
     },
     setRoleList(roleList: RoleEnum[]) {
       this.roleList = roleList;
@@ -217,16 +164,6 @@ export const useUserStore = defineStore({
     },
     /**
      * 登录事件
-     * access_token     * :     * "nlPQFUukMHuVwaia5qSknoWTj7Q"
-     * * dept_id     * :     * 0
-     * expires_in     * :     * 84513
-     * * license     * :     * "made by usercenter"
-     * refresh_token     * :     * "-SfSf4OaM81Brbx9DEzc_V6tf3E"
-     * scope     * :     * "server"
-     * token_type     * :     * "bearer"
-     * user_adcd     * :     * "000000000000000"
-     * user_id     * :     * 1
-     * username     * :     * "admin"
      */
     async login(
       params: LoginParams & {
@@ -238,21 +175,11 @@ export const useUserStore = defineStore({
       try {
         const { goHome = true, mode, ...loginParams } = params;
         const data = await loginApi(loginParams, mode);
-        console.log('data', data);
+        console.log('data',data)
         if (data?.code == 1) {
           ElMessage.error(data?.msg);
         } else {
-          const {
-            access_token: token,
-            refresh_token,
-            expires_in,
-            token_type,
-          } = data;
-          // save token
-          this.setToken(token);
-          this.setTokenType(token_type);
-          this.setRefreshToken(refresh_token);
-          this.setExpiresIn(expires_in);
+          this.setToken(data?.access_token);
           return this.afterLoginAction(goHome, data);
         }
       } catch (error) {
@@ -275,17 +202,7 @@ export const useUserStore = defineStore({
         if (data?.code == 1) {
           ElMessage.error(data?.msg);
         } else {
-          const {
-            access_token: token,
-            refresh_token,
-            expires_in,
-            token_type,
-          } = data;
-          // save token
-          this.setToken(token);
-          this.setTokenType(token_type);
-          this.setRefreshToken(refresh_token);
-          this.setExpiresIn(expires_in);
+          this.setToken(data?.access_token);
           return this.afterLoginAction(goHome, data);
         }
       } catch (error) {
@@ -312,7 +229,6 @@ export const useUserStore = defineStore({
       if (!this.getToken) return null;
       //获取用户信息
       const userInfo: any = await this.getUserInfoAction();
-      await this.queryFunctionCfgInfo();
       const sessionTimeout = this.sessionTimeout;
       if (sessionTimeout) {
         this.setSessionTimeout(false);
@@ -320,7 +236,7 @@ export const useUserStore = defineStore({
         const permissionStore = usePermissionStore();
         if (!permissionStore.isDynamicAddedRoute) {
           const routes = await permissionStore.buildRoutesAction();
-          // console.log('需要创建的...',routes)
+          console.log('需要创建的...',routes)
           routes.forEach((route) => {
             router.addRoute(route as unknown as RouteRecordRaw);
           });
@@ -328,9 +244,6 @@ export const useUserStore = defineStore({
           permissionStore.setDynamicAddedRoute(true);
         }
         await this.setLoginInfo({ ...data, isLogin: true });
-        //update-begin-author:liusq date:2022-5-5 for:登录成功后缓存拖拽模块的接口前缀
-        // localStorage.setItem(JDragConfigEnum.DRAG_BASE_URL, useGlobSetting().domainUrl);
-        //update-end-author:liusq date:2022-5-5 for: 登录成功后缓存拖拽模块的接口前缀
         goHome &&
           (await router.replace(
             (userInfo && userInfo.homePath) || PageEnum.BASE_HOME
@@ -391,14 +304,6 @@ export const useUserStore = defineStore({
         // await useSso().ssoLoginOut();
       }
       goLogin && (await router.push(PageEnum.BASE_LOGIN));
-    },
-    async queryFunctionCfgInfo() {
-      let functionCfgInfo = await queryFunctionCfgInfoApi().catch(() => {
-        return Promise.resolve({
-          forecast: null,
-        });
-      });
-      this.setFunctionCfgInfo(functionCfgInfo);
     },
     /**
      * 退出询问

@@ -1,0 +1,103 @@
+.ol-popup.default {
+  .ol-popup-content {
+    border-radius: 5px;
+    background: #fff;
+    box-shadow: 0 0 0.521vw 1px rgba(#2c5597, 0.3);
+  }
+
+  &.specs {
+    font-weight: bold;
+    color: #fd7d00;
+  }
+
+  .loading {
+    position: static;
+    width: unset;
+    height: unset;
+    font-size: 1.2rem;
+    color: $primary-color-6;
+    background: unset;
+  }
+
+  article {
+    min-width: 10rem;
+    max-width: 500px;
+    padding: 5px;
+    border-radius: 4px;
+    backdrop-filter: blur(10px);
+
+    header {
+      display: block;
+      margin: auto 10px;
+      padding: 5px 0;
+      border-bottom: 1px solid #2d7697;
+      font-size: 16px;
+      font-weight: 800;
+      text-align: center;
+      color: $primary-color-6;
+    }
+
+    section {
+      font-size: 1.1rem;
+    }
+
+    section.loading {
+      color: $primary-color-6;
+    }
+
+    section.error {
+      color: $error-color-6;
+    }
+
+    li {
+      display: table-row;
+      align-items: center;
+      padding: 2px 0;
+      font-size: 14px;
+      color: #a2c5dc;
+      list-style-type: none;
+      border-collapse: collapse;
+    }
+
+    li > img {
+      display: table-cell;
+      width: 12px;
+      height: 12px;
+      margin-left: 5px;
+    }
+
+    i {
+      display: table-cell;
+      padding: 0 5px;
+      font-size: 14px;
+      font-style: normal;
+      white-space: nowrap;
+      word-break: keep-all;
+      color: $primary-color-6;
+    }
+
+    i:nth-child(2) {
+      white-space: pre-line;
+      word-break: normal;
+    }
+
+    i:nth-child(3) {
+      font-size: 0.8rem;
+    }
+
+    fieldset {
+      display: table;
+      border: none;
+    }
+
+    legend {
+      margin-left: 4px;
+      font-size: 13px;
+      color: #123671;
+    }
+
+    fieldset:not(:first-child) {
+      margin-top: 5px;
+    }
+  }
+}

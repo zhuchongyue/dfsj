@@ -47,7 +47,7 @@ onBeforeMount(() => {
           :to="ROUTE_MAPPING?.[item?.name]?.path ?? '/'"
       >
         <SvgIcon :size="36" :name="ROUTE_MAPPING?.[item?.name]?.icon"/>
-        <span> {{ item?.label || item?.name }}</span>
+        <span>   {{ item?.label || item?.name }}</span>
       </router-link>
     </div>
   </div>

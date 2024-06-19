@@ -3,7 +3,8 @@ import { defHttp } from '/src/utils/http/axios';
 const Api = {
     adcdTree : "/station-service/adcd/findAdcdTreeWithRiskNode",
     roleList: "/system/userManage/getRoles",
-    userList: "/system/userManage/page",
+    // userList: "/system/userManage/page",
+    userList: "/user/userManage/page",
     deptList: "/system/userManage/getDepts",
     addUser: "/system/userManage/createUser",
     editUser: "/system/userManage/editUser",

@@ -120,8 +120,10 @@ export default class ResolvableLayerProvider extends AbstractNodeProvider {
                 config = this.interceptor(config);
             }
             // console.log('config node',node , config)
-            return this.factory.create(config);
+            // return this.factory.create(config);
+            return  config
         }
+        return null;
     }
 
     public getNodeInfo(index: number): Visual.NodeInfo {

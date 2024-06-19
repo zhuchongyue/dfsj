@@ -48,7 +48,6 @@ export function getRawRoute(
 
 //首页  预报  配置
 const HAS_MAP_LAYOUT = ['listen_id_1', 'listen_id_2', 'listen_id_3', 'listen_id_47']
-
 export function transMenu(menus: Array<Menu>) {
     if (!menus?.length || !menus) return [];
     const redirect = findFirstPath();
@@ -60,7 +59,6 @@ export function transMenu(menus: Array<Menu>) {
         redirect:redirect ? `${PageEnum.BASE_HOME}/${redirect}` :  ''
     }
     let children: AppRouteRecordRaw[] = []
-    console.log('menus', menus)
     menus.forEach((menu) => {
         const {label, name} = menu;
         const route = {

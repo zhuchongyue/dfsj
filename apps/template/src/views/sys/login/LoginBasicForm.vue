@@ -19,8 +19,10 @@ const loginRules = reactive({
 });
 
 const loginForm = reactive({
-  username: "hfh_admin",
-  password: "Dfsj@12345",
+  // username: "hfh_admin",
+  // password: "Dfsj@12345",
+  username: "adm0n",
+  password: "Dfsj@gy2023brysj_&?#",
   captcha: '',
   captcha_id: '',
 });

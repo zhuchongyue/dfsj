@@ -15,13 +15,13 @@ import {computed, reactive, ref} from 'vue';
 import AppProvider from '/@/components/Application/src/AppProvider.vue';
 import MapLayout from "./layouts/map/MapLayout.vue";
 import Visual from "@/components/Visual/Visual.vue";
-// console.log({ ECCesium })
-console.log({ECHooks})
-console.log({ECComponents})
-// console.log({ ECGuest })
-console.log({ECEcharts})
-// console.log({ ECOl })
-console.log({ECUtils})
+// // console.log({ ECCesium })
+// console.log({ECHooks})
+// console.log({ECComponents})
+// // console.log({ ECGuest })
+// console.log({ECEcharts})
+// // console.log({ ECOl })
+// console.log({ECUtils})
 
 const locale = ref(zhCn);
 const assemblySize = computed(() => 'default');
@@ -38,7 +38,6 @@ const buttonConfig = reactive({autoInsertSpace: false});
         :button="buttonConfig"
     >
 
-      <MapLayout />
       <!--    todo 左侧大屏-->
       <!--      <FixedLayout/>-->
 
@@ -52,6 +51,7 @@ const buttonConfig = reactive({autoInsertSpace: false});
 <!--            <UsageLayout/>-->
       <Visual />
 <!--      <RouterView/>-->
+      <MapLayout />
     </el-config-provider>
   </AppProvider>
 

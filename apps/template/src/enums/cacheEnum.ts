@@ -3,9 +3,6 @@
  */
 // token key
 export const TOKEN_KEY = 'TOKEN__';
-export const TOKEN_TYPE_KEY = 'TOKEN_TYPE__';
-export const REFRESH_TOKEN_KEY = 'REFRESH_TOKEN__';
-export const EXPIRES_IN_KEY = 'EXPIRES_IN__';
 export const LOCALE_KEY = 'LOCALE__';
 // user info key
 export const USER_INFO_KEY = 'USER__INFO__';
@@ -31,6 +28,11 @@ export const LOGIN_INFO_KEY = 'LOGIN__INFO__';
 export const LOGIN_REMEMBER_ME = 'LOGIN__REMEMBER_';
 
 export const DISPATCH_KEY = 'DISPATCH_KEY';
+
+export const PLATFORM_INS_KEY = 'PLATFORM_INS_KEY';
+
+
+
 export enum CacheTypeEnum {
   SESSION,
   LOCAL,

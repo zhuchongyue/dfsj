@@ -1,9 +1,10 @@
 import { ErrorTypeEnum } from '/@/enums/exceptionEnum';
 import { MenuModeEnum, MenuTypeEnum } from '/@/enums/menuEnum';
-import { RoleInfo } from '/@/api/sys/model/userModel';
 import {WindowPiniaPlugin} from "/@/store/plugins/window.plugin.ts";
 import {BoardPiniaPlugin} from "/@/store/plugins/board.plugin.ts";
+import {GetUserInfoModel, LoginResultModel} from "@/api/model/user.model.ts";
 
+export type  LoginInfo = LoginResultModel;
 // Lock screen information
 export interface LockInfo {
   // Password required
@@ -32,16 +33,7 @@ export interface ErrorLogInfo {
   time?: string;
 }
 
-export interface UserInfo {
-  userId: string | number;
-  username: string;
-  realName: string;
-  avatar: string;
-  desc?: string;
-  homePath?: string;
-  roles: RoleInfo[];
-  adcd: string
-}
+export type UserInfo = GetUserInfoModel;
 
 export interface BeforeMiniState {
   menuCollapsed?: boolean;

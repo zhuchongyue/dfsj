@@ -11,7 +11,7 @@ import {
   LOCK_INFO_KEY,
   LOGIN_INFO_KEY,
   LOGIN_REMEMBER_ME,
-  MULTIPLE_TABS_KEY,
+  MULTIPLE_TABS_KEY, PLATFORM_INS_KEY,
   PROJ_CFG_KEY,
   REFRESH_TOKEN_KEY,
   ROLES_KEY,
@@ -36,12 +36,13 @@ interface BasicStore {
   [PROJ_CFG_KEY]: ProjectConfig;
   [MULTIPLE_TABS_KEY]: RouteLocationNormalized[];
   [DISPATCH_KEY]: any;
-  // [LOGIN_INFO_KEY]: any;
-  // [TOKEN_TYPE_KEY]: any;
-  // [REFRESH_TOKEN_KEY]: any;
-  // [EXPIRES_IN_KEY]: any;
-  // [DB_DICT_DATA_KEY]: any;
-  // [TENANT_ID]: any;
+  [PLATFORM_INS_KEY]: any;
+  [LOGIN_INFO_KEY]: any;
+  [TOKEN_TYPE_KEY]: any;
+  [REFRESH_TOKEN_KEY]: any;
+  [EXPIRES_IN_KEY]: any;
+  [DB_DICT_DATA_KEY]: any;
+  [TENANT_ID]: any;
 }
 
 type LocalStore = BasicStore;
@@ -59,6 +60,8 @@ const localMemory = new Memory(DEFAULT_CACHE_TIME);
 const sessionMemory = new Memory(DEFAULT_CACHE_TIME);
 
 function initPersistentMemory() {
+
+  console.log('------------------------------------------initPersistentMemory---------------------------------------------------')
   const localCache = ls.get(APP_LOCAL_CACHE_KEY);
   const sessionCache = ss.get(APP_SESSION_CACHE_KEY);
   localCache && localMemory.resetCache(localCache);
@@ -125,7 +128,7 @@ window.addEventListener('beforeunload', function () {
   // TOKEN_KEY 在登录或注销时已经写入到storage了，此处为了解决同时打开多个窗口时token不同步的问题
   // LOCK_INFO_KEY 在锁屏和解锁时写入，此处也不应修改
   ls.set(APP_LOCAL_CACHE_KEY, {
-    ...omit(localMemory.getCache, LOCK_INFO_KEY),
+    ...omit(localMemory.getCache, [LOCK_INFO_KEY]),
     ...pick(ls.get(APP_LOCAL_CACHE_KEY), [
       TOKEN_KEY,
       USER_INFO_KEY,
@@ -133,7 +136,7 @@ window.addEventListener('beforeunload', function () {
     ]),
   });
   ss.set(APP_SESSION_CACHE_KEY, {
-    ...omit(sessionMemory.getCache, LOCK_INFO_KEY),
+    ...omit(sessionMemory.getCache, [LOCK_INFO_KEY]),
     ...pick(ss.get(APP_SESSION_CACHE_KEY), [
       TOKEN_KEY,
       USER_INFO_KEY,
@@ -144,7 +147,6 @@ window.addEventListener('beforeunload', function () {
 
 function storageChange(e: any) {
   const { key, newValue, oldValue } = e;
-
   if (!key) {
     Persistent.clearAll();
     return;

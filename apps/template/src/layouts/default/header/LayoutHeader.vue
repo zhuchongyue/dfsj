@@ -2,16 +2,11 @@
 import {useDesign} from '/@/hooks/web/useDesign';
 import ToolBarRight from '/@/layouts/default/header/ToolBarRight.vue';
 import SysTime from '/@/layouts/default/header/components/SysTime.vue';
-import {useUserStore} from "/@/store/modules/user";
 import PrimaryMenuLayout from "/@/layouts/default/menu/PrimaryMenuLayout.vue";
-
 const {prefixCls} = useDesign('basic-header-layout');
-const store = useUserStore()
-
 function reload() {
   location.reload(true); // 深度刷新
 }
-
 const appIcon = window.globalEnvs?.appIcon;
 </script>
 <template>

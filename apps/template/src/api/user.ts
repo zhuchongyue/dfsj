@@ -1,35 +1,33 @@
 import { ElMessage } from 'element-plus';
-
 import { TOKEN_KEY } from '/@/enums/cacheEnum';
 import { PageEnum } from '/@/enums/pageEnum';
 import { router } from '/@/router';
 import { useUserStoreWithOut } from '/@/store/modules/user';
 import { setAuthCache } from '/@/utils/auth';
 import { defHttp, gatewayHttp } from '/@/utils/http/axios';
-
 import { ErrorMessageMode } from '/#/axios';
-
 import {
   GetUserInfoModel,
   LoginParams,
   LoginResultModel,
-} from './model/userModel';
-
+} from './model/user.model.ts';
 enum Api {
   Code = '/code',
-  Login = '/system/oauth/token',
-  Logout = '/system/oauth/logout',
-  GetUserInfo = '/system/userManage/myInfo',
-  phoneLogin = '/system/oauth/mobile',
+  Login = '/user/oauth/token',
+  Logout = '/user/oauth/logout',
+  GetUserInfo = '/user/userManage/myInfo',
+  menuList = '/user/module/list', //菜单
+
+  phoneLogin = '/user/oauth/mobile',
   // 获取系统权限
   // 1、查询用户拥有的按钮/表单访问权限
   // 2、所有权限
   // 3、系统安全模式
-  GetPermCode = '/system/permission/getPermCode',
+  GetPermCode = '/user/permission/getPermCode',
   //新加的获取图形验证码的接口
-  getInputCode = '/system/randomImage',
+  getInputCode = '/user/randomImage',
   //获取短信验证码的接口
-  getCaptcha = '/system/oauth/sendGzValidCode',
+  getCaptcha = '/user/oauth/sendGzValidCode',
   //注册接口
   registerApi = '/sys/user/register',
   //校验用户接口
@@ -98,7 +96,12 @@ export function getUserInfo() {
       }
     });
 }
-
+/**
+ * 获取用户的菜单信息
+ */
+export const getMenuList = (params) => {
+    return defHttp.post({ url: Api.menuList, params });
+};
 export function getPermCode() {
   return defHttp.get({ url: Api.GetPermCode });
 }
@@ -106,12 +109,6 @@ export function getPermCode() {
 export function doLogout() {
   return defHttp.post({ url: Api.Logout });
 }
-
-export function getCodeInfo(currdatetime) {
-  let url = Api.getInputCode + `/${currdatetime}`;
-  return defHttp.get({ url: url });
-}
-
 /**
  * @description: 获取短信验证码
  */
@@ -175,8 +172,8 @@ export const passwordChange = (params) =>
  * @description: user phoneLogin api
  */
 export function phoneLoginApi(
-  params: LoginParams
-  // mode: ErrorMessageMode = 'modal'
+  params: LoginParams,
+  mode: ErrorMessageMode = 'modal'
 ) {
   return defHttp.post<LoginResultModel>(
     {

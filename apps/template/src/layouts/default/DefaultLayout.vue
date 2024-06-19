@@ -12,7 +12,7 @@ const {prefixCls} = useDesign('default-layout');
 </script>
 <template>
   <div :class="[prefixCls,'h-full','w-full']">
-   <LayoutFeatures />
+    <LayoutFeatures />
     <LayoutHeader/>
     <LayoutContent/>
     <LayoutBoard/>

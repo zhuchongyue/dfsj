@@ -3,12 +3,13 @@ import {computed, ref, toRaw, unref, shallowReactive, onMounted, nextTick} from 
 import {useDesign} from "/@/hooks/web/useDesign.ts";
 import {useUserStore} from '/@/store/modules/user';
 import {EMittLayerTitle} from "@/enums/mittTypeEnum.ts";
-import {emitter} from "@dfsj/utils"
+import {emitter} from "@dfsj/utils" ;
 const useStore = useUserStore();
 const {prefixCls} = useDesign('component-Visual-page');
 //todo
 import NodeAxisComponent from '@dfsj/components/src/components/NodeAxis/src/NodeAxis.vue';
 import {BasicModal} from "@dfsj/components";
+
 const COLORS = {
   RESET: '#ff0000',
   ABLE: '#1E88E5',
@@ -25,9 +26,9 @@ const props = defineProps({
     type: Symbol,
     default: GisSymbolKey.default
   },
-  offset:{
+  offset: {
     type: Object,
-    default:()=>({ top: '500px', left: '20%' })
+    default: () => ({top: '500px', left: '20%'})
   }
 })
 const {
@@ -42,7 +43,7 @@ const {
   playing,
   current,
   onChangeInstance,
-    player
+  player
 } = useVisualPlayer(props.playKey);
 const {multiContent} = useVisualManager({
   key: props.playKey,
@@ -61,8 +62,8 @@ const toggleName = computed(() =>
 
 function onRenderFrameRain(index) {
   const callback = (cur, pvd) => {
-    console.log('展示标题了',pvd.format(index, 'title'))
-    emitter.emit(EMittLayerTitle.SHOW + props.playKey.toString() , {
+    console.log('展示标题了', pvd.format(index, 'title'))
+    emitter.emit(EMittLayerTitle.SHOW + props.playKey.toString(), {
       title: pvd.format(index, 'title'),
       long: pvd.format(index, 'long'),
     });
@@ -177,12 +178,14 @@ $prefix-cls: #{$namespace}-component-Visual-page;
   $TAB_HEIGHT: 30px;
 
   .instance-tabs {
-    --el-tabs-header-height: 30px;
+    --el-tabs-header-height: auto;
 
     max-width: 300px;
     height: inherit;
     cursor: pointer;
-
+    margin: auto 0;
+    display: flex;
+    align-items: center;
     .el-tabs__nav-next,
     .el-tabs__nav-prev {
       display: flex;
@@ -212,20 +215,17 @@ $prefix-cls: #{$namespace}-component-Visual-page;
     }
 
     .el-tabs__item {
-      //color: #ffffff;
       margin-right: 5px;
-      padding-right: 0 !important;
-      padding-left: 0 !important;
-      background: #f2f2f2;
-
-      // border-radius: 10px;
+      padding: 1px 2px !important;
+      background: #e0e0e0;
+      border-radius: 10px;
+      font-size: 12px;
     }
 
     .el-tabs__item.is-active {
       color: #fff;
       background: var(--el-color-primary);
     }
-
     .el-tabs__header {
       margin: 0;
       padding: 0;
@@ -236,8 +236,6 @@ $prefix-cls: #{$namespace}-component-Visual-page;
     position: absolute;
     top: 0;
     left: 0;
-
-    // width: 100%;
     height: 30px;
     column-gap: 15px;
   }

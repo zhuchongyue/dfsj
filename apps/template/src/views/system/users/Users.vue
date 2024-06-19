@@ -87,8 +87,10 @@ const {tableRegister, tableMethods, tableState} = useTable({
   fetchDataApi: async () => {
     const {currentPage, pageSize} = tableState;
     const res = await getUserListApi({
-      page: {pageNow: unref(currentPage), pageSize: unref(pageSize)},
-      adcd: user.value?.adcd,
+      // page: {pageNow: unref(currentPage), pageSize: unref(pageSize)},
+      pageNum: unref(currentPage),
+      pageSize: unref(pageSize),
+      // adcd: user.value?.adcd,
     });
     console.log('res', res);
     return {

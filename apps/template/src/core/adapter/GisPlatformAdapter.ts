@@ -25,11 +25,9 @@ interface ICesiumConfig {
 
 export default class GisPlatformAdapter {
     protected _instance: any;
-
     get instance() {
         return this._instance;
     }
-
     constructor(platform: GisPlatformEnum, config: any) {
         if (platform == GisPlatformEnum.CESIUM) {
             const {target, options, defaultView, baseLayers, terrain} = config;
@@ -47,6 +45,7 @@ export default class GisPlatformAdapter {
 
         } else if (platform == GisPlatformEnum.OPENLAYERS) {
             this._instance = new Map(config.target, config);
+            this._instance.popup.enable = true
         }
     }
 }

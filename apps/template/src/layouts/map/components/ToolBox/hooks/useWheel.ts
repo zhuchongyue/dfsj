@@ -5,7 +5,7 @@ import baseLayers from '/@/layouts/map/config/basemap';
 import { MouseEventType } from '/@/packages/ol';
 
 import { useMapSwitch } from '@/layouts/map/components/ToolBox/hooks/useMapSwitch';
-import { useStaticVisualResource } from '@/layouts/map/components/ToolBox/hooks/useStaticVisualResource';
+import { useSpecialResource } from '@/layouts/map/components/ToolBox/hooks/useSpecialResource.ts';
 import { useAppStore } from '@/store/modules/app';
 import {isSWJEnv, isWLSDEnv, isCQCJEnv} from "@/utils/env";
 import emitter from "/@/utils/mitt";
@@ -25,7 +25,7 @@ export function useWheel() {
   const appStore = useAppStore();
   const { onSwitch,  loadAdditional } = useMapSwitch();
   const { additionalCheck, absentCheck, dispose, install } =
-    useStaticVisualResource();
+    useSpecialResource();
 
   // 多个图层放大时候需要切换底图
   const customIndex = computed(() =>

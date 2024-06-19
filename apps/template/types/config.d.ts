@@ -153,7 +153,7 @@ export type EnvEnumKeys = keyof typeof EnvEnum;
 export type ViteEnv = EnvEnum[EnvEnumKeys];
 export interface GlobEnvConfig {
   VITE_ENV: ViteEnv;//环境
-  // Site title
+  VITE_GLOB_APP_ID: string;
   VITE_GLOB_APP_TITLE: string;
   VITE_SECONDARY_TITLE: string;
   VITE_GLOB_APP_SHORT_NAME: string;

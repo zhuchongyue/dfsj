@@ -1,24 +1,27 @@
 <script setup lang="ts">
-import {getCurrentInstance, reactive, Ref, ref, onMounted, onBeforeUnmount, toRefs} from 'vue';
+import {getCurrentInstance, reactive, Ref, ref, onMounted, onBeforeUnmount, toRefs, computed, unref, toRaw} from 'vue';
 import {Icon, SvgIcon} from '@dfsj/components';
 import {useDesign} from '/@/hooks/web/useDesign';
 import LatLngPosition from '/@/layouts/map/components/ToolBox/components/LatLngPosition.vue';
 import SearchPanelWrap from '/@/layouts/map/components/ToolBox/components/SearchPanelWrap.vue';
 import {GisSymbolKey} from "@/core/GisCache.ts";
+import {GisPlatformEnum} from "@/enums/appEnum.ts";
+import {platformBasicProps} from "@/layouts/map/props.ts";
+import {usePlatformStoreWithOut} from "@/store/modules/platform.ts";
+import MapTools from "@/layouts/map/components/ToolBox/components/MapTools.vue";
+import SimpleMeasure from "@/layouts/map/components/ToolBox/components/SimpleMeasure.vue";
 
 const props = defineProps({
-  gisKey: {
-    type: Symbol,
-    default: () => GisSymbolKey.default,
-  },
+  ...platformBasicProps,
   toolboxCfg: {
     type: Array<any>,
     default: () => [],
-  }
+  },
+
 })
 const active: Ref = ref();
 const {prefixCls} = useDesign('tool-box-wrap');
-const {toolboxCfg, gisKey} = toRefs(props)
+const {toolboxCfg} = toRefs(props)
 const vm = getCurrentInstance();
 const offset = reactive({left: '0', bottom: '0'});
 const Status = {SPREAD: 'spread', MINIFY: 'minify'};
@@ -27,6 +30,8 @@ const classify = ref(Classify.NONE);
 const status: Ref = ref(Status.MINIFY);
 
 function onItemClick(item, index, event) {
+
+  console.log({item, index, event})
   const menu = vm.refs.menus[index];
   if (item.click instanceof Function) {
     return item.click();
@@ -37,9 +42,9 @@ function onItemClick(item, index, event) {
     }
   } else {
     const bound = menu?.getBoundingClientRect();
-    console.log({bound});
     offset.left = bound.width + 'px';
     active.value = index;
+    console.log({bound});
   }
 }
 
@@ -68,11 +73,21 @@ function setBlur(event) {
   }
 }
 
+const getAttr = computed(() => {
+  const cachePlatform = usePlatformStoreWithOut().getGisKeyInstance(props.gisKey)?.platform;
+  const platform = cachePlatform ?? props.platform;
+  console.log({...unref(props)}, platform)
+  return {
+    ...unref(props),
+    platform
+  }
+})
+
 onMounted(() => {
-  document.documentElement.addEventListener('click', setBlur);
+  // document.documentElement.addEventListener('click', setBlur);
 });
 onBeforeUnmount(() => {
-  document.documentElement.removeEventListener('click', setBlur);
+  // document.documentElement.removeEventListener('click', setBlur);
 });
 </script>
 <template>
@@ -119,14 +134,15 @@ onBeforeUnmount(() => {
                 >
                   <component
                       :active="active === i"
-                      v-bind="e.props"
+                      v-bind="getAttr"
                       :key="e?.label + e?.image"
                       :is="e.component"
                       @hidden="onHidden"
                   ></component>
                   <!--              <CompositeLocator />-->
                   <!--              <BaseMap />-->
-                  <!--              <MapTools/>-->
+                  <!--                                <MapTools/>-->
+                  <!--                  <SimpleMeasure/>-->
                   <!--               <StaticVisualResource />-->
                 </div>
               </transition>
@@ -250,14 +266,13 @@ $ITEM_HEIGHT: 48px;
     background: white;
     border-radius: 3px;
     margin-left: 8px;
-    @apply shadow-xl;
   }
 
   .item-section {
     height: $ITEM_HEIGHT;
-    @apply flex items-center;
+    display: flex;
+    align-items: center;
     padding: 0 12px;
-
     .item-section-icon {
       margin-right: 5px;
     }

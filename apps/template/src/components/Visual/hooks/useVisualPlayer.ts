@@ -8,6 +8,9 @@ import {emitter} from "@dfsj/utils";
 import dayjs from "dayjs";
 import {GisSymbolKey} from "@/core/GisCache.ts";
 import {EMittLayerLegend} from "@/enums/mittTypeEnum.ts"
+import {getLayerManage} from "@/core/adapter/class";
+import BufferLayerPlayer from "@dfsj/components/src/components/Visual/src/BufferLayerPlayer.ts";
+import getLayerConfig from "@/core/adapter/config/layer.feature.config.ts";
 const ModeMap = {
     [TimeModes.DAILY]: 'datatype',
     [TimeModes.INTERVAL]: 'rangeid',
@@ -62,18 +65,19 @@ export function useVisualPlayer(key:Symbol=GisSymbolKey.default){
                 custom.end = dayjs(obj.pubs * 1000).format('YYYY-MM-DD 24:00:00');
             }
             // return Object.assign(config, getLayerConfig(current.value.origin.motype, custom))
-            // let cfg = Object.assign(
-            //     config,
-            //     getLayerConfig({
-            //         motype: current.value.origin.motype,
-            //         custom,
-            //     })
-            // );
+            let cfg = Object.assign(
+                config,
+                getLayerConfig({
+                    motype: current.value.origin.motype,
+                    custom,
+                })
+            );
             console.log(
                 '%c主要干预一些配置信息 ',
                 'color:#fff;font-size:20px;width:200px;background-color:red'
+                ,cfg
             );
-            return config;
+            return cfg;
         }
 
         return config;
@@ -109,8 +113,7 @@ export function useVisualPlayer(key:Symbol=GisSymbolKey.default){
                         interceptor
                     );
                     console.log('content.provide', content.provider);
-                    // content.player = null
-                    // content.player = BufferLayerPlayerStrategy.create(content.provider);
+                    content.player = new BufferLayerPlayer(getLayerManage(GisSymbolKey.default) , content.provider)
                 }
                 // if (content === current.value) {
                 console.log('cossntent', content);

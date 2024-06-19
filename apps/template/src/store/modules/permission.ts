@@ -1,32 +1,21 @@
 import { defineStore } from 'pinia';
 import { toRaw } from 'vue';
-
-import { getMenuList } from '/@/api/common';
 import { PermissionModeEnum } from '/@/enums/appEnum';
-// import { filter } from '/@/utils/helper/treeHelper';
-// import { getPermCode } from '/@/api/sys/user';
 import { PageEnum } from '/@/enums/pageEnum';
 import { useI18n } from '/@/hooks/web/useI18n';
-import { transformRouteToMenu } from '/@/router/helper/menuHelper';
 import {
   addSlashToRouteComponent,
   flatMultiLevelRoutes,
   transformObjToRoute,
 } from '/@/router/helper/routeHelper';
-import { asyncRoutes } from '/@/router/routes';
 import { ERROR_LOG_ROUTE, PAGE_NOT_FOUND_ROUTE } from '/@/router/routes/basic';
 import type { AppRouteRecordRaw, Menu } from '/@/router/types';
 import projectSetting from '/@/settings/projectSetting';
 import { store } from '/@/store';
-// import { transMenu } from '/@/utils/helper/transHelper';
-// import { findNode } from '/@/utils/helper/treeHelper';
-
 import { useAppStoreWithOut } from './app';
 import { useUserStore } from './user';
 import {transMenu} from "/@/utils/route.ts";
-
-
-
+import {getMenuList} from "@/api/user.ts";
 // 系统权限
 interface AuthItem {
   // 菜单权限编码，例如：“sys:schedule:list,sys:schedule:info”,多个逗号隔开
@@ -39,7 +28,6 @@ interface AuthItem {
   describe?: string;
   isAuth?: boolean;
 }
-
 interface PermissionState {
   // Permission code list
   permCodeList: string[] | number[];
@@ -113,7 +101,6 @@ export const usePermissionStore = defineStore({
     setPermCodeList(codeList: string[]) {
       this.permCodeList = codeList;
     },
-
     setBackMenuList(list: Menu[]) {
       this.backMenuList = list;
       list?.length > 0 && this.setLastBuildMenuTime();
@@ -246,7 +233,6 @@ export const usePermissionStore = defineStore({
             if (!hasIcon && !hasIndex) {
               //
             }
-            // update-end----author:sunjianlei---date:20220315------for: 判断是否是 vue3 版本的菜单 ---
           } catch (error) {
             console.error(error);
           }
