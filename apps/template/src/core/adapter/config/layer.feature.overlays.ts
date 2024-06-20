@@ -1,6 +1,6 @@
 import dayjs from "dayjs";
-import {numeralFormat} from "@dfsj/echarts/src/utils/tools.ts";
-import {units} from "@dfsj/echarts/src/utils";
+import {tools} from "@dfsj/echarts";
+import {units} from "@dfsj/echarts";
 import Define from "@/config/Define.ts";
 import {findStRiverRByDate} from "@/api/common.ts"
 import {usePlayableStoreWithOut} from "@/store/modules/playable.ts";
@@ -26,7 +26,7 @@ const layerFeatureOverlays ={
         content: (data) => {
             const unit = units.find((e) => data.w >= e.value) || units[2];
             const value = data.w
-                ? numeralFormat(unit.value ? data.w / unit.value : data.w)
+                ? tools.numeralFormat(unit.value ? data.w / unit.value : data.w)
                 : '--';
             const tm = data?.tm
                 ? dayjs(data?.tm).format('YYYY-MM-DD HH:mm:ss')
@@ -35,9 +35,9 @@ const layerFeatureOverlays ={
             return `<fieldset>
                 <li><i>站点编码：</i><i>${data.stcd}</i></li>
                 <li><i>库水位：</i><i>${data.rz == null ? '--' : data.rz}(m)</i></li>
-                <li><i>预警情况：</i><i style="color:${Define.reservoirColor[data.wlevel]}">${data.warning || '--'}</i></li>
+                <li><i>预警情况：</i><i style="color:${Define?.reservoirColor?.[data?.wlevel]}">${data.warning || '--'}</i></li>
                 <li><i>库容：</i><i>${value}(${unit.symbol})</i></li>
-                <li><i>规模：</i><i>${Define.reservoirLevel[data.sttype]}</i></li>
+                <li><i>规模：</i><i>${Define?.reservoirLevel?.[data?.sttype]}</i></li>
                 <li><i>时间：</i><i>${data.tm || '--'}</i></li>
                 <li><i>地址：</i><i>${data.address || '--'}</i></li>
                 <li><i>数据来源：</i><i>${data.datasource || '--'}</i></li>

@@ -1,7 +1,5 @@
 import {computed, ref, Ref, shallowRef, toRaw, unref, watchEffect} from "vue";
-import {Extensible,TimeModes} from "@dfsj/components/src/components/NodeAxis/src/enum";
-import NullLayerProvider  from "@dfsj/components/src/components/NodeAxis/src/NullLayerProvider";
-import {ResolvableLayerProvider}  from "@dfsj/components/src";
+import {Extensible,TimeModes,NullLayerProvider,ResolvableLayerProvider,BufferLayerPlayer} from "@dfsj/components";
 import {visualPlayableLoadApi} from "@/components/Visual/api/api.ts";
 import {VisualContent} from "@/components/Visual/VisualContent";
 import {emitter} from "@dfsj/utils";
@@ -9,7 +7,6 @@ import dayjs from "dayjs";
 import {GisSymbolKey} from "@/core/GisCache.ts";
 import {EMittLayerLegend} from "@/enums/mittTypeEnum.ts"
 import {getLayerManage} from "@/core/adapter/class";
-import BufferLayerPlayer from "@dfsj/components/src/components/Visual/src/BufferLayerPlayer.ts";
 import getLayerConfig from "@/core/adapter/config/layer.feature.config.ts";
 const ModeMap = {
     [TimeModes.DAILY]: 'datatype',

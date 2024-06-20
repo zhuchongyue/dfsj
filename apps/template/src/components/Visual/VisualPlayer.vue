@@ -7,7 +7,7 @@ import {emitter} from "@dfsj/utils" ;
 const useStore = useUserStore();
 const {prefixCls} = useDesign('component-Visual-page');
 //todo
-import NodeAxisComponent from '@dfsj/components/src/components/NodeAxis/src/NodeAxis.vue';
+import {NodeAxis as NodeAxisComponent} from '@dfsj/components';
 import {BasicModal} from "@dfsj/components";
 
 const COLORS = {

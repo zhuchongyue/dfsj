@@ -2,7 +2,7 @@
 import {computed, ref, toRaw, unref, shallowReactive, onMounted, nextTick} from "vue";
 import {useDesign} from "/@/hooks/web/useDesign.ts";
 import {useUserStore} from '/@/store/modules/user';
-import ResolvableLayerProvider from "@dfsj/components/src/components/Visual/src/ResolvableLayerProvider.ts"
+import {ResolvableLayerProvider} from "@dfsj/components"
 import {play,dbz} from "./data"
 const useStore = useUserStore();
 const {prefixCls} = useDesign('component-Visual-page');
@@ -12,7 +12,6 @@ let _dbz = new ResolvableLayerProvider(null , dbz);
 console.log('解析的结果',res)
 
 //todo
-import NodeAxisComponent from "@dfsj/components/src/components/NodeAxis/src/NodeAxis.vue";
 import {BasicModal} from "@dfsj/components";
 import VisualPlayer from "@/components/Visual/VisualPlayer.vue";
 import {emitter} from "@dfsj/utils";

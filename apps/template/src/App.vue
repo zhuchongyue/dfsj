@@ -19,7 +19,7 @@ import Visual from "@/components/Visual/Visual.vue";
 // console.log({ECHooks})
 // console.log({ECComponents})
 // // console.log({ ECGuest })
-// console.log({ECEcharts})
+console.log({ECEcharts})
 // // console.log({ ECOl })
 // console.log({ECUtils})
 
