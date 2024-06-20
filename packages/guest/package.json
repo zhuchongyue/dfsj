@@ -1,6 +1,6 @@
 {
   "name": "@dfsj/guest",
-  "version": "3.1.1",
+  "version": "3.1.2",
   "description": "访问系统权限校验sdk",
   "keywords": [
     "guest",
@@ -39,7 +39,7 @@
   "types": "dist/index.d.ts",
   "dependencies": {
     "@babel/runtime": "^7.24.0",
-    "@dfsj/utils": "^3.1.1"
+    "@dfsj/utils": "^3.1.2"
   },
   "publishConfig": {
     "access": "public"

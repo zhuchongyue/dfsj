@@ -1,6 +1,6 @@
 {
   "name": "@dfsj/components",
-  "version": "3.1.1",
+  "version": "3.1.2",
   "description": "通用的vue组件;包括专业组件、原子级组件",
   "type": "module",
   "keywords": [
@@ -43,8 +43,8 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.24.0",
-    "@dfsj/echarts": "^3.1.1",
-    "@dfsj/utils": "^3.1.1",
+    "@dfsj/echarts": "^3.1.2",
+    "@dfsj/utils": "^3.1.2",
     "@element-plus/icons-vue": "^2.3.1",
     "@iconify/iconify": "^3.1.1",
     "@wangeditor/editor": "^5.1.23",

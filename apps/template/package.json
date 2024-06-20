@@ -1,7 +1,7 @@
 {
   "name": "@dfsj/template",
   "private": true,
-  "version": "3.1.1",
+  "version": "3.1.2",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -18,12 +18,12 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.24.0",
-    "@dfsj/cesium": "workspace:^3.1.1",
-    "@dfsj/components": "workspace:^3.1.1",
+    "@dfsj/cesium": "workspace:^3.1.2",
+    "@dfsj/components": "workspace:^3.1.2",
     "@dfsj/echarts": "workspace:^",
     "@dfsj/guest": "workspace:^",
-    "@dfsj/hooks": "workspace:^3.1.1",
-    "@dfsj/ol": "workspace:^3.1.1",
+    "@dfsj/hooks": "workspace:^3.1.2",
+    "@dfsj/ol": "workspace:^3.1.2",
     "@dfsj/twins": "workspace:^3.0.0",
     "@dfsj/utils": "workspace:^",
     "@iconify/iconify": "^3.1.1",
