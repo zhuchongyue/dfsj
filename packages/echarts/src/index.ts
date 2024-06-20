@@ -8,21 +8,21 @@ import {useDamSchematic} from './charts/useDamSchematic' //大坝示意图
 import {useStageflow} from './charts/useStageflow' //水位流量图
 import {useRainfall} from './charts/useRainfall' //降雨量关系图
 import {useHydrology} from './charts/useHydrology' //基础水文
-import * as utils from './utils/index' //工具
-import * as config from './config' //基础配置
+export * from './utils/index' //工具
+export * from './config' //基础配置
+import config from './config' //基础配置
 export {useDownLoad} from "./view/useDownLoad"; //统一下载
 export {useEChartsThemes} from "./themes/useEChartsThemes"
 export {
-	useAssist,
-	useECharts,
-	useCapacity,
-	useStageflow,
-	useHydrology,
-	useRainfall,
-	useCrossSection,
-	useComplexHydrology,
-	useDamSchematic,
-	useDrainageCurves,
-	utils,
-	config
+    useAssist,
+    useECharts,
+    useCapacity,
+    useStageflow,
+    useHydrology,
+    useRainfall,
+    useCrossSection,
+    useComplexHydrology,
+    useDamSchematic,
+    useDrainageCurves,
+    config
 }
