@@ -3,12 +3,15 @@ import {Feature} from 'ol'
 import GeometryHelper from '../../helpers/GeometryHelper'
 import StyleHelper from '../../style/StyleHelper'
 import {getCenter} from 'ol/extent'
+import {GeometryFormatType} from "../GeometryType";
 
 export default class Billboard extends Overlay {
 	constructor(position, options) {
 		super(options)
 		this._position = position
-		const geometry = GeometryHelper.getGeomFromGeomData(position, options)
+		const geometry = GeometryHelper.getGeomFromGeomData(position, {
+			geometryType: GeometryFormatType.Point,
+			...options})
 		this._delegate = new Feature({
 			geometry: geometry,
 			params: options
@@ -31,9 +34,12 @@ export default class Billboard extends Overlay {
 	 * @param zoom
 	 * @returns {Billboard}
 	 */
-	setStyle(style, zoom = null) {
-		const helper = StyleHelper.Billboard(style, this.attr, zoom)
-		super.setStyle(helper, zoom)
+	setStyle(style,options = {
+		standard: false,
+		zoom: null
+	}) {
+		const helper =!options?.standard ? StyleHelper.Billboard(style, this.attr, options.zoom):style;
+		super.setStyle(helper, options)
 		return this
 	}
 

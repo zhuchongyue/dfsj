@@ -42,7 +42,7 @@ const toolboxCfg = [
         component: defineAsyncComponent(
             () =>
                 import(
-                    '/src/layouts/map/components/ToolBox/components/StaticVisualResource.vue'
+                    '/src/layouts/map/components/ToolBox/components/SpecialResource.vue'
                     )
         ),
         closeOnContentClick: false,

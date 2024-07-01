@@ -28,12 +28,13 @@ import * as ol from '@dfsj/ol'
 import {OlBaseMap} from '/src/usege/ol/config/olBaseMap'
 import {computed, onMounted, ref, toRaw, unref} from 'vue'
 import PlotType from '/src/usege/ol/config/plot.ts'
+import {MouseEventType, OverlayType} from "@dfsj/ol";
 
 const base = computed(() => OlBaseMap.baseLayers)
 let map: any = null
 console.log('&&****&&&&这是库的export方法', ol)
 let plot: any = null
-const type = ref()
+const type = ref(OverlayType.LUNE)
 const drawSession = ref([])
 
 //绘制
@@ -47,16 +48,20 @@ function handleStart() {
 		(overlay, others) => {
 			console.log('绘制完成的回调函数', overlay, others)
 			const { buffer, popup, overlays } = others
-			overlay && receiveLayer.addOverlay(overlay)
-			buffer && receiveLayer.addOverlay(buffer)
-			overlays?.forEach((o: any) => receiveLayer.addOverlay(o))
-			if (Array.isArray(popup)) {
-				popup?.forEach((p) => {
-					map._delegate?.addOverlay(p)
-				})
-			} else {
-				map._delegate?.addOverlay(popup)
-			}
+			overlay && receiveLayer.addOverlay(overlay);
+      //TODO 测试编辑
+      return
+      plot.edit(overlay)
+
+			// buffer && receiveLayer.addOverlay(buffer)
+			// overlays?.forEach((o: any) => receiveLayer.addOverlay(o))
+			// if (Array.isArray(popup)) {
+			// 	popup?.forEach((p) => {
+			// 		map._delegate?.addOverlay(p)
+			// 	})
+			// } else {
+			// 	map._delegate?.addOverlay(popup)
+			// }
 			let draw = {
 				delegate: overlay,
 				...others
@@ -99,7 +104,20 @@ function handleStop() {
 let home = [97.528555, 21.142501, 106.19696203, 29.22582455] //Home边界
 const pos = [105.00625, 27.560108]
 
-let receiveLayer = new ol.VectorLayer('ol-plot-layer')
+let receiveLayer = new ol.VectorLayer('ol-plot-layer');
+
+
+receiveLayer.on(MouseEventType.CLICK,(e:any)=>{
+  console.log('图层点击is火箭',e)
+  if (e?.movement?.overlay){
+    const overlay = e?.movement?.overlay
+    plot.edit(overlay,(graph)=>{
+      console.log('编辑完了',graph)
+      receiveLayer.addOverlay(graph)
+    });
+    receiveLayer.removeOverlay(overlay)
+  }
+})
 onMounted(() => {
 	map = new ol.Map('ec-ol-map-container', OlBaseMap)
 	map.flyToBounds(home, {
@@ -127,6 +145,7 @@ onMounted(() => {
 	})
 
 	map.popup.enable = true
+
 	//FIXME 标绘功能
 	plot = new ol.Plot(map, {})
 	/**

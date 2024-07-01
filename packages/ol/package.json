@@ -12,7 +12,7 @@
   "author": "yangbo <1747837358@qq.com>",
   "homepage": "",
   "license": "MIT",
-  "main": "dist/index.js",
+  "main": "dist/index.ts",
   "directories": {
     "lib": "lib",
     "test": "__tests__"
@@ -39,14 +39,15 @@
     "@turf/turf": "^6.5.0",
     "dayjs": "^1.11.7",
     "lodash-es": "^4.17.21",
+    "mathjs": "^13.0.0",
     "ol": "^7.2.2",
     "ol-ext": "^4.0.4",
     "proj4": "^2.8.1",
     "ts-mixer": "^6.0.3"
   },
   "gitHead": "0b570d86e0ba05e19a5713e24c05b2f0d5aaeb73",
-  "module": "dist/index.js",
-  "browser": "dist/index.js",
+  "module": "src/index.ts",
+  "browser": "src/index.ts",
   "types": "dist/index.d.ts",
   "publishConfig": {
     "access": "public"

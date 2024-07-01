@@ -15,6 +15,10 @@ import {computed, reactive, ref} from 'vue';
 import AppProvider from '/@/components/Application/src/AppProvider.vue';
 import MapLayout from "./layouts/map/MapLayout.vue";
 import Visual from "@/components/Visual/Visual.vue";
+import Plot from "@/components/Plot/src/Plot.vue";
+import UsageLayout from "../layouts/usage/UsageLayout.vue";
+import {usePlatformStoreWithOut} from "@/store/modules/platform.ts";
+import {GisSymbolKey} from "@/core/GisCache.ts";
 // // console.log({ ECCesium })
 // console.log({ECHooks})
 // console.log({ECComponents})
@@ -26,6 +30,10 @@ console.log({ECEcharts})
 const locale = ref(zhCn);
 const assemblySize = computed(() => 'default');
 const buttonConfig = reactive({autoInsertSpace: false});
+
+const ready = computed(()=>{
+  return usePlatformStoreWithOut().getGisKeyInstance(GisSymbolKey.default)?.ready
+})
 </script>
 
 <template>
@@ -46,10 +54,10 @@ const buttonConfig = reactive({autoInsertSpace: false});
       <!--    todo 右侧动态面板部分-->
 
       <!--          <DynamicLayout/>-->
-
-
-<!--            <UsageLayout/>-->
-      <Visual />
+<!--      <UsageLayout/>-->
+<!--      {{ready}}-->
+      <Plot v-if="ready" />
+<!--      <Visual />-->
 <!--      <RouterView/>-->
       <MapLayout />
     </el-config-provider>

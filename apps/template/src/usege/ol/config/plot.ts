@@ -5,6 +5,18 @@ console.log('OverlayType',OverlayType)
 
 const PlotType = [
 	{
+		label: '点',
+		value: OverlayType.POINT
+	},
+	{
+		label: '文字',
+		value: OverlayType.TEXT
+	},
+	{
+		label: '广告牌',
+		value: OverlayType.BILLBOARD
+	},
+	{
 		label: '折线',
 		value: OverlayType.POLYLINE
 	},

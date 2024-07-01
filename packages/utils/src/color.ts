@@ -29,7 +29,7 @@ export function rgbToHex(r: number, g: number, b: number) {
  * @param {string} hex  - 十六进制hex
  * @returns  String
  */
-export function hexToRGB(hex: string) {
+export function hexToRGB(hex: string , alpha=1) {
 	let sHex = hex.toLowerCase()
 	if (isHexColor(hex)) {
 		if (sHex.length === 4) {
@@ -43,7 +43,7 @@ export function hexToRGB(hex: string) {
 		for (let i = 1; i < 7; i += 2) {
 			sColorChange.push(parseInt('0x' + sHex.slice(i, i + 2)))
 		}
-		return 'RGB(' + sColorChange.join(',') + ')'
+		return 'RGBA(' + sColorChange.join(',') + ',' + alpha +')'
 	}
 	return sHex
 }

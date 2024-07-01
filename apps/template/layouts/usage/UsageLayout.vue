@@ -12,10 +12,10 @@ import UUtils from "/@//usege/utils/UUtils.vue";
   <!-- 基础业务组件-->
 <!--    <UComponents />-->
   <!--  水文图表-->
-    <UChart />
+<!--    <UChart />-->
   <!--  工具函数-->
   <!--  地图-->
-  <!--  <OlScene/>-->
+    <OlScene/>
   <!--  <UUtils/>-->
   <!--  todo 二三维地图一体化-->
   <!--  <UGis />-->
