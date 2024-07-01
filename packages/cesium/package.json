@@ -1,6 +1,6 @@
 {
   "name": "@dfsj/cesium",
-  "version": "3.1.2",
+  "version": "3.1.3",
   "description": "基于@cesium/engine 封装的3维地图可视化库",
   "keywords": [
     "cesium",
@@ -34,7 +34,7 @@
   "dependencies": {
     "@babel/runtime": "^7.24.0",
     "@cesium/engine": "6.1.1",
-    "@dfsj/utils": "^3.1.2",
+    "@dfsj/utils": "^3.1.3",
     "@turf/turf": "^6.5.0",
     "echarts": "^5.4.1",
     "supercluster": "^8.0.1",

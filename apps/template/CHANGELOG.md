@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 3.1.3 (2024-07-01)
+
+
+### Bug Fixes
+
+* (template) 修改引入 ([206fa9e](http://10.10.12.18/dfsj/dfsj/commits/206fa9ea090b8973285abdaaff1fb7a0fad115ce))
+
+
+### Features
+
+* (template) 增加要素图标 ([f6d046b](http://10.10.12.18/dfsj/dfsj/commits/f6d046b4e3805a115477516deae719dca54cac3f))
+* (template)标绘工具 ([b35fa56](http://10.10.12.18/dfsj/dfsj/commits/b35fa56f91041545eed077b383531bc196543f21))
+
+
+
+
+
 ## 3.1.2 (2024-06-20)
 
 

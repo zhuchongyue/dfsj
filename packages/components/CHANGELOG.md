@@ -1,20 +1,21 @@
 # Change Log
 
-All notable changes to this project will be documented in this file.
-See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-## 3.1.2 (2024-06-20)
-
+## 3.1.3 (2024-07-01)
 
 ### Features
 
-* (components) 增加时间轴导出 ([ca11a1f](http://10.10.12.18/dfsj/dfsj/commits/ca11a1f00f0e963b4c4f483fae3cacd76f65d522))
-* (template) 增加要素图标 ([f6d046b](http://10.10.12.18/dfsj/dfsj/commits/f6d046b4e3805a115477516deae719dca54cac3f))
+- (components) 增加时间轴导出 ([ca11a1f](http://10.10.12.18/dfsj/dfsj/commits/ca11a1f00f0e963b4c4f483fae3cacd76f65d522))
+- (template) 增加要素图标 ([f6d046b](http://10.10.12.18/dfsj/dfsj/commits/f6d046b4e3805a115477516deae719dca54cac3f))
+- (template)标绘工具 ([b35fa56](http://10.10.12.18/dfsj/dfsj/commits/b35fa56f91041545eed077b383531bc196543f21))
 
+## 3.1.2 (2024-06-20)
 
+### Features
 
-
-
+- (components) 增加时间轴导出 ([ca11a1f](http://10.10.12.18/dfsj/dfsj/commits/ca11a1f00f0e963b4c4f483fae3cacd76f65d522))
+- (template) 增加要素图标 ([f6d046b](http://10.10.12.18/dfsj/dfsj/commits/f6d046b4e3805a115477516deae719dca54cac3f))
 
 ## [3.1.1](https://gitee.com/verdaccio/ec/compare/@dfsj/components@3.1.0...@dfsj/components@3.1.1) (2024-05-21)
 
