@@ -1,5 +1,6 @@
 import {Polygon} from '../../overlay'
 import Draw from './Draw'
+import OverlayType from "../../overlay/OverlayType";
 
 //矩形
 export default class DrawRectangle extends Draw {
@@ -10,18 +11,19 @@ export default class DrawRectangle extends Draw {
 
 	_mountedHook() {
 		this._delegate = new Polygon([this._positions], {})
-		this._delegate.attr = {}
+		this._delegate.attr = { id: this._id ,type:OverlayType.RECTANGLE,plot:true }
 		this._delegate.setStyle(this._style)
 		this._layer.addOverlay(this._delegate)
 	}
 
-	generate() {
-		let count = this.count
+	generate(position = this.positions) {
+		let count = position.length
 		if (count < 2) {
 			return
 		} else {
-			let pnt1 = this.positions[0]
-			let pnt2 = this.positions[1]
+			// let pnt1 = this.positions[0]
+			// let pnt2 = this.positions[1]
+			const [ pnt1 ,pnt2] = position;
 			let xmin = Math.min(pnt1[0], pnt2[0])
 			let xmax = Math.max(pnt1[0], pnt2[0])
 			let ymin = Math.min(pnt1[1], pnt2[1])

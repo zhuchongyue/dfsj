@@ -10,6 +10,7 @@ import {
     isClockWise,
     mid
 } from '../../utils/plot'
+import OverlayType from "../../overlay/OverlayType";
 
 //弓形
 export default class DrawLune extends Draw {
@@ -20,37 +21,16 @@ export default class DrawLune extends Draw {
 
 	_mountedHook() {
 		this._delegate = new Polygon([this._positions], {})
-		this._delegate.attr = {}
+		this._delegate.attr = { id: this._id ,type:OverlayType.LUNE,plot:true }
 		this._delegate.setStyle(this._style)
 		this._layer.addOverlay(this._delegate)
-		console.log('this._delegate', this._delegate)
 	}
-
-	//
-	// _onAnchorMoving({position}) {
-	//     super._onAnchorMoving({position})
-	//     this.generate()
-	// }
-
-	/**
-	 *
-	 * @param position
-	 * @private
-	 */
-	// _onDrawAnchor({position}) {
-	//     this._positions.push(position)
-	//     if (this._positions.length) {
-	//         this.generate()
-	//         this.drawTool.fire(new PlotEvent(PlotEventType.CREATE_ANCHOR, position))
-	//     }
-	// }
-
-	generate() {
-		if (this.count < 2) {
+	generate(position = this.positions) {
+		if (position.length < 2) {
 			return
 		}
-		let pnts = this.positions
-		if (this.count == 2) {
+		let pnts = position
+		if (position.length == 2) {
 			let m = mid(pnts[0], pnts[1])
 			let d = distance(pnts[0], m)
 			let pnt = getThirdPoint(pnts[0], m, Constants.HALF_PI, d, undefined)

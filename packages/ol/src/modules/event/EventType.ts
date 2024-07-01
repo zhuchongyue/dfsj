@@ -35,38 +35,46 @@ const MapEventType = {
 /** 鼠标事件*/
 const MouseEventType = {
 	CONTEXTMENU: 'contextmenu',
-	CLICK: 'click',
-	DB_CLICK: 'dblclick',
-	SINGLE_CLICK: 'singleclick', // 单击事件
 	WHEEL: 'wheel',
-	POINTER_MOVE: 'pointermove' // 移动事件
-}
-/** overlay 事件*/
-const OverlayEventType = {
-	...BaseEventType,
-	...MouseEventType,
+	POINTER_MOVE: 'pointermove', // 移动事件.
+	POINTERDOWN: 'pointerdown',
+	POINTERUP: 'pointerup',
+	POINTEROVER: 'pointerover',
+	POINTEROUT: 'pointerout',
+	POINTERENTER: 'pointerenter',
+	POINTERLEAVE: 'pointerleave',
+	POINTERCANCEL: 'pointercancel',
 	CLICK: 'click', // 点击事件
 	DB_CLICK: 'dblclick', // 双击事件
 	SINGLE_CLICK: 'singleclick', // 单击事件
 	MOUSEOVER: 'mouseover', // 要素的鼠标移入事件
 	MOUSEOUT: 'mouseout' // 要素的鼠标移出事件
 }
+/** overlay 事件*/
+const OverlayEventType = {
+	...BaseEventType,
+	...MouseEventType,
+}
 
 const LayerEventType = {
-	...BaseEventType
+	...BaseEventType,
+	...MouseEventType
 }
 const LayerGroupEventType = BaseEventType
 const PlotEventType = {
 	DRAW_START: 'drawStart',
 	DRAW_STOP: 'drawStop',
 	EDIT_START: 'editStart',
-	EDIT_STOP: 'editEnd',
+	EDIT_STOP: 'editEnd',//停止
+	EDIT_PAUSE:'editPause',//暂停
 	DRAW_ANCHOR: 'drawAnchor',
 	CREATE_ANCHOR: 'createAnchor',
 	UPDATE_ANCHOR: 'updateAnchor',
 	ANCHOR_MOVING: 'anchorMoving',
 	EDIT_ANCHOR_STOP: 'editAnchorStop',
-	CLEAR_ANCHOR: 'clearAnchor'
+	CLEAR_ANCHOR: 'clearAnchor',
+	ANCHOR_DOWN: 'anchorDown',
+	ANCHOR_UP:'anchorUp'
 }
 
 export {

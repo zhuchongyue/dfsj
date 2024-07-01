@@ -1,19 +1,18 @@
 import {Polygon} from '../../overlay'
-import Draw from './Draw'
+import Edit from './Edit'
 import {
-    Constants,
-    distance,
-    getAngleOfThreePoints,
-    getBaseLength,
-    getQBSplinePoints,
-    getThirdPoint,
-    isClockWise,
-    mid,
-    wholeDistance
+	Constants,
+	distance,
+	getAngleOfThreePoints,
+	getBaseLength,
+	getQBSplinePoints,
+	getThirdPoint,
+	isClockWise,
+	mid,
+	wholeDistance
 } from '../../utils/plot'
-import OverlayType from "../../overlay/OverlayType";
-//进攻方向
-export default class DrawAttackArrow extends Draw {
+//进攻方向 编辑
+export default class EditAttackArrow extends Edit {
 	public headHeightFactor: number
 	public headWidthFactor: number
 	public neckHeightFactor: number
@@ -22,31 +21,27 @@ export default class DrawAttackArrow extends Draw {
 
 	constructor(style) {
 		super(style)
+		this.hasControlPoint = true;
 		this.headHeightFactor = 0.18
 		this.headWidthFactor = 0.3
 		this.neckHeightFactor = 0.85
 		this.neckWidthFactor = 0.15
 		this.headTailFactor = 0.8
-
-		this.fixPointCount = 3
 	}
-
 	_mountedHook() {
-		this._delegate = new Polygon(this._positions, {})
-		this._delegate.attr = { id: this._id ,type:OverlayType.ATTACK_ARROW,plot:true }
-		this._delegate.setStyle(this._style)
+		this._positions = this.getControlPoints();
+		this._delegate = new Polygon([], {})
+		this._delegate.attr = { ...this.attr}
+		this._delegate.setStyle(this.style, {standard:true});
 		this._layer.addOverlay(this._delegate)
+		this.generate()
+	}
+	getControlPoints(geometry = this._overlay){
+		return this._overlay.attr.fixPoints ?? []
 	}
 
-	generate(position = this.positions) {
-		if (this.count < 2) {
-			return
-		}
-		if (this.count == 2) {
-			this._delegate.setCoordinates([position])
-			return
-		}
-		let pnts = position
+	generate(newPoints = this._positions) {
+		let pnts = newPoints
 		// 计算箭尾
 		let tailLeft = pnts[0]
 		let tailRight = pnts[1]
@@ -72,8 +67,8 @@ export default class DrawAttackArrow extends Draw {
 		leftPnts = getQBSplinePoints(leftPnts)
 		rightPnts = getQBSplinePoints(rightPnts)
 		this._delegate.setCoordinates([leftPnts.concat(headPnts, rightPnts.reverse())])
+		this._delegate.attr.lastFixPoints = [...newPoints]
 	}
-
 	getArrowHeadPoints(points, tailLeft, tailRight) {
 		let len = getBaseLength(points)
 		let headHeight = len * this.headHeightFactor
@@ -116,4 +111,5 @@ export default class DrawAttackArrow extends Draw {
 		}
 		return leftBodyPnts.concat(rightBodyPnts)
 	}
+
 }

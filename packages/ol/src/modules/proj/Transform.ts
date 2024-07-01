@@ -93,7 +93,7 @@ export default class Transform {
 			proj4textToStr = Transform.proj4textObj['4326']['srtext']
 			coordinate = proj4(proj4textFromStr, proj4textToStr, coordinate)
 		}
-		return coordinate
+		return coordinate;
 	}
 
 	/**

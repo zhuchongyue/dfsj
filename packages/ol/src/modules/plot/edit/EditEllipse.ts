@@ -1,38 +1,35 @@
 import {Polygon} from '../../overlay'
-import Draw from './Draw'
-import {PlotEventType} from '../../event/EventType'
-import PlotEvent from '../../event/type/PlotEvent'
-import {Constants, mid} from '../../utils/plot'
-import OverlayType from "../../overlay/OverlayType";
+import Edit from './Edit'
+import {Constants, mid} from "../../utils/plot";
 
-export default class DrawEllipse extends Draw {
+//椭圆
+export default class EditEllipse extends Edit {
 	constructor(style) {
 		super(style)
-		this.fixPointCount = 2
+		this.hasControlPoint = true
 	}
-
+	getControlPoints(geometry = this._overlay){
+		return this._overlay.attr.fixPoints ?? []
+	}
 	_mountedHook() {
+		this._positions = this.getControlPoints();
+		console.log('_positions',this._positions)
+		const style=  this.style;
 		this._delegate = new Polygon([this._positions], {})
-		this._delegate.attr = { id: this._id ,type:OverlayType.ELLIPSE,plot:true }
-		this._delegate.setStyle(this._style)
+		this._delegate.attr = { ...this.attr}
+		this._delegate.setStyle(style, {standard:true});
 		this._layer.addOverlay(this._delegate)
+		this.generate()
 	}
 
-	generate(position = this.positions) {
-		let count = position.length
-		if (count < 2) {
-			return
-		}
-		// let pnt1 = this.positions[0]
-		// let pnt2 = this.positions[1]
-		const [pnt1, pnt2] = position;
+	generate(newPoints = this._positions) {
+		let [pnt1,pnt2] = newPoints
 		let center = mid(pnt1, pnt2)
 		let majorRadius = Math.abs((pnt1[0] - pnt2[0]) / 2)
 		let minorRadius = Math.abs((pnt1[1] - pnt2[1]) / 2)
-		// this.setCoordinates([this.generatePoints(center, majorRadius, minorRadius)]);
 		this._delegate.setCoordinates([this.generatePoints(center, majorRadius, minorRadius)])
+		this._delegate.attr.lastFixPoints = [...newPoints]
 	}
-
 	generatePoints(center, majorRadius, minorRadius) {
 		let x,
 			y,

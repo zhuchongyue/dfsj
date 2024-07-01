@@ -1,10 +1,6 @@
 /***
  * 图层
  */
-// import { Cesium } from '@dfsj-cesium-modules/namespace'
-// import { Util } from '@dfsj-cesium-modules/utils'
-// import State from '@dfsj-cesium-modules/state/State'
-// import { LayerEventType, OverlayEventType, LayerEvent } from '@dfsj-cesium-modules/event'
 import LayerType from './LayerType'
 import Util from '../utils/Util'
 import {Observable} from 'ol'
@@ -41,7 +37,6 @@ class Layer extends Observable {
 		this._layerEvent = {}
 		this._buffer = []
 		this._animation = new GraphicAnimationImp()
-
 		// @ts-ignore
 		this.on(LayerEventType.ADD, this._onAdd, this)
 		// @ts-ignore
@@ -120,8 +115,6 @@ class Layer extends Observable {
 	 * @public
 	 */
 	_onAdd(event) {
-		// console.log({event})
-		console.log('.///////////////////////////////////////', event)
 		this._map = event.map
 		if (!this._delegate) {
 			return
@@ -246,6 +239,7 @@ class Layer extends Observable {
 	getOverlaysByAttr(attrName, attrVal) {
 		let result = []
 		this.eachOverlay((item) => {
+			console.log('item',item,attrVal)
 			if (item.attr[attrName] === attrVal) {
 				result.push(item)
 			}
@@ -320,8 +314,7 @@ class Layer extends Observable {
 	 * @returns {Layer}
 	 */
 	listen(type, callback, context) {
-		console.log('ddddddddddddddd', this, callback, context)
-		this._layerEvent.on(type, callback, context || this)
+		this.on(type, callback)
 		return this
 	}
 
@@ -333,7 +326,7 @@ class Layer extends Observable {
 	 * @returns {Layer}
 	 */
 	off(type, callback, context) {
-		this._layerEvent.off(type, callback, context || this)
+		this.un(type, callback)
 		return this
 	}
 
@@ -344,13 +337,10 @@ class Layer extends Observable {
 	 * @returns {Layer}
 	 */
 	fire(event) {
-		// console.log(event)
-		// this._layerEvent.fire(type, params)
 		// @ts-ignore
 		this.dispatchEvent(event)
-		// return this
+		return this
 	}
-
 	/**
 	 * Registers Type
 	 * @param type

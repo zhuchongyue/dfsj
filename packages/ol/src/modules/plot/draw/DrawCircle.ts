@@ -5,6 +5,7 @@ import {GeometryFormatType} from '../../overlay/GeometryType'
 import GeomUtil from '../../utils/geomUtil'
 import Popup from 'ol-ext/overlay/Popup'
 import {buffer as getBuffer, polygon} from '@turf/turf'
+import OverlayType from "../../overlay/OverlayType";
 
 export default class DrawCircle extends Draw {
 	protected _center
@@ -64,22 +65,22 @@ export default class DrawCircle extends Draw {
 		}
 
 		this._delegate = new Polygon([this._positions], {})
-		this._delegate.attr = { id: this._id }
+		this._delegate.attr = { id: this._id ,type:OverlayType.CIRCLE,plot:true }
 		this._delegate.setStyle(this._style)
 		this._layer.addOverlay(this._delegate)
 		//
 	}
 
-	generate() {
-		const count = this.count
-		let center = count == 1 ? this.positions : this.positions[0]
+	generate(position = this.positions) {
+		const count = position.length
+		let center = count == 1 ? position : position[0]
 		//圆点
 		this._center && this._center.setCoordinates(center)
 		if (count < 2) {
 			return
 		}
-		let radius = GeomUtil.turfDistance(center, this.positions[1])
-		let diff = distance(center, this.positions[1])
+		let radius = GeomUtil.turfDistance(center, position[1])
+		let diff = distance(center, position[1])
 		const calcPnts = this.generatePoints(center, diff)
 		this._delegate.setCoordinates([calcPnts])
 

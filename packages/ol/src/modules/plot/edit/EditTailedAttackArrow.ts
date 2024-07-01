@@ -1,13 +1,10 @@
-import {Polygon} from '../../overlay'
-import {distance, getBaseLength, getQBSplinePoints, getThirdPoint, isClockWise, mid} from '../../utils/plot'
-import DrawAttackArrow from './DrawAttackArrow'
-import OverlayType from "../../overlay/OverlayType";
+ import {distance, getBaseLength, getQBSplinePoints, getThirdPoint, isClockWise, mid} from '../../utils/plot'
+import EditAttackArrow from './EditAttackArrow'
 //进攻方向（尾）
-export default class DrawTailedAttackArrow extends DrawAttackArrow {
+export default class EditTailedAttackArrow extends EditAttackArrow {
 	private tailWidthFactor: number
 	private swallowTailFactor: number
 	private swallowTailPnt: any
-
 	constructor(style) {
 		super(style)
 		this.headHeightFactor = 0.18
@@ -20,23 +17,9 @@ export default class DrawTailedAttackArrow extends DrawAttackArrow {
 		this.swallowTailPnt = null
 	}
 
-	_mountedHook() {
-		this._delegate = new Polygon(this._positions, {})
-		this._delegate.attr = { id: this._id ,type:OverlayType.TAILED_ATTACK_ARROW,plot:true }
-		this._delegate.setStyle(this._style)
-		this._layer.addOverlay(this._delegate)
-	}
-
-	generate(position = this.positions) {
-		let count = position.length
-		if (count < 2) {
-			return
-		}
-		if (count == 2) {
-			this._delegate.setCoordinates([position])
-			return
-		}
-		let pnts = position
+	generate(newPoints = this._positions) {
+		let pnts = JSON.parse(JSON.stringify(newPoints))
+        if(pnts.length != 3) return null;
 		let tailLeft = pnts[0]
 		let tailRight = pnts[1]
 		if (isClockWise(pnts[0], pnts[1], pnts[2])) {
@@ -54,7 +37,7 @@ export default class DrawTailedAttackArrow extends DrawAttackArrow {
 		this.swallowTailPnt = getThirdPoint(bonePnts[1], bonePnts[0], 0, len, true)
 		let factor = tailWidth / allLen
 		let bodyPnts = this.getArrowBodyPoints(bonePnts, neckLeft, neckRight, factor)
-		count = bodyPnts.length
+		let count = bodyPnts.length
 		let leftPnts = [tailLeft].concat(bodyPnts.slice(0, count / 2))
 		leftPnts.push(neckLeft)
 		let rightPnts = [tailRight].concat(bodyPnts.slice(count / 2, count))
@@ -65,5 +48,6 @@ export default class DrawTailedAttackArrow extends DrawAttackArrow {
 		this._delegate.setCoordinates([
 			leftPnts.concat(headPnts, rightPnts.reverse(), [this.swallowTailPnt, leftPnts[0]])
 		])
+		this._delegate.attr.lastFixPoints = [...newPoints]
 	}
 }

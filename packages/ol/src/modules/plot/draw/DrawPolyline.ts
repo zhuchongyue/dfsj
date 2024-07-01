@@ -3,6 +3,7 @@ import {Polygon, Polyline} from '../../overlay'
 import {buffer as getBuffer, lineString} from '@turf/turf'
 import Popup from 'ol-ext/overlay/Popup'
 import GeomUtil from '../../utils/geomUtil'
+import OverlayType from "../../overlay/OverlayType";
 
 export default class DrawPolyline extends Draw {
 	constructor(config) {
@@ -27,19 +28,19 @@ export default class DrawPolyline extends Draw {
 			this._layer.addOverlay(this._buffer)
 		}
 		this._delegate = new Polyline(this._positions, { zIndex: 2 })
-		this._delegate.attr = { id: this._id }
+		this._delegate.attr = { id: this._id ,type:OverlayType.POLYLINE,plot:true }
 		this._delegate.setStyle(this._style)
 		this._layer.addOverlay(this._delegate)
 	}
 
-	generate() {
-		let count = this.count
+	generate(position = this.positions) {
+		let count = position.length
 		if (count < 2) {
 			return
 		}
-		this._delegate.setCoordinates(this.positions)
+		this._delegate.setCoordinates(position)
 		if (this.config.buffer) {
-			let polyline = lineString(this.positions)
+			let polyline = lineString(position)
 			let polygons = getBuffer(polyline, Number(this.config.buffer) * 1000, { units: 'meters' })
 			const coordinates = polygons.geometry.coordinates
 			this._buffer.setCoordinates(coordinates)

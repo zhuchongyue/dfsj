@@ -32,7 +32,6 @@ export default class Map extends Mixin(BaseLayers, ViewHelper, Observable) {
 		//3、controls
 		let baseLayers = []
 		baseLayers = this.addBaseLayer(this._options?.baseLayers)
-		console.log('baseLayers', baseLayers)
 		//4、interactions
 		//5、baseLayer
 		this._delegate = new olMap({

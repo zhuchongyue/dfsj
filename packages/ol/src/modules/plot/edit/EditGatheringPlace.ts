@@ -1,38 +1,30 @@
 import {Polygon} from '../../overlay'
-import Draw from './Draw'
+import Edit from './Edit'
 import {Constants, distance, getBisectorNormals, getCubicValue, getThirdPoint, mid} from '../../utils/plot'
-import OverlayType from "../../overlay/OverlayType";
 
 //集结地
-export default class DrawGatheringPlace extends Draw {
+export default class EditGatheringPlace extends Edit {
 	public t: number
-
 	constructor(style) {
 		super(style)
 		this.t = 0.4
-		this.fixPointCount = 3
+		this.hasControlPoint = true
 	}
-
+	getControlPoints(geometry = this._overlay){
+		return this._overlay.attr.fixPoints ?? []
+	}
 	_mountedHook() {
-		this._delegate = new Polygon([this._positions], {})
-		this._delegate.attr = { id: this._id ,type:OverlayType.GATHERING_PLACE,plot:true }
-		this._delegate.setStyle(this._style)
+		this._positions = this.getControlPoints();
+		this._delegate = new Polygon([], {})
+		this._delegate.attr = { ...this.attr}
+		this._delegate.setStyle(this.style, {standard:true});
 		this._layer.addOverlay(this._delegate)
+		this.generate()
 	}
-	generate(position = this.positions) {
-		let pnts = position
-		if (position.length < 2) {
-			return
-		}
-		if (position.length == 2) {
-			let m = mid(pnts[0], pnts[1])
-			let d = distance(pnts[0], m) / 0.9
-			let pnt = getThirdPoint(pnts[0], m, Constants.HALF_PI, d, true)
-			pnts = [pnts[0], pnt, pnts[1]]
-		}
+	generate(newPoints = this._positions) {
+		let pnts = JSON.parse(JSON.stringify(newPoints));
 		let m = mid(pnts[0], pnts[2])
 		pnts.push(m, pnts[0], pnts[1])
-
 		let normals = []
 		for (let i = 0; i < pnts.length - 2; i++) {
 			let pnt1 = pnts[i]
@@ -61,6 +53,8 @@ export default class DrawGatheringPlace extends Draw {
 			}
 			pList.push(pnt2)
 		}
-		this._delegate.setCoordinates([pList])
+		this._delegate.setCoordinates([pList])	;
+		this._delegate.attr.lastFixPoints = [...newPoints]
+
 	}
 }

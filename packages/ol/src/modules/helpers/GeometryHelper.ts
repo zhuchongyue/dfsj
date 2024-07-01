@@ -115,7 +115,7 @@ export default class GeometryHelper {
 				 * 点数据
 				 */
 			} else if (
-				(Array.isArray(geomData) && geomData?.length == 2) ||
+				(Array.isArray(geomData) && geomData?.length == 2 && !Reflect.has(options,'geometryType'))  ||
 				options['geometryType'] == GeometryFormatType.Point
 			) {
 				featureGeom = transformProj(new Point(geomData))

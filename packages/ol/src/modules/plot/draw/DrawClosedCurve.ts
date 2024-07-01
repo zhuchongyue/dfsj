@@ -1,6 +1,7 @@
 import {Polygon} from '../../overlay'
 import Draw from './Draw'
 import {Constants, getBisectorNormals, getCubicValue} from '../../utils/plot'
+import OverlayType from "../../overlay/OverlayType";
 
 export default class DrawClosedCurve extends Draw {
 	private t: number
@@ -12,40 +13,19 @@ export default class DrawClosedCurve extends Draw {
 
 	_mountedHook() {
 		this._delegate = new Polygon([this._positions], {})
-		this._delegate.attr = {}
+		this._delegate.attr = { id: this._id ,type:OverlayType.CLOSED_CURVE,plot:true }
 		this._delegate.setStyle(this._style)
 		this._layer.addOverlay(this._delegate)
-		console.log('this._delegate', this._delegate)
 	}
-
-	// _onAnchorMoving({position}) {
-	//
-	//   super._onAnchorMoving({position})
-	//   // return
-	//   this._delegate.setCoordinates([this._positions])
-	// }
-	/**
-	 *
-	 * @param position
-	 * @private
-	 */
-	// _onDrawAnchor({position}) {
-	//   this._positions.push(position)
-	//   if (this._positions.length) {
-	//     this._delegate.setCoordinates([this._positions])
-	//     console.log('this._positions',this._delegate)
-	//     this.drawTool.fire(new PlotEvent(PlotEventType.CREATE_ANCHOR, position))
-	//   }
-	// }
-	generate() {
-		let count = this.count
+	generate(position = this.positions) {
+		let count = position.length
 		if (count < 2) {
 			return
 		}
 		if (count == 2) {
-			this._delegate.setCoordinates([this.positions])
+			this._delegate.setCoordinates([position])
 		} else {
-			let pnts = this.positions
+			let pnts = position
 			pnts.push(pnts[0], pnts[1])
 			let normals = []
 			for (let i = 0; i < pnts.length - 2; i++) {

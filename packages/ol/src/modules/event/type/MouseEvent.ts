@@ -1,17 +1,31 @@
 import {connectEvent} from '../../utils/EventUtil'
-import {MapEventType, MouseEventType, OverlayEventType} from '../EventType'
+import {LayerEventType, MapEventType, MouseEventType, OverlayEventType} from '../EventType'
 import OverlayEvent from './OverlayEvent'
+import LayerEvent from './LayerEvent'
 import MapEvent from './MapEvent'
 import StyleHelper from '../../style/StyleHelper'
 
-let lastFeature = null
+let lastFeature = null;
+
+const BASIC_POINTER_EVENT = [
+	MouseEventType.POINTERDOWN,
+	MouseEventType.POINTERUP,
+	MouseEventType.POINTEROVER,
+	MouseEventType.POINTEROUT,
+	MouseEventType.POINTERENTER,
+	MouseEventType.POINTERLEAVE,
+	MouseEventType.POINTERCANCEL, 
+	MouseEventType.CONTEXTMENU,
+]
 export default class MouseEvent {
 	public _map: any
 	public _cache: {}
+	public _hitTolerance: number = 2;
 
-	constructor(map: any) {
+	constructor(map: any , hitTolerance:number = 5) {
 		this._map = map
 		this._cache = {}
+		this._hitTolerance = hitTolerance
 		this._setInputAction()
 	}
 
@@ -29,6 +43,9 @@ export default class MouseEvent {
 		connectEvent(this._map._delegate, MouseEventType.POINTER_MOVE, this._mouseMoveHandle, this) //鼠标移动事件
 		connectEvent(this._map._delegate, MouseEventType.WHEEL, this._setDynamicStyleHandler, this) //鼠标滚轮事件
 		connectEvent(this._map._delegate, MapEventType.MOVEEND, this._mouseWheelHandler, this) //地图视窗变化事件
+		BASIC_POINTER_EVENT.forEach((event)=>{
+			connectEvent(this._map._delegate, event, this._pointerHandler, this)
+		})
 		// connectEvent(this._map.view , MapEventType.CHANGE_RESOLUTION ,this._setDynamicStyleHandler,this)
 	}
 
@@ -41,6 +58,9 @@ export default class MouseEvent {
 			movement.pixel,
 			function (feature, layer) {
 				return feature
+			},
+			{
+				hitTolerance: this._hitTolerance
 			}
 		)
 		const mouseInfo = this.getMouseInfo(movement)
@@ -69,13 +89,19 @@ export default class MouseEvent {
 	/** 点击回调函数*/
 	_clickHandler(movement) {
 		const { feature, mouseInfo, targetInfo } = this._getFeature(movement)
-		// console.log('___单击地图事件回调___', targetInfo)
 		this._map.dispatchEvent(new MapEvent(MouseEventType.CLICK, { ...mouseInfo, ...targetInfo }))
 		if (targetInfo?.overlay) {
 			targetInfo.overlay.fire(
 				new OverlayEvent(OverlayEventType.CLICK, {
 					mouseInfo,
 					targetInfo
+				})
+			)
+		}
+		if (targetInfo?.overlay && targetInfo?.layer) {
+			targetInfo.layer.fire(
+				new LayerEvent(LayerEventType.CLICK, this._map , {
+					...mouseInfo, ...targetInfo
 				})
 			)
 		}
@@ -98,6 +124,18 @@ export default class MouseEvent {
 		}
 	}
 
+	//TODO
+	/**
+	 * 鼠标事件回调函数
+	 */
+	_pointerHandler(movement) {
+        // movement?.preventDefault?.()
+        // movement?.stopPropagation?.()
+		const { feature, mouseInfo, targetInfo } = this._getFeature(movement)
+		this._map.dispatchEvent(new MapEvent(movement?.type, { ...mouseInfo, ...targetInfo }))
+	}
+
+
 	/**
 	 * 鼠标移动事件
 	 */
@@ -109,10 +147,10 @@ export default class MouseEvent {
 			function (feature, layer) {
 				return feature
 			},
-			{ hitTolerance: 2 }
+			{ hitTolerance: this._hitTolerance }
 		)
 		const hit = this._map._delegate.hasFeatureAtPixel(pixel, function (feature, layer) {}, {
-			hitTolerance: 2
+			hitTolerance: this._hitTolerance
 		})
 		// if (lastFeature !== feature) {
 		if (feature && feature?.overlayId && feature?.layerId) {

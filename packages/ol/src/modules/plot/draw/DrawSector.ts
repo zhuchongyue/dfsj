@@ -1,6 +1,7 @@
 import {Polygon} from '../../overlay'
 import Draw from './Draw'
 import {distance, getArcPoints, getAzimuth} from '../../utils/plot'
+import OverlayType from "../../overlay/OverlayType";
 //扇形
 export default class DrawSector extends Draw {
 	constructor(style) {
@@ -9,18 +10,17 @@ export default class DrawSector extends Draw {
 	}
 
 	_mountedHook() {
-		this._delegate = new Polygon([this._positions], {})
-		this._delegate.attr = {}
+		this._delegate = new Polygon([this._positions], {});
+		this._delegate.attr = { id: this._id ,type:OverlayType.SECTOR,plot:true }
 		this._delegate.setStyle(this._style)
 		this._layer.addOverlay(this._delegate)
-		console.log('this._delegate', this._delegate)
 	}
 
-	generate() {
-		if (this.count < 2) return
-		if (this.count == 2) this._delegate.setCoordinates([this.positions])
+	generate(position = this.positions) {
+		if (position.length < 2) return
+		if (position.length  == 2) this._delegate.setCoordinates([position])
 		else {
-			let pnts = this.positions
+			let pnts = position
 			let center = pnts[0]
 			let pnt2 = pnts[1]
 			let pnt3 = pnts[2]

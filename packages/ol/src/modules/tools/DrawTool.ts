@@ -8,9 +8,6 @@ import {VectorLayer} from '../layer'
 import PlotEvent from '../event/type/PlotEvent'
 import {Point} from '../overlay'
 import DoubleClickZoom from 'ol/interaction/DoubleClickZoom'
-
-const DEF_OPTS = {}
-
 class DrawTool extends Observable {
 	public _map: any
 	public _anchorLayer: any
@@ -35,54 +32,42 @@ class DrawTool extends Observable {
 	}
 
 	_onClick(e) {
-		console.log('%%%%单击事件', this)
-		// let _that = this.drawTool;
-		let _that = this
 		const movement = e?.movement
 		const position = movement?.coordinate ?? null
 		if (!position) return
-		if (!_that._floatingAnchor) {
-			_that._floatingAnchor = _that._onCreateAnchor({ position })
+		if (!this._floatingAnchor) {
+			this._floatingAnchor = this._onCreateAnchor({ position })
 		}
-
-		_that.fire(new PlotEvent(PlotEventType.DRAW_ANCHOR, position))
+		this.fire(new PlotEvent(PlotEventType.DRAW_ANCHOR, position))
 	}
 
 	_onMouseMove(e) {
-		let _that = this
 		const movement = e?.movement
 		const position = movement?.coordinate ?? null
 		if (!position) return
-		_that._floatingAnchor && _that._floatingAnchor.setCoordinates?.(position)
-		_that.fire(new PlotEvent(PlotEventType.ANCHOR_MOVING, position))
+		this._floatingAnchor && this._floatingAnchor.setCoordinates?.(position)
+		this.fire(new PlotEvent(PlotEventType.ANCHOR_MOVING, position))
 	}
-
 	_onDBClick(e) {
-		console.log('%%%双击结束事件', e)
-		console.log('_onMouseMove', this)
-		e?.preventDefault?.()
-		let _that = this
+		e?.stopPropagation();
+		e?.preventDefault();
+		this._map.un(MouseEventType.CLICK, this._onClick.bind(this))
+		unByKey(this.clickListener);
+		unByKey(this.pointerMoveListener);
+		this.clickListener = null;
 		const movement = e?.movement
 		const position = movement?.coordinate ?? null
-		_that.fire(new PlotEvent(PlotEventType.DRAW_STOP, position))
+		this.fire(new PlotEvent(PlotEventType.DRAW_STOP, position))
 	}
-
 	_onCreateAnchor({ position, isCenter = false }) {
-		console.log('_onCreateAnchor', position)
 		const pos = new Point(position)
 		pos.setStyle({
+			size:5,
+			color:'red',
+			outlineColor:'rgba(255,255,255,0.9)',
+			outlineWidth:1,
 			image: {
 				type: 'circle',
-				image: {
-					radius: 5,
-					stroke: {
-						strokeColor: 'rgba(51,51,51,0.77)',
-						strokeWidth: 1
-					},
-					fill: {
-						fillColor: (v) => 'red'
-					}
-				}
 			}
 		})
 		this._anchorLayer.addOverlay(pos)
@@ -94,12 +79,9 @@ class DrawTool extends Observable {
 	}
 
 	_bindEvent() {
-		this.clickListener = this._map.on(MouseEventType.CLICK, this._onClick.bind(this))
-		this.pointerMoveListener = this._map.on(
-			MouseEventType.POINTER_MOVE,
-			this._onMouseMove.bind(this)
-		)
 		this.dbclickListener = this._map.on(MouseEventType.DB_CLICK, this._onDBClick.bind(this))
+		this.clickListener = this._map.on(MouseEventType.CLICK, this._onClick.bind(this))
+		this.pointerMoveListener = this._map.on(MouseEventType.POINTER_MOVE,this._onMouseMove.bind(this))
 		// @ts-ignore
 		this.on(PlotEventType.CREATE_ANCHOR, this._onCreateAnchor)
 		// @ts-ignore
@@ -107,7 +89,6 @@ class DrawTool extends Observable {
 	}
 
 	_unbindEvent() {
-		console.log('Draw Tool_unbindEvent~~~~~~~')
 		unByKey(this.clickListener)
 		unByKey(this.pointerMoveListener)
 		unByKey(this.dbclickListener)

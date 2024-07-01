@@ -128,7 +128,6 @@ class ViewHelper extends Mixin(Global) {
 	 */
 	zoomToExtent(extent, { padding = [0, 0, 0, 0], duration = 300 }) {
 		let Transform = this?.transform
-		console.log(' this._delegate', this)
 		extent = Transform.transformExtent(extent)
 		if (this._delegate) {
 			let view = this._delegate.getView()

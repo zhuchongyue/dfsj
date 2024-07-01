@@ -4,6 +4,7 @@ import {Constants, distance} from '../../utils/plot'
 import {unByKey} from 'ol/Observable'
 import Util from '../../utils/Util'
 import Popup from "ol-ext/overlay/Popup";
+import {POINT,SINGLE} from "../Plot";
 
 interface Config {
 	style: object
@@ -85,14 +86,24 @@ class Draw {
 	get drawTool() {
 		return this._map?.drawTool
 	}
+	get type(){
+		return this._options?.type
+	}
+	get isPoint(){
+        return POINT.includes(this.type)
+	}
 
-	generate() {}
+	generate(position?) {}
 
 	_mountedHook() {}
 
 	_stoppedHook() {
 		console.log('_options', this._options)
+		console.log('停止绘制:_positions',this._positions)
 		if (this._positions && this._delegate) {
+			if (this.fixPointCount) {
+				this._delegate.attr.fixPoints = this.positions?.slice(0,this.fixPointCount);
+			}
 			this._options.onDrawStop &&
 				this._options.onDrawStop(this._delegate, {
 					buffer: this._buffer,
@@ -112,18 +123,19 @@ class Draw {
 			this.stop()
 			return
 		} else {
-			this._positions.push(position)
 			if (
 				this._positions?.length > 1 &&
-				distance(position, this._positions[this.count - 1]) < Constants.ZERO_TOLERANCE
+				distance(position, this.positions[this.count - 1]) < Constants.ZERO_TOLERANCE
 			) {
-				console.log('距离太接近,不做处理了')
+				console.log('_onDrawAnchor距离太接近,不做处理了')
 				return
 			}
+			this._positions.push(position)
 			if (this._positions.length >= 1) {
 				this.generate()
 				this.drawTool.fire(new PlotEvent(PlotEventType.CREATE_ANCHOR, position))
 			}
+			if (this.count == this.fixPointCount)this.stop()
 		}
 	}
 
@@ -139,21 +151,21 @@ class Draw {
 		}
 		if (
 			this._positions.length &&
-			distance(position, this._positions[this.count - 1]) < Constants.ZERO_TOLERANCE
+			distance(position, this.positions[this.count - 1]) < Constants.ZERO_TOLERANCE
 		) {
-			console.log('距离太接近,不做处理了')
+			console.log('_onAnchorMoving距离太接近,不做处理了')
 			return
 		}
+		const copy =  this._positions.slice(0);
+		let positions = [];
 		if (!this.freehand) {
-			this._positions.pop()
-			let ps = this._positions.slice(0)
-			this._positions = ps.concat([position])
+			positions = copy.concat([position]);
 		} else {
 			if (!this._positions.length) return
 			this._positions.push(position)
+			positions = this._positions
 		}
-		// console.log('鼠标移动当前的所有坐标',...this._positions)
-		if (this._positions.length >= 1) this.generate()
+		if (position.length >= 1) this.generate(positions)
 	}
 
 	_onDrawStop() {
@@ -175,22 +187,16 @@ class Draw {
 
 	_bindEvent() {
 		console.log('Draw _bindEvent')
-		this._onDrawAnchorLister = this.drawTool.on(
-			PlotEventType.DRAW_ANCHOR,
-			this._onDrawAnchor.bind(this)
-		)
-		this._onAnchorMovingLister = this.drawTool.on(
-			PlotEventType.ANCHOR_MOVING,
-			this._onAnchorMoving.bind(this)
-		)
+		this._onDrawAnchorLister = this.drawTool.on(PlotEventType.DRAW_ANCHOR,this._onDrawAnchor.bind(this))
+		this._onAnchorMovingLister = this.drawTool.on(PlotEventType.ANCHOR_MOVING,this._onAnchorMoving.bind(this))
 		this._onDrawStopLister = this.drawTool.on(PlotEventType.DRAW_STOP, this._onDrawStop.bind(this))
 	}
 
 	_unbindEvent() {
 		console.log('Draw _unbindEvent')
-		// this.drawTool.off(PlotEventType.DRAW_ANCHOR, this._onDrawAnchor.bind(this))
-		// this.drawTool.off(PlotEventType.ANCHOR_MOVING, this._onAnchorMoving.bind(this))
-		// this.drawTool.off(PlotEventType.DRAW_STOP, this._onDrawStop.bind(this))
+		this.drawTool.off(PlotEventType.DRAW_ANCHOR, this._onDrawAnchor.bind(this))
+		this.drawTool.off(PlotEventType.ANCHOR_MOVING, this._onAnchorMoving.bind(this))
+		this.drawTool.off(PlotEventType.DRAW_STOP, this._onDrawStop.bind(this))
 		unByKey(this._onDrawAnchorLister)
 		unByKey(this._onAnchorMovingLister)
 		unByKey(this._onDrawStopLister)
@@ -213,8 +219,7 @@ class Draw {
 			positioning: 'center-right',
 			className: "default specs"});
 		this._map._delegate?.addOverlay(this._startTip);
-		this._startTip.show?.('点击左键开始!');
-
+		this._startTip.show?.(this.isPoint ? '点击左键结束!':'点击左键开始!');
 		return this
 	}
 

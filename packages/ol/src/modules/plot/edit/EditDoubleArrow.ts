@@ -1,5 +1,5 @@
 import {Polygon} from '../../overlay'
-import Draw from './Draw'
+import Edit from './Edit'
 import {
     Constants,
     distance,
@@ -11,9 +11,8 @@ import {
     mid as Mid,
     wholeDistance
 } from '../../utils/plot'
-import OverlayType from "../../overlay/OverlayType";
 //钳击箭头
-export default class DrawDoubleArrow extends Draw {
+export default class EditDoubleArrow extends Edit {
 	private headHeightFactor: number
 	private headWidthFactor: number
 	private neckHeightFactor: number
@@ -23,43 +22,31 @@ export default class DrawDoubleArrow extends Draw {
 
 	constructor(style) {
 		super(style)
+		this.hasControlPoint = true;
 		this.headHeightFactor = 0.25
 		this.headWidthFactor = 0.3
 		this.neckHeightFactor = 0.85
 		this.neckWidthFactor = 0.15
 		this.connPoint = []
 		this.tempPoint4 = null
-		this.fixPointCount = 4
-	}
-	_stoppedHook(){
-		this._delegate.attr.fixPoints = this.positions?.slice(0,this.fixPointCount);
-		super._stoppedHook()
 	}
 	_mountedHook() {
-		this._delegate = new Polygon(this._positions, {});
-		this._delegate.attr = { id: this._id ,type:OverlayType.DOUBLE_ARROW,plot:true }
-		this._delegate.setStyle(this._style)
+		this._positions = this.getControlPoints();
+		const style=  this.style;
+		this._delegate = new Polygon([], {})
+		this._delegate.attr = { ...this.attr}
+		this._delegate.setStyle(style, {standard:true});
 		this._layer.addOverlay(this._delegate)
+		this.generate()
+	}
+	getControlPoints(geometry = this._overlay){
+		return this._overlay.attr.fixPoints ?? []
 	}
 
-	generate(position = this.positions) {
-		let count = position.length
-		if (count < 2) {
-			return
-		}
-		if (count == 2) {
-			this._delegate.setCoordinates([position])
-			return
-		}
-		// let pnt1 = this.positions[0]
-		// let pnt2 = this.positions[1]
-		// let pnt3 = this.positions[2]
-		const [pnt1,pnt2,pnt3] = position
-		count = position.length
-		if (count == 3) this.tempPoint4 = this.getTempPoint4(pnt1, pnt2, pnt3)
-		else this.tempPoint4 = position[3]
-		if (count == 3 || count == 4) this.connPoint = Mid(pnt1, pnt2)
-		else this.connPoint = position[4]
+	generate(newPoints = this._positions) {
+		let [pnt1,pnt2,pnt3,pnt4] = newPoints;
+		this.tempPoint4 = pnt4
+		this.connPoint = Mid(pnt1, pnt2)
 		let leftArrowPnts, rightArrowPnts
 		if (isClockWise(pnt1, pnt2, pnt3)) {
 			leftArrowPnts = this.getArrowPoints(pnt1, this.connPoint, this.tempPoint4, false)
@@ -85,6 +72,7 @@ export default class DrawDoubleArrow extends Draw {
 
 		let pnts = rlBodyPnts.concat(rArrowPnts, bodyPnts, lArrowPnts, lrBodyPnts)
 		this._delegate.setCoordinates([pnts])
+		this._delegate.attr.lastFixPoints = [...newPoints]
 	}
 
 	getArrowPoints(pnt1, pnt2, pnt3, clockWise) {
@@ -117,10 +105,7 @@ export default class DrawDoubleArrow extends Draw {
 		return lPoints.reverse().concat(arrowPnts, rPoints)
 	}
 
-	finishDrawing() {
-		if (this.count == 3 && this.tempPoint4 != null) this._positions.push(this.tempPoint4)
-		if (this.connPoint != null) this._positions.push(this.connPoint)
-	}
+
 
 	getArrowHeadPoints(points, tailLeft, tailRight) {
 		let len = getBaseLength(points)
