@@ -1,6 +1,6 @@
 <!--衍生的地图组件-->
 <script setup lang="ts">
-import {computed, nextTick, onBeforeUnmount, onMounted, toRaw, toRefs, unref, watchEffect} from "vue";
+import {computed, nextTick, onBeforeMount, onBeforeUnmount, onMounted, toRaw, toRefs, unref, watchEffect} from "vue";
 import {delGis, GisSymbolKey, setGis} from "/@/core/GisCache";
 import {useDesign} from "@/hooks/web/useDesign.ts";
 import {GisPlatformEnum} from "@/enums/appEnum.ts";
@@ -23,34 +23,34 @@ const {gisKey} = toRefs(props)
 const emits = defineEmits(["ready"]);
 const initMap = () => {
   //查找本地缓存的是2，3维
-  const cachePlatform = usePlatformStoreWithOut().getGisKeyInstance(toRaw(unref(gisKey)))?.platform;
-
-  const gisPlatform = cachePlatform ?? props.platform
-  console.log('cachePlatform',cachePlatform)
-
-  // return
+  const cachePlatform = usePlatformStoreWithOut().getGisKeyInstance(toRaw(unref(gisKey)))?.platform; 
+  const gisPlatform = cachePlatform ?? props.platform 
   const baseLayers = props.options?.[gisPlatform]?.baseLayers??[]
   const mapIndex = baseLayers.findIndex(v => v.isDefault);
-  let adapter = new GisPlatformAdapter(gisPlatform, props.options?.[gisPlatform]);
-  console.log('adapter', adapter)
+  let adapter = new GisPlatformAdapter(gisPlatform, props.options?.[gisPlatform]); 
   setGis(toRaw(unref(gisKey)), adapter.instance);
-  emits('ready', true)
-  // setTimeout(()=>{
+  emits('ready', true) 
     usePlatformStoreWithOut().setInstance(toRaw(unref(gisKey)), {
       ready: true,
       platform: gisPlatform,
       mapIndex:mapIndex
-    })
-  // },2000)
+    }) 
 }
 onMounted(() => {
   nextTick(initMap)
 })
 onBeforeUnmount(() => {
+  resetMapState()
   delGis(toRaw(unref(gisKey)))
 })
-
-
+function resetMapState() {
+  usePlatformStoreWithOut().setInstance(toRaw(unref(gisKey)), {
+    ready: false,
+  })
+}
+onBeforeMount(()=>{
+  resetMapState()
+})
 watchEffect(()=>{
   let i = usePlatformStoreWithOut().getInstance;
   console.log('7777777777777777',i)

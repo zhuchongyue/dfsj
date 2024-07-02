@@ -10,10 +10,12 @@ export function usePlot(giskey = GisSymbolKey.default, config = {}, options = {
     let receiveLayer:any;
     let map:any;
     let plot:any;
-    const overlayId = ref(null)
+    const overlayId = ref(null);
+    const refuse = ref(false);
     onMounted(() => {
         receiveLayer = new VectorLayer('ol-plot-layer');
         map = getGis(giskey);
+        if (!map) return;
         plot = new Plot(map, config);
         map.addLayer(receiveLayer);
         if (options.editable) receiveLayer.on(MouseEventType.CLICK, (e: any) => {
@@ -23,7 +25,10 @@ export function usePlot(giskey = GisSymbolKey.default, config = {}, options = {
                 const propEditor = PropFactory.create(overlay?.attr?.type, {})
                 options.propEditRef?.value?.show?.(true, propEditor)
                 plot.edit(overlay, (graph) => {
-                    receiveLayer.addOverlay(graph);
+                    if (!refuse.value){
+                        receiveLayer.addOverlay(graph);
+                    };
+                    refuse.value = false;
                     options.propEditRef?.value?.show?.(false,{})
                 });
                 receiveLayer.removeOverlay(overlay)
@@ -63,8 +68,8 @@ export function usePlot(giskey = GisSymbolKey.default, config = {}, options = {
     }
 
     function dispose() {
-        receiveLayer?.off?.(MouseEventType.CLICK);
-        map.removeLayer(receiveLayer);
+        if (!map || !receiveLayer) return;
+        map?.removeLayer(receiveLayer);
         plot?.dispose?.()
         receiveLayer = null;
         map= null;
@@ -73,16 +78,34 @@ export function usePlot(giskey = GisSymbolKey.default, config = {}, options = {
     }
 
     function getPlotOverlays() {
-        return receiveLayer?.getPlotOverlays()
+        return receiveLayer?.getOverlays()
     }
-    function getEditOverlays() {
-        console.log('overlayId.value',overlayId.value)
+    function getEditOverlay() {
         if (!overlayId.value) return undefined;
         return receiveLayer?.getOverlaysByAttr('id',overlayId.value)
     }
 
     function setStyle(style) {
         plot?.setStyle(style)
+    }
+
+    /**
+     * 删除当前的
+     */
+    function delPlot() {
+        refuse.value = true;
+        plot?.stop?.();
+        overlayId.value = null;
+    }
+
+    /**
+     * 清除所有的
+     */
+     function clearPlot() {
+        refuse.value = true;
+        plot?.stop?.()
+        receiveLayer?.clear?.()
+        overlayId.value = null;
     }
 
     return {
@@ -92,8 +115,10 @@ export function usePlot(giskey = GisSymbolKey.default, config = {}, options = {
         dispose,
         overlayId,
         getPlotOverlays,
-        getEditOverlays,
-        setStyle
+        getEditOverlay,
+        setStyle,
+        delPlot,
+        clearPlot
     }
 
 

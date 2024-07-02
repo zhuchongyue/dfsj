@@ -10,6 +10,7 @@ import PropFactory from "@/components/Plot/src/class/PropFactory.ts";
 import {usePlot} from "@/components/Plot/src/usePlot.ts";
 import {GisSymbolKey} from "@/core/GisCache.ts";
 import IconPicker from "@/components/Plot/src/components/IconPicker/IconPicker.vue";
+import {EventEnum} from "@/components/Plot/src/enum/eventEnum.ts";
 const {prefixCls} = useDesign('component-plot-page');
 const svgPrefix = `plot-`;
 const selected  = ref(null);
@@ -18,7 +19,9 @@ const propEditRef = ref(null);//操作属性编辑器的
 const iconPickerRef = ref(null)
 const lable = ref(null)
 
-const { stop ,startPlot,getEditOverlays,setStyle} = usePlot(
+const { stop ,
+  clearPlot,
+  delPlot,startPlot,getPlotOverlays,setStyle} = usePlot(
     GisSymbolKey.default,
     {},
     {
@@ -30,13 +33,18 @@ const { stop ,startPlot,getEditOverlays,setStyle} = usePlot(
  * 外层类型点击
  */
 function onCategory(item:IPlot,index:number) {
-
+  console.log('点击外层的操作',item,index);
+  if (item.type == EventEnum.CLEAN){
+    clearPlot()
+  }else if(item.type == EventEnum.SAVE){
+    const overlay = getPlotOverlays();
+    console.log('当前所有绘制的',overlay)
+  }
 }
 /**
  * 内部具体的标绘类型
  */
 function onPlotType(item:IPlot) {
-  console.log('洒洒水',item)
   selected.value = item.type;
   startPlot(item.type)
 }
@@ -61,44 +69,27 @@ const wholePlotToolBoxConfig = PlotToolBoxConfig.concat(PlotEventConfig)
 
 //设置样式
 function onOperation(type: 'del' | 'apply') {
-  console.log('设置样式',type)
-  const overlay = getEditOverlays();
-  console.log('overlay',overlay)
   if (type === 'apply') {
-    const { props = {} } = propEditRef?.value.graph
-    console.log({ props })
+    const { props = {} } = propEditRef?.value?.graph
     const propEditor = PropFactory.create(props?.type, props)
     const style = propEditor.getStyle()
     setStyle(style)
-    // overlay.setStyle(style)
-    // plot.setStyle(style)
-    // plot.setAttr({
-    //   ...overlay.attr,
-    //   style: { ...props },
-    // })
   } else if (type === 'del') {
-    // layer && layer?.removeOverlay?.(overlay)
-    // plot && plot?.stop?.()
-    // propEdit?.value?.show?.(false, {})
+    delPlot()
   }
 }
 
 // TODO 图标的上图标绘
 const pickerHandle = (icon: string) => {
-  console.log('ref',icon,iconPickerRef.value)
   const ref = iconPickerRef.value?.[0] as any
   const { selectedObj } = ref;
   let symbolProp = PropFactory.create(PlotType.BILLBOARD, {
     image: selectedObj?.src,
   })
   const style = symbolProp.getStyle();
-  console.log('style',style)
   startPlot(PlotType.BILLBOARD ,{
     style
   })
-  // const styleProps = symbolProp.props
-  // draw('billboard', style, styleProps) // 图标点
-  // symbolProp = null
 }
 
 watch(()=>lable.value , (value)=>{
