@@ -15,7 +15,7 @@ function ensure(value: string | number): string {
  * @param value 要测试的值
  */
 function isp(value: string | number): boolean {
-	return typeof value === 'string' && !!value.match(/^.+(%|vh|vw)$/)
+	return typeof value === 'string' && !!value.match(/^.+(%|vh|vw|px|rem)$/)
 }
 
 /**

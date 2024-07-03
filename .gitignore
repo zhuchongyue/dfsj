@@ -40,3 +40,4 @@ pnpm-debug.log*
 
 cache/*
 /docs/build/*
+hs_err_pid*.log
