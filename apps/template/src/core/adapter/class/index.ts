@@ -2,6 +2,7 @@
 import { getGis, GisSymbolKey } from '/@/core/GisCache';
 import LayerManager from "@/core/adapter/class/LayerManager.ts";
 import ResourceManage from "@/core/adapter/class/ResourceManage.ts";
+import {isEmpty, isNull} from "@dfsj/utils";
 let layerManages:any = {};
 let resourceManages:any = {};
 export function getLayerManage(key: symbol = GisSymbolKey.default): LayerManager {
@@ -37,5 +38,14 @@ export function delResourceManage(key: symbol = GisSymbolKey.default) {
 }
 
 export function generateUniqueId(layerCfg: any) {
-  return `${layerCfg?.id}${layerCfg?.name}${layerCfg?.layer ?? ''}`;
+  if (!layerCfg || isEmpty(layerCfg)) throw new Error('layerCfg  empty!');
+  let unique = layerCfg?.id?.toString();
+  if(Reflect.has(layerCfg, "name")) {
+    unique = `${unique}${layerCfg?.name}`;
+  }
+  if(Reflect.has(layerCfg, "layer")) {
+    unique = `${unique}${layerCfg?.layer}`;
+  }
+  console.log('{unique}:',unique)
+  return unique
 }

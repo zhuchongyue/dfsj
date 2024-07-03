@@ -45,7 +45,7 @@ const defaultLoader =(options: any = {}, cancelKey = '')=> {
     const params = {
         motype: options.motype,
         type: { motype: options.motype, sttypes: options.filter?.sttypes },
-        area: options?.user?.adcd,
+        area: options?.user?.adcd ?? '520000000000000',
         box: options.extent,
         scale: -1,
         wlevel: options.filter.legend ?? -1,
@@ -53,6 +53,7 @@ const defaultLoader =(options: any = {}, cancelKey = '')=> {
         sumtype: ModeMap[options.mode],
         end: options.end,
     };
+    console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>开始请求图层信息',params,options)
     return visualPlayableFeatureApi(params, cancelKey);
 }
 export {

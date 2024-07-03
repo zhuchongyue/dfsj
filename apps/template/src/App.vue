@@ -18,7 +18,7 @@ import Visual from "@/components/Visual/Visual.vue";
 import Plot from "@/components/Plot/src/Plot.vue";
 import UsageLayout from "../layouts/usage/UsageLayout.vue";
 import {usePlatformStoreWithOut} from "@/store/modules/platform.ts";
-import {GisSymbolKey} from "@/core/GisCache.ts";
+import {getGis, GisSymbolKey} from "@/core/GisCache.ts";
 // // console.log({ ECCesium })
 // console.log({ECHooks})
 // console.log({ECComponents})
@@ -32,7 +32,7 @@ const assemblySize = computed(() => 'default');
 const buttonConfig = reactive({autoInsertSpace: false});
 
 const ready = computed(()=>{
-  return usePlatformStoreWithOut().getGisKeyInstance(GisSymbolKey.default)?.ready
+  return usePlatformStoreWithOut().getGisKeyInstance(GisSymbolKey.default)?.ready && getGis(GisSymbolKey.default)
 })
 </script>
 
@@ -57,7 +57,7 @@ const ready = computed(()=>{
 <!--      <UsageLayout/>-->
 <!--      {{ready}}-->
       <Plot v-if="ready" />
-<!--      <Visual />-->
+      <Visual v-if="ready" />
 <!--      <RouterView/>-->
       <MapLayout />
     </el-config-provider>

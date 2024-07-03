@@ -9,6 +9,7 @@ import GisPlatformAdapter from "@/core/adapter/GisPlatformAdapter.ts";
 import ToolBox from "@/layouts/map/components/ToolBox/ToolBox.vue";
 import {platformBasicProps} from "@/layouts/map/props.ts";
 import {usePlatformStoreWithOut} from "@/store/modules/platform.ts";
+import LayerLegender from "@/components/Layer/LayerLegender.vue";
 
 let map: any = void 0;
 const {prefixCls} = useDesign('gis-component-page-wrap');
@@ -37,11 +38,13 @@ const initMap = () => {
     }) 
 }
 onMounted(() => {
-  nextTick(initMap)
+  nextTick(initMap);
+  window.addEventListener('beforeunload', resetMapState);
 })
 onBeforeUnmount(() => {
-  resetMapState()
   delGis(toRaw(unref(gisKey)))
+  window.removeEventListener('beforeunload', resetMapState);
+  resetMapState()
 })
 function resetMapState() {
   usePlatformStoreWithOut().setInstance(toRaw(unref(gisKey)), {
@@ -66,6 +69,9 @@ const ready = computed(()=>{
 <template>
   <div :class="`${prefixCls} relative`">
    <template v-if="ready">
+     <LayerLegender
+         :gis-key="gisKey"
+     />
      <ToolBox
          :platform="platform"
          :gis-key="gisKey"

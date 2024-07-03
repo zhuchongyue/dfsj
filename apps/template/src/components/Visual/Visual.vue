@@ -10,7 +10,6 @@ console.log('时间轴信息',play)
 let res = new ResolvableLayerProvider(null , play);
 let _dbz = new ResolvableLayerProvider(null , dbz);
 console.log('解析的结果',res)
-
 //todo
 import {BasicModal} from "@dfsj/components";
 import VisualPlayer from "@/components/Visual/VisualPlayer.vue";
@@ -19,6 +18,7 @@ import {EMittLayerPlayable} from "@/enums/mittTypeEnum.ts";
 import {GisSymbolKey} from "@/core/GisCache.ts";
 import {players, rsvrPlayer} from "@/components/Visual/mock";
 import LayerTitle from "@/components/Layer/LayerTitle.vue";
+import Point from "@/components/Graph/Point.vue";
 const target = players[0]
 // const model: NodeModel = new NodeModel({...def});
 // // const chips: VisualContent[] = shallowReactive([]);
@@ -64,7 +64,7 @@ const click = (origin,key:Symbol)=>{
 </script>
 <template>
   <div :class="prefixCls">
-
+     <Point/>
     <BasicModal
         :visible="true"
         :footer="false"

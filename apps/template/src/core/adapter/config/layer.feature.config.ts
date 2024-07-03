@@ -9,6 +9,7 @@
 
 import Define from "@/config/Define.ts";
 import overlays from "./layer.feature.overlays.ts";
+import { buildUUID} from "@dfsj/utils";
 import {getGis, GisSymbolKey} from "@/core/GisCache.ts";
 import {visualPlayableWeatherApi} from "@/api/layer.ts";
 import {defaultHighlight, defaultLoader, defaultStyle} from "@/core/adapter/config/default.ts";
@@ -80,6 +81,7 @@ const configs: any = {
 /***
  获取一些必要的配置 */
 export default function getLayerConfig({
+                                           id =  buildUUID(),
                                            motype = 1,
                                            custom = {},
                                            normal = defaultStyle,
@@ -92,6 +94,7 @@ export default function getLayerConfig({
         return Object.assign({}, config, { custom });
     }
     return {
+        id:id,
         type: 'feature',
         format: {
             type: 'list',

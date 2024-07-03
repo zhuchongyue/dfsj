@@ -16,7 +16,7 @@ import {
 import {diff, emitter} from '@dfsj/utils';
 import {generateUniqueId} from "@/core/adapter/class";
 export class OlResourceImpl extends AbstractResource {
-    constructor(id: any, config: any, dataSource?: [] = []) {
+    constructor(id: any, config: any, dataSource?: []) {
         super(id, config, dataSource);
         if (config?.type == 'feature') {
             this.vectorLayerGroup = new LayerGroup(id + '-group');

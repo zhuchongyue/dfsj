@@ -4,6 +4,7 @@ import {useDesign} from "/@/hooks/web/useDesign.ts";
 import {useUserStore} from '/@/store/modules/user';
 import {EMittLayerTitle} from "@/enums/mittTypeEnum.ts";
 import {emitter} from "@dfsj/utils" ;
+
 const useStore = useUserStore();
 const {prefixCls} = useDesign('component-Visual-page');
 //todo
@@ -164,7 +165,6 @@ function onTabClick(tab, ev) {
       <div style="width: 500px;height: 70px">
         <NodeAxisComponent
             class="z-10"
-            :res="res"
             @register="register"
             @update:frame="onRenderFrameRain"></NodeAxisComponent>
       </div>
@@ -186,6 +186,7 @@ $prefix-cls: #{$namespace}-component-Visual-page;
     margin: auto 0;
     display: flex;
     align-items: center;
+
     .el-tabs__nav-next,
     .el-tabs__nav-prev {
       display: flex;
@@ -226,6 +227,7 @@ $prefix-cls: #{$namespace}-component-Visual-page;
       color: #fff;
       background: var(--el-color-primary);
     }
+
     .el-tabs__header {
       margin: 0;
       padding: 0;

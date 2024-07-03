@@ -1,0 +1,73 @@
+.component.legend {
+  //padding: 5px;
+  .legend-title {
+    font-size: 16px !important;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: unset;
+    background: transparent;
+    text-align: center;
+  }
+
+  ul {
+    padding: 5px 0px 5px 0;
+  }
+
+  li {
+    height: 16px;
+    list-style: none;
+    margin-top: 1px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    cursor: pointer;
+  }
+
+  .index {
+    width: 15px;
+    height: 100%;
+    margin-right: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .style {
+    width: 28px;
+    height: 100%;
+    margin-right: 10px;
+    border-radius: 1px;
+    // opacity: 0.3;
+  }
+
+  img.style{
+    max-width: 28px;
+    width: auto;
+  }
+
+  .label {
+    font-size: 12px;
+    opacity: 0.7;
+  }
+
+  li.selected .color, li.selected .label {
+    opacity: 1;
+  }
+
+  .index.cursor:before {
+    display: inline-block;
+    font: normal normal normal 24px / 1 "Material Design Icons";
+    //font-size: 30px;
+    //text-rendering: auto;
+    //line-height: inherit;
+    content: "";
+    //color: red;
+    width: 0;
+    height: 0;
+    border-left: 5px solid red;
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent
+  }
+}
