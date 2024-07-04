@@ -8,7 +8,7 @@ import {getCurrentInstance, onMounted, ref, watch} from 'vue';
 
 import {State, StateEnum} from '../../../Stateful';
 import {useLoaderProps} from '../props';
-import {isEmpty, isNullOrUnDef} from '../../../../utils/is';
+import {isEmpty, isNullOrUnDef} from '@dfsj/utils';
 
 export function useLoader(
   props: useLoaderProps,

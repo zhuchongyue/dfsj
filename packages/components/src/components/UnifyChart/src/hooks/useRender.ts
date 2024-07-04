@@ -1,5 +1,6 @@
 import {computed, onMounted, Ref, watch} from 'vue';
 import {EToolbox, IToolbox} from '../props';
+import {isEmpty} from "@dfsj/utils";
 // import type { EChartsType } from 'echarts/core';
 type EChartsType = object | any;
 export interface RenderConfig {
@@ -32,7 +33,7 @@ export function useRender(config: RenderConfig, datasource: Ref, toolbox: Toolbo
   }));
   /** 刷新图表*/
   function refreshCharts(data) {
-    if (!data) return;
+    if (!data || isEmpty(data)) return;
     transform(data);
     const optioned = createOptions(data);
     const options = assemble(data, optioned);
