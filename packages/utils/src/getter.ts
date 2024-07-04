@@ -8,7 +8,7 @@ export type PropertyGetter<T extends any = any> = (properties: any) => T
  * @param args 其他参数（仅property为函数时使用）
  * @return 属性值
  */
-export default function getter<T extends any>(
+export function getter<T extends any>(
 	property: any | PropertyGetter,
 	target?: any,
 	def: any = undefined,

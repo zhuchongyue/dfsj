@@ -14,7 +14,7 @@ import {TTyphoonResultV2} from './adapter/result'
 import Polyline from '../overlay/vector/Polyline'
 import {GeometryFormatType} from '../overlay/GeometryType'
 import * as turf from '@turf/turf'
-import diff from '../utils/diff'
+import {diff} from '@dfsj/utils'
 import MapEvent from '../event/type/MapEvent'
 
 export enum ETyphoonLayer {
@@ -572,7 +572,7 @@ export default class TyphoonChannel extends Observable {
 			})
 			this.forecast = arg ? defForecast : []
 		} else if (Array.isArray(arg)) {
-			const [absent, additional, identical] = diff(this.forecast, arg)
+			const {absent, additional, identical} = diff(this.forecast, arg)
 			if (absent.length) {
 				absent.forEach((value) => {
 					let layer = this.forecastLayerMap.get(value)

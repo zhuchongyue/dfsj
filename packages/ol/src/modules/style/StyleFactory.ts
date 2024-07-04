@@ -1,7 +1,6 @@
 // @ts-ignore
-import {isFunction, isNumber} from '../utils/common'
 import {Circle, Fill, Icon, RegularShape, Stroke, Text} from 'ol/style'
-import getter from '../utils/getter'
+import {getter,isFunction, isNumber} from '@dfsj/utils'
 
 export default class StyleFactory {
 	/**

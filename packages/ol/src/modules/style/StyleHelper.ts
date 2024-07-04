@@ -1,7 +1,7 @@
 /**
  * 通过自定义的格式进来转换成ol需要的格式
  */
-import getter from '../utils/getter'
+import {getter} from '@dfsj/utils';
 import {Style} from 'ol/style'
 
 const Z_INDEX = 2
