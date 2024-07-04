@@ -1,4 +1,4 @@
-import {isFunction} from '../utils/common'
+import {isFunction} from '@dfsj/utils'
 import {Style as olStyle} from 'ol/style'
 import {Feature as olFeature} from 'ol'
 import Style from '../style/Style'
