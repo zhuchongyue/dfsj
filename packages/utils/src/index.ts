@@ -7,6 +7,7 @@ export * from './file/base64Conver' //base64转换
 export * from './file/download' //下载
 export * from './uuid' //uuid生成
 export * from './bem' //BEM规范类名
+export * from './getter' //获取属性
 export * from './propTypes' //3方类型拓展
 export * as domUtils from './domUtils' //dom工具
 export * as constant from './const' //常量
