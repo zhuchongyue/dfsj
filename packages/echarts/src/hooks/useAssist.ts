@@ -170,10 +170,10 @@ export function useAssist() {
 						],
 						yAxis: [
 							{
-								$layout: CATEGORY.OTHER,
-								name: '开度（m）',
+								$layout: CATEGORY.RAINFALL,
+								name: '降雨量（mm）',
 								min: 0,
-								max: (v) => Math.round(v.max + (v.max - v.min) * 0.1)
+								max: v => Math.round(v.max + (v.max - v.min) * 0.1),
 							},
 							{
 								$layout: CATEGORY.FLOW,//4
