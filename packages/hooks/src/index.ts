@@ -34,7 +34,9 @@ import useCountdown from "./useCountdown/index"
 
 import useAttrs from './useAttrs/index';
 import {useContext,createContext} from './useContext/index';
+//工具函数
 
+export * from "./utils"
 export {
 	// Async
 	useRequest,
