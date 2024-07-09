@@ -17,15 +17,10 @@ export default class Polyline extends Overlay {
             params: options
         })
     }
-
-    /**
-     *
-     * @param style
-     * @returns {Billboard}
-     */
     setStyle(style,options = {
         standard: false,
-        zoom: null
+        zoom: null,
+        highlight: false
     }) {
         const helper = !options?.standard ? StyleHelper.Polyline(style, this.attr) : style;
         super.setStyle(helper,options)

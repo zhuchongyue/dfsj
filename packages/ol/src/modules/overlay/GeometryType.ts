@@ -11,6 +11,7 @@ export enum GeometryFormatType {
 	Point = 'Point',
 	OSMXML = 'OSMXML',
 	WKT = 'WKT',
+	WKB = 'WKB',
 	GMLBase = 'GMLBase',
 	GPX = 'GPX',
 	WFS = 'WFS',

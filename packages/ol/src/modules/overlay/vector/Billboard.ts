@@ -27,22 +27,15 @@ export default class Billboard extends Overlay {
 		const center = getCenter(extent)
 		return center ?? []
 	}
-
-	/**
-	 *
-	 * @param style
-	 * @param zoom
-	 * @returns {Billboard}
-	 */
 	setStyle(style,options = {
 		standard: false,
-		zoom: null
+		zoom: null,
+		highlight: false
 	}) {
 		const helper =!options?.standard ? StyleHelper.Billboard(style, this.attr, options.zoom):style;
 		super.setStyle(helper, options)
 		return this
 	}
-
 	/**
 	 * Parse from entity
 	 * @param entity

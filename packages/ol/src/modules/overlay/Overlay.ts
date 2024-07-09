@@ -16,6 +16,7 @@ export default class Overlay extends Observable {
     public _state: any
     public _show: boolean
     public _style: any = {}
+    public _highlight: any = {}
     public _attr: {}
     public _allowDrillPicking: boolean
     public _contextMenu: any[]
@@ -39,6 +40,7 @@ export default class Overlay extends Observable {
         this._state = undefined
         this._show = true
         this._style = {}
+        this._highlight = {}
         this._attr = {}
         this._allowDrillPicking = false
         this._contextMenu = []
@@ -107,6 +109,10 @@ export default class Overlay extends Observable {
         return this._style
     }
 
+    get highlight() {
+        return this._highlight
+    }
+
     set id(id) {
         this._bid = id
         // return this
@@ -172,26 +178,18 @@ export default class Overlay extends Observable {
         return this._contextMenu
     }
 
-    /**
-     * @param options
-     */
     setStyle(style = {}, options = {
         standard: false,
-        zoom: null
+        zoom: null,
+        highlight: false
     }): Overlay {
-        //判断是否相等  若果相等则不必要更新样式
-        let eq = JSON.stringify(this._style) == JSON.stringify(style)
-        if (!style || Object.keys(style).length === 0) {
-            return this
-        }
-        if (style instanceof olStyle) {
+        if (!style || Object.keys(style).length === 0) return this;
+        if (Array.isArray(style || style instanceof olStyle)) {
             this._delegate.setStyle(style)
         } else {
-            this._style = merge({}, cloneDeep(this._style), cloneDeep(style))
-            // console.log('//////////是否相等////////////',eq)
-            style = Style.create(this._style, this.attr)
-            // if (eq) return
-            this._delegate.setStyle(style)
+            if (!options.highlight) this._style = cloneDeep(style)
+            if (options.highlight) this._highlight = cloneDeep(style)
+            this._delegate.setStyle(Style.create(cloneDeep(style), this.attr))
         }
         return this
     }

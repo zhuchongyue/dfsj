@@ -112,7 +112,6 @@ export default class ImageryLayerFactory {
 	 * @returns {string}
 	 */
 	static createTileWMSLayer(layerName, params, gis?) {
-		console.log('___createTileWMSLayer___createTileWMSLayer', params, params['width'])
 		const _config: any = {
 			LAYERS: params?.['layer'], // require
 			STYLES: params?.['style'] ?? '',
@@ -124,7 +123,7 @@ export default class ImageryLayerFactory {
 			CRS: params?.['srs'] ?? 'EPSG:3857',
 			REQUEST: 'GetMap',
 			TRANSPARENT: true,
-			TILED: !!params?.['tiled'] ?? true,
+			TILED: params?.['tiled'] ?? true,
 			TILESORIGIN: params?.['tiledsorrigin'] ?? undefined,
 			SERVICE: 'WMS',
 			FORMAT: params?.['format'] ?? 'image/png',
@@ -137,7 +136,7 @@ export default class ImageryLayerFactory {
 			// @ts-ignore
 			layerName: layerName,
 			visible: params?.['visible'] ?? true,
-			opacity: +params?.['opacity'] ?? 1,
+			opacity: params?.['opacity'] ?? 1,
 			zIndex: +params['zIndex'],
 			source: new TileWMS({
 				url: params?.['layerUrl'],

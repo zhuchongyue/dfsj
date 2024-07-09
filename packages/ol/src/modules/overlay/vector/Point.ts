@@ -27,15 +27,10 @@ export default class Point extends Overlay {
 	get position() {
 		return this._position
 	}
-
-	/**
-	 *
-	 * @param style
-	 * @returns {Point}
-	 */
 	setStyle(style = this._style, options = {
 		standard: false,
-		zoom: null
+		zoom: null,
+		highlight: false
 	}) {
 		const helper = !options.standard ? StyleHelper.Point(style, this.attr):style;
 		super.setStyle(helper,options)

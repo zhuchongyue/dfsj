@@ -48,14 +48,10 @@ export default class Polygon extends Overlay {
         } // @ts-ignore
         return this
     }
-
-    /**
-     * @param style
-     * @param standard
-     */
     setStyle(style = this._style, options = {
         standard: false,
-        zoom: null
+        zoom: null,
+        highlight: false
     }) {
         const helper = !options.standard ? StyleHelper.Polygon(style, this.attr) : style;
         super.setStyle(helper,options)
