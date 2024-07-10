@@ -23,6 +23,9 @@ const { getBindValue } = useRender(
 )
 
 
+defineExpose({
+  getBindValue
+})
 
 </script>
 <template>
