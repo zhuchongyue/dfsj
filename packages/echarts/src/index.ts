@@ -12,7 +12,9 @@ export * from './utils/index' //工具
 export * from './config' //基础配置
 import config from './config' //基础配置
 export {useDownLoad} from "./view/useDownLoad"; //统一下载
-export {useEChartsThemes} from "./themes/useEChartsThemes"
+export {useEChartsThemes} from "./themes/useEChartsThemes";
+//图表转表格组件
+import ChartTable from "./view/Table.vue";
 export {
     useAssist,
     useECharts,
@@ -24,5 +26,6 @@ export {
     useComplexHydrology,
     useDamSchematic,
     useDrainageCurves,
+    ChartTable,
     config
 }

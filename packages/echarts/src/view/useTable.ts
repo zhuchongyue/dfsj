@@ -20,7 +20,6 @@ export function useTable() {
 	watch(
 		() => props.visible,
 		(value, oldValue, onCleanup) => {
-			console.log('//////////')
 			value ? open() : close()
 		},
 		{
