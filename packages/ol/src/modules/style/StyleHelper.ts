@@ -52,40 +52,15 @@ export default class StyleHelper {
             const {label, scale, image, rotation} = style
             const zooms = style?.zooms ?? undefined
             let lzs = label?.zooms ?? null
-            const noLabel = zoom != null && lzs != null && (zoom < lzs[0] || zoom > lzs[1])
+            const noLabel = zoom != null && lzs != null && (zoom < lzs[0] || zoom > lzs[1]);
+            let text:Object | Array<any> = {};
+            if (Array.isArray(label)){
+                text = label.map((l)=>StyleHelper.Text(l,attr))
+            }else{
+                text = StyleHelper.Text(label,attr)
+            }
             return {
-                text: {
-                    placement: null,
-                    overflow: null,
-                    font: label?.font,
-                    // offsetX: label?.offset?.[0] ,
-                    // offsetY: label?.offset?.[1] ,
-                    offsetX: getter(label?.offset, attr, [0, 0])?.[0],
-                    offsetY: getter(label?.offset, attr, [0, 0])?.[1],
-                    scale: undefined,
-                    // text: label?.text ,
-                    text: !noLabel ? getter(label?.text, attr, '') : '',
-                    textAlign: getter(label?.align, attr, 'center'),
-                    textBaseline: 'alphabetic',
-                    rotateWithView: false,
-                    fill: {
-                        color: label?.color
-                    },
-                    backgroundFill: '',
-                    stroke: {
-                        color: label?.outlineColor,
-                        lineCap: '',
-                        lineJoin: '',
-                        lineDash: '',
-                        lineDashOffset: '',
-                        miterLimit: '',
-                        width: label?.outlineWidth
-                    },
-                    backgroundStroke: '',
-                    maxAngle: undefined,
-                    rotation: 0,
-                    padding: undefined
-                },
+                text: text,
                 image: {
                     type: 'icon',
                     scale: getter(scale, attr, 1),
