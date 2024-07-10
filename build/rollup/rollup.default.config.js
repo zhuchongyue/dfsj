@@ -4,7 +4,7 @@ import commonjs from '@rollup/plugin-commonjs'
 import typescript from 'rollup-plugin-typescript2'
 import glslify from 'rollup-plugin-glslify'
 import babel from '@rollup/plugin-babel'
-import { terser } from 'rollup-plugin-terser'
+import terser from '@rollup/plugin-terser';
 import multi from '@rollup/plugin-multi-entry'
 import json from '@rollup/plugin-json'
 import replace from '@rollup/plugin-replace'
