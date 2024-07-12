@@ -9,7 +9,7 @@
   "author": "yangbo <1747837358@qq.com>",
   "homepage": "",
   "license": "MIT",
-  "main": "dist/index.js",
+  "main": "dist/index.ts",
   "directories": {
     "lib": "lib",
     "test": "__tests__"
@@ -34,8 +34,8 @@
     "@dfsj/rollup": "workspace:^",
     "@types/node": "^20.11.3"
   },
-  "module": "dist/index.js",
-  "browser": "dist/index.js",
+  "module": "src/index.ts",
+  "browser": "src/index.ts",
   "types": "dist/index.d.ts",
   "dependencies": {
     "@babel/runtime": "^7.24.0",
