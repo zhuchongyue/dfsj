@@ -24,7 +24,7 @@ onMounted(()=>{
 </script>
 <template>
   <div :class="prefixCls">
-     上图
+     点数据
   </div>
 </template>
 

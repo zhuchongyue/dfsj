@@ -19,6 +19,7 @@ import {GisSymbolKey} from "@/core/GisCache.ts";
 import {players, rsvrPlayer} from "@/components/Visual/mock";
 import LayerTitle from "@/components/Layer/LayerTitle.vue";
 import Point from "@/components/Graph/Point.vue";
+import Store from "@/components/Graph/Store.vue";
 const target = players[0]
 // const model: NodeModel = new NodeModel({...def});
 // // const chips: VisualContent[] = shallowReactive([]);
@@ -64,7 +65,8 @@ const click = (origin,key:Symbol)=>{
 </script>
 <template>
   <div :class="prefixCls">
-     <Point/>
+    <Point/>
+<!--    <Store/>-->
     <BasicModal
         :visible="true"
         :footer="false"
@@ -108,5 +110,6 @@ $prefix-cls: #{$namespace}-component-Visual-page;
 .#{$prefix-cls} {
   position: fixed;
   z-index: 100;
+  top: 0;
 }
 </style>
