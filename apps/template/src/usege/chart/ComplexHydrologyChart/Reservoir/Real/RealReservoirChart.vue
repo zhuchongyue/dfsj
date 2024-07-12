@@ -6,7 +6,7 @@
 import {computed, ref} from 'vue'
 import {useAssist, useComplexHydrology} from '@dfsj/echarts'
 import {UnifyChart} from "@dfsj/components"
-import Data from "./data3.ts";
+import Data from "./data2.ts";
 
 const datasource =ref(Data.data)
 

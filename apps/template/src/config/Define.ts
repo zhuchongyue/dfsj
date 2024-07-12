@@ -112,13 +112,13 @@ Define.WarningMap = {
     unknown: '未知',
   },
 };
-Define.ReservoirColor = {
+Define.RsvrColor = {
   2: '#f09614',
   3: '#fae600',
   4: '#3764ff',
   5: '#dc2828',
 };
-Define.ReservoirLevel = {
+Define.RsvrLevel = {
   1: '大一',
   2: '大二',
   3: '中型',
@@ -126,7 +126,7 @@ Define.ReservoirLevel = {
   5: '小二',
   6: '其他',
 };
-Define.engGradOptions = [
+Define.EngGradOptions = [
   {
     value: '1',
     label: 'Ⅰ',
@@ -149,47 +149,41 @@ Define.engGradOptions = [
   },
 ];
 
-Define.categoryOptions = [
+Define.CategoryOptions = [
   { value: '1', label: '纯公益性' },
   { value: '2', label: '准公益性' },
   { value: '3', label: '经营性' },
   { value: '9', label: '暂未划分' },
 ];
 
-Define.engScalMapOptions = [
+Define.EngScalMapOptions = [
   {
     label: '大(一)型',
-    // value: '1',
-    value: 1,
+    value: '1',
   },
   {
     label: '大(二)型',
-    // value: '2',
-    value: 2,
+    value: '2',
   },
   {
     label: '中型',
-    // value: '3',
-    value: 3,
+    value: '3',
   },
   {
     label: '小(一)型',
-    // value: '4',
-    value: 4,
+    value: '4',
   },
   {
     label: '小(二)型',
-    // value: '5',
-    value: 5,
+    value: '5',
   },
   {
     label: '其他',
-    // value: '6',
-    value: 6,
+    value: '6',
   },
 ];
-
-Define.typeOptions = [
+//水库类型
+Define.RsvrtypeOptions = [
   {
     value: '1',
     dicCode: 'RSKD',
@@ -212,7 +206,7 @@ Define.typeOptions = [
   },
 ];
 
-Define.industryOptions = [
+Define.IndustryOptions = [
   { value: 1, letter: 'A', label: '水利部门' },
   { value: 2, letter: 'B', label: '能源部门' },
   { value: 3, letter: 'C', label: '交通部门' },
@@ -225,41 +219,41 @@ Define.industryOptions = [
   { value: 9, letter: 'Z', label: '其他' },
 ];
 
-Define.engStatTypeOptions = [
-  // {
-  //   label: '未建',
-  //   value: '0',
-  // },
-  // {
-  //   label: '在建',
-  //   value: '1',
-  // },
-  // {
-  //   label: '已建',
-  //   value: '2',
-  // },
-  // {
-  //   label: '未验收',
-  //   value: '5',
-  // },
-  // {
-  //   label: '竣工验收',
-  //   value: '3',
-  // },
-  // {
-  //   label: '未蓄水',
-  //   value: '4',
-  // },
-  // {
-  //   label: '蓄水验收',
-  //   value: '6',
-  // },
-  // {
-  //   label: '已蓄水',
-  //   value: '7',
-  // },
-  { value: '1', dicCode: 'CNBSINST', label: '竣工验收' },
-  { value: '0', dicCode: 'CNBSINST', label: '下闸蓄水' },
+Define.EngStatTypeOptions = [
+  {
+    label: '未建',
+    value: '0',
+  },
+  {
+    label: '在建',
+    value: '1',
+  },
+  {
+    label: '已建',
+    value: '2',
+  },
+  {
+    label: '未验收',
+    value: '5',
+  },
+  {
+    label: '竣工验收',
+    value: '3',
+  },
+  {
+    label: '未蓄水',
+    value: '4',
+  },
+  {
+    label: '蓄水验收',
+    value: '6',
+  },
+  {
+    label: '已蓄水',
+    value: '7',
+  },
+  // { value: '1', dicCode: 'CNBSINST', label: '竣工验收' },
+  // { value: '0', dicCode: 'CNBSINST', label: '下闸蓄水' },
 ];
 
 // 测站基础信息表类型
@@ -565,27 +559,7 @@ Define.MwrtbdtpType = {
   2: '挡水闸',
 };
 
-// 挡水主坝类型按材料分
-Define.DamTypeMatType = {
-  1: '混凝土坝',
-  2: '碾压混凝土坝',
-  3: '浆砌石坝',
-  4: '土坝',
-  5: '堆石坝',
-  9: '其它',
-};
 
-// 挡水主坝类型按结构分
-Define.DamTypeStrType = {
-  1: '重力坝',
-  2: '拱坝',
-  3: '支墩坝',
-  4: '均质坝',
-  5: '心墙坝',
-  6: '斜墙坝',
-  7: '面板坝',
-  9: '其它',
-};
 
 // 主要泄洪建筑物型式
 Define.DscncltpType = {
@@ -608,7 +582,7 @@ Define.DscncltpType = {
   999: '其它',
 };
 
-Define.endstpOptions = [
+Define.EndstpOptions = [
   {
     value: '1',
     label: '底流',
@@ -626,7 +600,7 @@ Define.endstpOptions = [
     label: '挑流',
   },
 ];
-Define.openCloseOptions = [
+Define.OpenCloseOptions = [
   {
     value: 1,
     label: '卷扬式启闭机',
@@ -768,5 +742,62 @@ Define.WarningColor = {
   BLUE_COLOR_RGB: 'rgb(2, 123, 227, 0.5)',
   DEFAULT_COLOR_RGB: 'rgb(0, 171, 223, 0.5)',
 };
+
+
+//水库任务
+Define.TaskStrType = {
+  1: '防洪',
+  2: '灌溉',
+  3: '供水',
+  4: '发电',
+  5: '航运',
+  6: '放凌',
+  7: '生态',
+  8: '旅游',
+  9: '养殖',
+  99: '其他',
+};
+Define.TaskStrTypeOptions = [
+  {
+    value: 1,
+    label: '防洪',
+  },
+  {
+    value: 2,
+    label: '灌溉',
+  },
+  {
+    value: 3,
+    label: '供水',
+  },
+  {
+    value: 4,
+    label: '发电',
+  },
+  {
+    value: 5,
+    label: '航运',
+  },
+  {
+    value: 6,
+    label: '放凌',
+  },
+  {
+    value: 7,
+    label: '生态',
+  },
+  {
+    value: 8,
+    label: '旅游',
+  },
+  {
+    value: 9,
+    label: '养殖',
+  },
+  {
+    value: 99,
+    label: '其他',
+  },
+];
 
 export default Define;

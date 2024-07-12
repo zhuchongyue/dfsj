@@ -170,9 +170,13 @@ const transform: AxiosTransform = {
      */
     requestInterceptors: (config: Recordable, options) => {
         // 请求之前处理config
-        const token = getToken();
+        // const token = getToken();
+        const token = 'QUjL4jVr_Y6REIdgMxoF50XjkhE';
+        // 1856898742529966
+
         let tenantid = getTenantId();
-        config.headers.appId = getAppEnvConfig().VITE_GLOB_APP_ID;
+        // config.headers.appId = getAppEnvConfig().VITE_GLOB_APP_ID;
+        config.headers.appId = '1856898742529966';
         config.headers.Terminal = 'web';
         if (token && (config as Recordable)?.requestOptions?.withToken !== false) {
             // jwt token

@@ -25,6 +25,10 @@ export default class LayerManager {
   get resourceManager() {
     return getResourceManage(this._gisKey);
   }
+  dispose() {
+    this.resourceManager?.dispose?.()
+    this.clear()
+  }
   /**
    * 新增图层到地图
    * @param layer
@@ -63,8 +67,6 @@ export default class LayerManager {
     this.collection.clear();
   }
   modify(layer: any, property: string, value: any) {
-    // console.log('////modify图层....');
-    // console.log(layer, property, value,);
     let resource = this.collection.get(generateUniqueId(layer));
     if (!resource) {
       layer[property] = value;
@@ -73,9 +75,7 @@ export default class LayerManager {
     resource.setProperty(layer ,property, value);
   }
   query(layer: any, property:string): any {
-    // console.log('////query图层....', layer, property);
     let resource = this.collection.get(generateUniqueId(layer));
-    // console.log('resource',resource)
     if (!resource) {
       return layer[property];
     };

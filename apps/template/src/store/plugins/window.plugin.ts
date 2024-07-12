@@ -18,6 +18,7 @@ export type WindowOptions = {
     maximizer?: boolean,
     header?:boolean,
     footer?:boolean,
+    props?:any
 };
 export interface WindowState {
     items: WindowOptions[];

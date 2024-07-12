@@ -5,79 +5,11 @@
  *   3、视窗聚合的(含个数统计)
  *   4、视窗直接加载的（直接加载所有 原则上和2一样）
  */
-
-
 import Define from "@/config/Define.ts";
 import overlays from "./layer.feature.overlays.ts";
-import { buildUUID} from "@dfsj/utils";
-import {getGis, GisSymbolKey} from "@/core/GisCache.ts";
-import {visualPlayableWeatherApi} from "@/api/layer.ts";
+import configs from "./config";
 import {defaultHighlight, defaultLoader, defaultStyle} from "@/core/adapter/config/default.ts";
-const configs: any = {
-    // 天气预报
-    [Define.Resource.WEATHER_POINT_PLAY]: {
-        type: 'feature',
-        format: {
-            type: 'list', // 返回的格式
-            id: (v) => v.wrcd, // id
-            coordinate: (v) => [v.lgtd, v.lttd], // 坐标字段
-            graphic: 'billboard', // 类型
-            fields: '*', // 字段
-            projection: { from: null, to: null }, // 转换投影
-        },
-        identity: (v) => v.wrcd, // 唯一标识
-        overlay: overlays['427'], // 鼠标的移入效果
-        animation: () => {},
-        loader: (options: any) => {
-            console.log('options', options);
-            const params = {
-                adcd: options?.user?.adcd,
-                newBox: options?.extent,
-                offest: options?.weather,
-                zoom: getGis(GisSymbolKey.default).zoom,
-            };
-            console.log(
-                'getGis(GisSymbolKey.default)',
-                getGis(GisSymbolKey.default),
-                getGis(GisSymbolKey.default).zoom
-            );
-            return visualPlayableWeatherApi(params);
-        },
-        styleRenderer: {
-            type: 'unique',
-            field: undefined,
-            store: false,
-            loses: {
-                type: 'billboard',
-                normal: {
-                    image: (v) => `/images/meteorological/weather/${v?.phenomena}/0.png`,
-                    label: {
-                        font: '14px arial',
-                        outlineWidth: 3,
-                        outlineColor: 'white',
-                        zooms: null,
-                        offset: [0, 30],
-                        color: '#00abdf',
-                        text: (v) => `${v.wrnm}（${v.phenomena}）`,
-                    },
-                    scale: 0.5,
-                },
-                highlight: {
-                    scale: 0.6,
-                    image: (v) => `/images/meteorological/weather/${v?.phenomena}/0.png`,
-                    label: {
-                        offset: [0, 35],
-                        font: '14px arial',
-                        outlineWidth: 3,
-                        outlineColor: 'white',
-                        color: '#ff00ff',
-                        text: (v) => `${v.wrnm}（${v.phenomena}）`,
-                    },
-                },
-            },
-        },
-    },
-};
+import {buildUUID} from "@dfsj/utils";
 /***
  获取一些必要的配置 */
 export default function getLayerConfig({
@@ -87,6 +19,7 @@ export default function getLayerConfig({
                                            normal = defaultStyle,
                                            highlight = defaultHighlight,
                                            loader = defaultLoader,
+                                           listener = false
                                        }) {
     const config = configs[motype];
     if (config) {
@@ -98,47 +31,52 @@ export default function getLayerConfig({
         type: 'feature',
         format: {
             type: 'list',
-            id: (v) => v.mocd || v.stcd || v.code || v.id,
-            coordinate: (v) => [v.lgtd, v.lttd],
+            id: (v:any) => v.mocd || v.stcd || v.code || v.id,
+            coordinate: (v:any) => [v.lgtd, v.lttd],
             graphic: 'billboard',
             fields: '*',
             projection: { from: null, to: null },
         },
-        identity: (v) => v.mocd || v.stcd || v.code || v.id,
-        overlay: overlays[motype],
+        identity: (v:any) => v.mocd || v.stcd || v.code || v.id,
+        //@ts-ignore
+        overlay: overlays?.[motype],
         styleRenderer: {
             type: 'unique',
             // @ts-ignore
             store: false,
-            field: (v) => (v.count > 1 ? 'cluster' : undefined),
+            field: (v:any) => (v.count > 1 ? 'cluster' : undefined),
             loses: { type: 'billboard', normal, highlight },
             items: [
                 {
                     type: 'point',
                     value: 'cluster',
-                    style: {
-                        size: (v) => Math.max(12, Math.log2(v.count) * 2.31),
-                        color: (v) => `${Define.RandomColor[v.motype % 16]}BB`,
+                    normal: {
+                        size: (v:any) => Math.max(12, Math.log2(v.count) * 2.31),
+                        color: (v:any) => `${Define.RandomColor[v.motype % 16]}BB`,
                         outlineWidth: 1.5,
-                        outlineColor: (v) => Define.RandomColor[v.motype % 16],
+                        outlineColor: (v:any) => Define.RandomColor[v.motype % 16],
                         label: [
                             {
-                                text: (v) => String(v.count),
+                                text: (v:any) => String(v.count),
                                 font: '14px arial bold',
                                 color: 'white',
-                                offset: [-1, 1],
+                                // offset: [-1, 1],
+                                offset: (v:any) => [
+                                    0,
+                                    Math.max(12, Math.log2(v.count) * 2.31) / 2,
+                                ],
                             },
                             {
                                 // @ts-ignore
-                                text: (v) => v.monm || v.stnm || v.label || v.name,
+                                text: (v:any) => v.monm || v.stnm || v.label || v.name,
                                 font: '14px arial bold',
                                 color: 'white',
-                                offset: (v) => [
+                                offset: (v:any) => [
                                     0,
-                                    Math.max(12, Math.log2(v.count) * 2.31) + 12,
+                                    Math.max(12, Math.log2(v.count) * 2.31) + 16,
                                 ],
                                 outlineWidth: 3,
-                                outlineColor: (v) => Define.RandomColor[v.motype % 16],
+                                outlineColor: (v:any) => Define.RandomColor[v.motype % 16],
                             },
                         ],
                     } as any,
@@ -148,5 +86,6 @@ export default function getLayerConfig({
         custom: { motype, ...custom },
         // @ts-ignore
         loader,
+        listener,
     };
 }

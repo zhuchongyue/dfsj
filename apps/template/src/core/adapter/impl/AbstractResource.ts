@@ -1,3 +1,9 @@
+import {debounce} from "@dfsj/hooks";
+
+export const defaultDelay = {
+    loaderDelay:800,
+    overlayDelay:300,
+}
 export abstract class AbstractResource {
     public listener: any;
     public map: any;
@@ -11,6 +17,11 @@ export abstract class AbstractResource {
     public imagery: Map<string, any>;
     public id: any = null;
     public dataSource: [];
+    //防抖的函数
+    public debounceLoaderFn:Function;
+    public debounceOverlayFn:Function;
+    public loaderDelay:number = defaultDelay.loaderDelay;
+    public overlayDelay:number = defaultDelay.overlayDelay;
     constructor(id: any, config: any, dataSource?: [] ) {
         dataSource = dataSource?.length ? dataSource : [];
         this.id = id;
@@ -18,6 +29,13 @@ export abstract class AbstractResource {
         this.config = config;
         this.imagery = new Map();
         this.dataSource = dataSource;
+        if (Reflect.has(config, 'loaderDelay')) {
+            this.loaderDelay = config.loaderDelay;
+        }
+        if (Reflect.has(config, 'overlayDelay')) {
+            this.overlayDelay = config.overlayDelay;
+        }
+        this.debounceLoaderFn = debounce(this.load , this.loaderDelay)
     }
     public setMap(map:any){};
     public remove() {
@@ -25,7 +43,6 @@ export abstract class AbstractResource {
         this.map?.removeLayerGroup?.(this.vectorLayerGroup);
         this.vectorLayerGroup = null;
         this.imagery.forEach((value, key, map) => {
-            console.log('cccccccc删除',value)
             this.map?.removeImagery?.(value);
         });
         this.imagery.clear();
@@ -71,9 +88,9 @@ export abstract class AbstractResource {
     public render(data: any = []){
         let now = new Date().valueOf();
         if (now < this._lastMouseSampleTime + 500) {
-            console.log('取消');
             return;
         }
         this._lastMouseSampleTime = now;
+        this.vectorLayerCluster?.clear();
     }
 }

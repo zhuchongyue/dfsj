@@ -5,5 +5,5 @@ const ram = computed(() => Math.floor(Math.random() * 21))
 </script>
 
 <template>
-	<div> 测试的 {{ ram }} </div>
+	<div  > 测试的 {{ ram }} </div>
 </template>

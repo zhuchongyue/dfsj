@@ -6,6 +6,7 @@ import LayoutContent from "/@/layouts/default/content/LayoutContent.vue";
 import LayoutBoard from "/@/layouts/default/board/LayoutBoard.vue";
 import LayoutFooter from "/@/layouts/default/footer/LayoutFooter.vue";
 import LayoutWindow from "/@/layouts/default/window/LayoutWindow.vue";
+import MapLayout from "@/layouts/map/MapLayout.vue";
 
 const {prefixCls} = useDesign('default-layout');
 
@@ -14,10 +15,12 @@ const {prefixCls} = useDesign('default-layout');
   <div :class="[prefixCls,'h-full','w-full']">
     <LayoutFeatures />
     <LayoutHeader/>
-    <LayoutContent/>
+<!--    <LayoutContent/>-->
     <LayoutBoard/>
     <LayoutWindow/>
     <LayoutFooter/>
+<!-- 地图-->
+    <MapLayout/>
   </div>
 </template>
 <style lang="scss">

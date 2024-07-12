@@ -1,65 +1,52 @@
 <script setup lang="ts">
-// import "@dfsj/components/dist/index.min.css"
-// import "@dfsj/echarts/dist/index.min.css"
-// import * as ECCesium from '@dfsj/cesium'
-
 import '@dfsj/cesium/src/themes/index.js';
-import * as ECHooks from '@dfsj/hooks'
-import * as ECComponents from '@dfsj/components'
-// import * as ECGuest from '@dfsj/guest'
-import * as ECEcharts from '@dfsj/echarts'
-// import * as ECOl from '@dfsj/ol'
-import * as ECUtils from '@dfsj/utils'
+import "@dfsj/echarts/src/themes/index.ts"
 import zhCn from 'element-plus/dist/locale/zh-cn.js';
-import {computed, reactive, ref} from 'vue';
+import {computed, onMounted, reactive, ref} from 'vue';
 import AppProvider from '/@/components/Application/src/AppProvider.vue';
-import MapLayout from "./layouts/map/MapLayout.vue";
-import Visual from "@/components/Visual/Visual.vue";
-import Plot from "@/components/Plot/src/Plot.vue";
+import {useLinkEvent} from "@/core/useLinkEvent.ts";
+import DefaultLayout from "@/layouts/default/DefaultLayout.vue";
+import * as utils from "@dfsj/utils"
+import * as components from "@dfsj/components"
+import {useRootStoreWithOut} from "@/store/root.ts";
 import UsageLayout from "../layouts/usage/UsageLayout.vue";
-import {usePlatformStoreWithOut} from "@/store/modules/platform.ts";
-import {getGis, GisSymbolKey} from "@/core/GisCache.ts";
-// // console.log({ ECCesium })
-// console.log({ECHooks})
-// console.log({ECComponents})
-// // console.log({ ECGuest })
-console.log({ECEcharts})
-// // console.log({ ECOl })
-// console.log({ECUtils})
 
+console.log({
+  utils,
+components
+})
 const locale = ref(zhCn);
 const assemblySize = computed(() => 'default');
 const buttonConfig = reactive({autoInsertSpace: false});
 
-const ready = computed(()=>{
-  return usePlatformStoreWithOut().getGisKeyInstance(GisSymbolKey.default)?.ready && getGis(GisSymbolKey.default)
+useLinkEvent()
+
+
+onMounted(()=>{
+  useRootStoreWithOut().window.open({
+    title: '周边查询',
+    id:'BaseInfo',
+    offset:{top:0,left:0},
+    sizes:['20vw', '100vh'],
+    content:() => import('/@/components/AroundQuery/src/AroundQuery.vue'),
+    props:{
+      narrow:true
+    }
+  })
 })
 </script>
 
 <template>
-
-
   <AppProvider>
     <el-config-provider
         :locale="locale"
         :size="assemblySize"
         :button="buttonConfig"
     >
-
-      <!--    todo 左侧大屏-->
-      <!--      <FixedLayout/>-->
-
-      <!--    todo 中间地图部分-->
-      <!--          <MapLayout/>-->
-      <!--    todo 右侧动态面板部分-->
-
-      <!--          <DynamicLayout/>-->
 <!--      <UsageLayout/>-->
-<!--      {{ready}}-->
-      <Plot v-if="ready" />
-      <Visual v-if="ready" />
 <!--      <RouterView/>-->
-      <MapLayout />
+<!--      <MapLayout />-->
+      <DefaultLayout/>
     </el-config-provider>
   </AppProvider>
 
