@@ -235,7 +235,7 @@ export default defineComponent({
     // 渲染formItem
     const renderFormItem = (item: FormSchema) => {
       // 如果有optionApi，优先使用optionApi
-      if (item.optionApi) {
+      if (item.optionApi && (!item.componentProps?.options || !item.componentProps?.options.length)) {
         // 内部自动调用接口，不影响其它渲染
         getOptions(item.optionApi, item);
       }

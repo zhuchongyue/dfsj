@@ -13,6 +13,8 @@ export * from  "./components/UnifyChart";//统一图表
 export * from "./components/Highlight";
 export * from "./components/InputPassword";
 
+export * from "./components/Descriptions"; //描述组件
+
 
 export * from "./components/NodeAxis";
 export * from "./components/Visual";
