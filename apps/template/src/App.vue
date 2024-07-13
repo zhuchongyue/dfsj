@@ -27,10 +27,21 @@ onMounted(()=>{
     title: '周边查询',
     id:'BaseInfo',
     offset:{top:0,left:0},
-    sizes:['20vw', '100vh'],
+    sizes:['400px', '100vh'],
     content:() => import('/@/components/AroundQuery/src/AroundQuery.vue'),
     props:{
       narrow:true
+    }
+  })
+
+  useRootStoreWithOut().window.open({
+    title: '周边查询',
+    id:'BaseInfo2',
+    offset:{top:0,right:0},
+    sizes:['700px', '100vh'],
+    content:() => import('/@/components/AroundQuery/src/AroundQuery.vue'),
+    props:{
+      narrow:false
     }
   })
 })
