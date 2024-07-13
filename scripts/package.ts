@@ -19,7 +19,7 @@ enum Env {
 }
 const Url = {
     [Env.DEV]:'src/index.ts',
-    [Env.PUB]:'dist/index.es.js'
+    [Env.PUB]:'dist/index.js'
 }
 
 function updatePackageJsonMain(lernaPath: string, packagesToUpdate: string[]): void {
@@ -49,9 +49,8 @@ function updatePackageJsonMain(lernaPath: string, packagesToUpdate: string[]): v
                         packageJson.module = "src/index.js";
                         packageJson.browser = "src/index.js";
                     }
-                    packageJson.main = "dist/index.ts";
+                    packageJson.main = "src/index.ts";
                     packageJson.types = "dist/index.d.ts";
-
                 } else if (env == Env.PUB) {
                     packageJson.main = "dist/index.js";
                     packageJson.module = "dist/index.js";//后续定义为index.es.index
