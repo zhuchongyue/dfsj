@@ -135,21 +135,21 @@ const configs = [
 		},
 		plugins: plugins,
 	},
-	{
-		input,
-		output: {
-			file: `${output}/${filename}.d.ts`,
-			format: 'esm'
-		},
-		plugins: [...tsPlugin()],
-		external: [
-			// 'vue',
-			// 'echarts',
-			// 'dayjs',
-			// 'numeral',
-			// '@vueuse/core'
-			// '@dfsj/utils'
-		]
-	}
+	// {
+	// 	input,
+	// 	output: {
+	// 		file: `${output}/${filename}.d.ts`,
+	// 		format: 'esm'
+	// 	},
+	// 	plugins: [...tsPlugin()],
+	// 	external: [
+	// 		// 'vue',
+	// 		// 'echarts',
+	// 		// 'dayjs',
+	// 		// 'numeral',
+	// 		// '@vueuse/core'
+	// 		// '@dfsj/utils'
+	// 	]
+	// }
 ]
 export default configs
