@@ -12,7 +12,6 @@ import {useTable} from '../../view/useTable'
 import {useStatistic} from '../../view/useStatistic'
 
 export function useComplexHydrology(chartRef: Ref<HTMLElement>) {
-	console.log('ddddddd', 333)
 	const { setOptions, echarts, getInstance, container } = useECharts(chartRef)
 	const { open: openTable, close: closeTable, props, toggleTable } = useTable()
 	props.container = container

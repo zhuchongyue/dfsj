@@ -124,7 +124,6 @@ function update() {
     getSource()
     getDimensions()
     getDataSource()
-    console.log(dimensions.value, dataSource.value)
   } else {
     dimensions.value.length = 0
     dataSource.value.length = 0

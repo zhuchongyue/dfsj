@@ -51,7 +51,6 @@ export function useLoader(
           target: props.target,
           condition: condition,
         });
-        console.log('曲线结果', result);
         if (!isNullOrUnDef(result) && !isEmpty(result)) {
           datasource.value = result;
         } else {
@@ -62,14 +61,12 @@ export function useLoader(
         datasource.value = null;
       } finally {
         let empty = isNullOrUnDef(datasource.value) || isEmpty(datasource.value);
-        console.log({ empty });
         stateful.completed(empty);
       }
     }
   };
   immediate &&
     onMounted(() => {
-      console.log('立即执行');
       fetchData();
     });
 
