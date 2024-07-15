@@ -1,8 +1,8 @@
 import dayjs from 'dayjs';
 import {defineAsyncComponent} from 'vue';
-
 import {findRiverZqrl, getCrossSection, getRiverRealPro,} from '/@/api/common';
 import {findRiverStation} from "@/components/Explorer";
+import Common from "./common.config.ts"
 
 export default {
   renders: [
@@ -14,6 +14,7 @@ export default {
         () => import('../components/Hydrology/CrossSection.vue')
       ),
       options: {
+        //@ts-ignore
         loader: ({ target, condition }) => {
           const params = {
             stcd: target?.stcd,
@@ -32,6 +33,7 @@ export default {
       ),
       options: {
         appendable: 3,
+        //@ts-ignore
         loader: ({ target, condition }) => {
           // 设置请求时间
           let start = `${condition.date[0]}`;
@@ -96,6 +98,7 @@ export default {
         () => import('../components/Hydrology/Stageflow.vue')
       ),
       options: {
+        //@ts-ignore
         loader: ({ target, condition }) => {
           const params = {
             stcd: target?.stcd,
@@ -108,5 +111,6 @@ export default {
         },
       },
     },
+      ...Common.renders
   ],
 };

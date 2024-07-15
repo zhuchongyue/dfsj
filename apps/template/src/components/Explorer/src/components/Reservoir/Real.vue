@@ -80,16 +80,7 @@ const {run, loading: captchaLoading, data: stationInfo} = useRequest(() => {
 })
 
 const chart = computed(() => unifyRef.value?.getBindValue?.instance?.())
-//获取
-watch(() => datasource.value, (value) => {
-  console.log('!Q!!!!!!!!!datasource', datasource.value)
-}, {
-  immediate: false
-})
-watch(() => unifyRef.value, (value, oldValue, onCleanup) => {
-  console.log(value, oldValue)
-  console.log('图表的!!!!!!///', unifyRef.value.getBindValue?.instance?.())
-})
+
 </script>
 <style lang="scss">
 $prefixCls: #{$namespace}-reservoir-real-warp;

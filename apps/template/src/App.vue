@@ -30,20 +30,28 @@ onMounted(()=>{
     sizes:['400px', '100vh'],
     content:() => import('/@/components/AroundQuery/src/AroundQuery.vue'),
     props:{
-      narrow:true
+      narrow:true,
+      title: '周边查询',
+      target:{
+        "around": {"type": 1, "radius": 1, "lgtd": 105.1963, "lttd": 27.0625},
+        "adcd": "520000000000000",
+        "stcd": "60804375",
+        "lgtd": 105.1963,
+        "lttd": 27.0625
+      }
     }
   })
 
-  useRootStoreWithOut().window.open({
-    title: '周边查询',
-    id:'BaseInfo2',
-    offset:{top:0,right:0},
-    sizes:['700px', '100vh'],
-    content:() => import('/@/components/AroundQuery/src/AroundQuery.vue'),
-    props:{
-      narrow:false
-    }
-  })
+  // useRootStoreWithOut().window.open({
+  //   title: '周边查询',
+  //   id:'BaseInfo2',
+  //   offset:{top:0,right:0},
+  //   sizes:['700px', '100vh'],
+  //   content:() => import('/@/components/AroundQuery/src/AroundQuery.vue'),
+  //   props:{
+  //     narrow:false
+  //   }
+  // })
 })
 </script>
 

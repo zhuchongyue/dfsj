@@ -10,5 +10,4 @@ Object.keys(files).forEach((fileName,index) => {
         suffix:fType,
     }
 });
-// console.log({result})
 export default result;

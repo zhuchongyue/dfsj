@@ -1,5 +1,6 @@
 import {useRootStoreWithOut} from "@/store/root.ts";
-import {aroundQueryDetails} from "@/components/AroundQuery/api.ts";
+import {aroundQueryDetails, aroundQueryExport, aroundQuerySubject} from "@/components/AroundQuery/src/api.ts";
+import {downloadByUrl} from "@dfsj/utils";
 
 interface Handlers {
     export: Function;
@@ -9,7 +10,7 @@ interface Handlers {
 
 export interface RendererOptions {
     /**  用于加载呈现数据的函数  */
-    load: (target: any) => Promise<any>,
+    loader: (target: any) => Promise<any>,
     /** 指示呈现器在初始打开时是否立即查询数据。默认为true。 */
     immediate?: boolean
     /**  查询条件 */
@@ -18,16 +19,38 @@ export interface RendererOptions {
 }
 
 //初始值
-const defaultOptions = {
-    load: () => {
+export const AroundDefaultOptions = {
+    //@ts-ignore
+    loader: ({target, condition}) => {
+        return aroundQuerySubject({
+            adcd: target.adcd,
+            around: {
+                type: 1,
+                lgtd: target.lgtd,
+                lttd: target.lttd,
+                radius: condition.radius,
+            },
+            stcd: target.stcd,
+        }).then((result:any) => {
+            return result
+        })
     },
     handlers: {
-        export: () => {
+        export: (data, motypes) => {
+            const params = {
+                gid: data.gid, motypes: motypes
+            }
+            aroundQueryExport(params).then((res) => {
+                if (!res?.fileId) return;
+                const  url  = `/file/file/${res.fileId}`;
+                const fileName = res.fileName;
+                downloadByUrl({url,fileName})
+            })
+
         },
         summary: () => {
         },
         details: (item) => {
-            console.log('这是props 的方法', item)
             useRootStoreWithOut().window.once({
                 id: "around.query.details",
                 title: `${item.name}列表`,
@@ -87,7 +110,7 @@ export const AroundQueryProps = {
     target: Object,         // 要呈现的资源对象
     options: {
         type: Object as PropType<RendererOptions>,
-        default: () => defaultOptions
+        default: () => AroundDefaultOptions
     },
     title: {
         type: String,

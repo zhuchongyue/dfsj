@@ -1,4 +1,4 @@
-import {unifyPostHttp} from '/@/utils/http/axios'; 
+import {unifyPostHttp} from '/src/utils/http/axios';
 enum Api {
     aroundQuerySubject= '/station-service/around/findAffectTotalByTif',
     aroundQueryDetails= '/station-service/around/findObjectByUuid',

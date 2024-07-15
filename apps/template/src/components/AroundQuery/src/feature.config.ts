@@ -1,6 +1,6 @@
 import {deepMerge} from "@dfsj/utils";
 import getLayerConfig from "@/core/adapter/config/layer.feature.config.ts";
-import {aroundQueryCluster} from "@/components/AroundQuery/api.ts";
+import {aroundQueryCluster} from "@/components/AroundQuery/src/api.ts";
 
 function loader(options:any) {
     const params = {

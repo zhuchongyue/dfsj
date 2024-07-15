@@ -4,6 +4,7 @@ import {defineAsyncComponent} from "vue";
 import {findPptnStation} from "@/components/Explorer";
 import {useAppSyncTimeStateWithOut} from "@/store/modules/syncTime.ts";
 import {getRainRealPro} from "@/api/common.ts";
+import Common from "./common.config.ts"
 
 export default {
     renders: [
@@ -17,6 +18,7 @@ export default {
             ),
             options: {
                 appendable: 3,
+                //@ts-ignore
                 load: ({target, condition}) => {
                     const params = {
                         stcd: target.stcd,
@@ -33,7 +35,7 @@ export default {
                         ],
                     };
                 },
-                chart: (data) => {
+                chart: (data:any) => {
                     if (data == null) return null;
                     const day = tools.getNearNDays(data.source || [], 7);
                     return {
@@ -60,7 +62,7 @@ export default {
             },
         },
         {
-            name: 'around',
+            name: 'base',
             label: '基础信息',
             order: 2,
             content: defineAsyncComponent(
@@ -76,5 +78,6 @@ export default {
                 },
             },
         },
+        ...Common.renders
     ],
 };

@@ -1,66 +1,75 @@
 <script lang="ts" setup>
-import {computed, ref, toRaw, unref, watchEffect, h, Ref, reactive} from "vue";
+import {computed, h, reactive, Ref, ref, unref, watch} from "vue";
 import {useDesign} from "/@/hooks/web/useDesign.ts";
-import {useUserStore} from '/@/store/modules/user';
-import {Mock} from "@/components/AroundQuery/src/mock.ts";
+import {Icon, Stateful} from "@dfsj/components"
 import {groupBy} from "lodash-es";
-import {Icon} from "@dfsj/components";
-import {AroundQueryProps} from "@/components/AroundQuery/src/props.ts";
-import {getter} from "@dfsj/utils";
+import {AroundQueryProps, defaultOptions} from "@/components/AroundQuery/src/props.ts";
 import {toReactive} from "@vueuse/core";
 import {GisSymbolKey} from "@/core/GisCache.ts";
 import {getLayerManage} from "@/core/adapter/class";
 import BasicTabs from "/@/components/Tabs/BasicTabs.vue"
-import getLayerConfig from "@/core/adapter/config/layer.feature.config.ts";
-import {getAroundQueryLayerConfig} from "@/components/AroundQuery/feature.config.ts";
-
+import {getAroundQueryLayerConfig} from "@/components/AroundQuery/src/feature.config.ts";
+import {useRootStoreWithOut} from "@/store/root.ts";
+import {usePropsLoader} from "@/components/Explorer/src/usePropsLoader.ts";
+import {LinearProgress} from "@/components/LinearProgress";
 const {prefixCls} = useDesign('component-around-query-page');
 const catagory = "catagory";
-const data = ref(Mock);
 const props = defineProps(AroundQueryProps);
-const {options, narrow, sizer} = toReactive(props)
-const active: Ref = ref(null),
+const {options, narrow, sizer,target,title} = toReactive(props)
+const active: Ref = ref<any>(null),
     selectable: Ref = ref(false),
-    checks = reactive({}),
-    select = reactive(new Set());
+    checks = reactive<any>({}),
+    select = reactive<any>(new Set());
+
+const size = computed(()=>select.size ?? 0)
 const collapseNames = ref([]);
-
-function setCollapse() {
-  const content = unref(content)
-  // const totalName = unref()
-}
-
+//TODO 使用统一的方法请求
+const {data,condition,statefulValue,stateful} = usePropsLoader(target,props);
 //复选框
-const checkAlls = reactive({})
-const checkIsIndeterminates = reactive({});
-
-const condition: any = reactive(getter(options.condition) || {});
+const checkAlls = reactive<any>({})
+const checkIsIndeterminates = reactive<any>({});
 const control = options.control || {};
-
-function load() {
-
-}
-
 function onSelectable() {
   selectable.value = !selectable.value;
+  setAllChecked(selectable.value)
 }
-
 function onClear() {
-
+  if (select.size){
+    const manager = getLayerManage(GisSymbolKey.default)
+    select.forEach((item)=>{
+      const config = getAroundQueryLayerConfig(toRaw(unref(item)));
+      manager.remove(config)
+    })
+    select.clear()
+  }
 }
 
+/**
+ * 勾选导出
+ */
 function onExport() {
-  console.log('选择的', checks)
+  const motypes = Object.values(checks).reduce((acc, curr) => acc.concat(curr), []);
+  options.handlers.export(unref(data),motypes)
 }
 
+/**
+ * 查看汇总
+ */
 function onSummary() {
-
+  useRootStoreWithOut().window.open({
+    id: 'impact-briefing',
+    title: `影响风险简报`,
+    sizes: ['40vw', '35vh'],
+    content: () => import('./BriefingBrowser.vue'),
+    props: {
+      data: data.value,
+    },
+  })
 }
 
 function handleCheckedGroupChange(value, item) {
-  console.log('选择', value, item);
   const checkedCount = value.length;
-  const all = item?.children.map(c => c?.id);
+  const all = item?.children.map(c => c?.id) ?? [item.id];
   checkAlls[item.id] = checkedCount === all.length
   checkIsIndeterminates[item.id] = checkedCount > 0 && checkedCount < all.length
 
@@ -69,19 +78,46 @@ function handleCheckedGroupChange(value, item) {
 
 //根据结果分组  确定tab个数
 const content = computed(() => {
-  // Object.keys(checks).forEach(key => delete checks[key]);
-  let list = data.value?.details;
+  let list = data.value?.details ?? [];
   if (list?.length) {
-    list.forEach(e => onCheck(e, true));
     active.value = list[0][catagory];
-    console.log('groupBy(list, catagory)', groupBy(list, catagory))
     return groupBy(list, catagory);
   }
   return null;
 });
-const curTab = ref(null)
+
+//设置全部展开
+function setCollapse() {
+  const ct = unref(content);
+  let ids: any = []
+  for (const ctKey in ct) {
+    ct[ctKey]?.forEach((ctv: any) => {
+      ids.push(ctv?.id)
+    })
+  }
+  collapseNames.value = ids;
+}
+
+//设置全部勾选
+function setAllChecked(value = true) {
+  const ct = unref(content);
+  for (const ctKey in ct) {
+    ct[ctKey]?.forEach((ctv: any) => {
+      checkAlls[ctv.id] = value
+      handleCheckAllChange(value, ctv)
+    })
+  }
+}
+const curTab = ref<any|string>(null)
 const tabOptions = computed(() => {
-  let arr = Object.keys(content.value).map((key, index) => {
+  if (!content.value){
+    curTab.value = '影响分析'
+    return [{
+      value:'影响分析',
+      label:'影响分析',
+    }];
+  }
+  let arr = Object.keys(content.value)?.map((key) => {
     return {
       value: key,
       label: key
@@ -92,36 +128,24 @@ const tabOptions = computed(() => {
   }
   return arr
 })
-
-function onCheck(checked: boolean) {
-
-}
-
 function handleCheckAllChange(checked, item) {
-  const all = item?.children.map(c => c?.id);
+  const all = item?.children?.map(c => c?.id) ?? [item.id];
   checks[item.id] = checked ? all : []
   checkIsIndeterminates[item.id] = false
-  console.log('handleCheckAllChange', checked, item, all)
 }
-
 function hasMore(item) {
   return !!(item.uuid && item.count);
 }
-
 function onDetails(item) {
-  console.log('打开详情', item)
   options.handlers.details?.(item)
 }
-
 //加载图层信息
 function onToggleSelect(item) {
-  console.log('加载到地图信息', item)
   if (item?.loadMap != 1) return;
   const manager = getLayerManage(GisSymbolKey.default)
   const selected = select.has(item);
   const config = getAroundQueryLayerConfig(item);
   if (!selected && item.count > 0) {
-    console.log('获取信息', config)
     manager.addition(config)
     // caches.set(item, layer)
     select.add(item)
@@ -131,9 +155,11 @@ function onToggleSelect(item) {
     select.delete(item)
   }
 }
-
 const suffixUnit = () => h('span', control.preset.units)
 
+watch(()=>data.value , (value, oldValue, onCleanup)=>{
+    setCollapse()
+})
 </script>
 <template>
   <div :class="[prefixCls , {narrow}]">
@@ -143,9 +169,18 @@ const suffixUnit = () => h('span', control.preset.units)
     </template>
     <!--头部-->
     <div :class="['renderer--container', {narrow}]">
-      <div :class="['renderer--container-adapt' , {narrow}]">
+      <div :class="['renderer--container-adapt relative' , {narrow}]">
+        <div class="absolute around-linear-progress">
+          <LinearProgress
+              :percent="100"
+              active
+              :visible="stateful.isLoading"
+              color-flow
+              :color="['#f5af19', '#f12711', '#9254de', '#40a9ff', '#5cdbd3']"
+          />
+        </div>
         <div class="renderer--actions">
-          <div v-if="narrow" class="flex items-center">周边查询</div>
+          <div v-if="narrow" class="flex items-center renderer--title ">{{ title }}</div>
           <div class="flex items-center">
             <el-button type="primary" @click="onSelectable" title="选择导出">
               <template #icon>
@@ -166,6 +201,7 @@ const suffixUnit = () => h('span', control.preset.units)
               <template #icon>
                 <Icon size="26" icon="mdi:broom"/>
               </template>
+              {{size || ''}}
             </el-button>
           </div>
         </div>
@@ -189,13 +225,14 @@ const suffixUnit = () => h('span', control.preset.units)
       <!--渲染内容-->
       <template v-for="(item) in tabOptions"
                 :key="item.value">
+        <Stateful :value="statefulValue">
         <div class="renderer--content" :key="`tab${item.value}`" v-if="curTab == item.value">
           <el-collapse :accordion="false" v-model="collapseNames">
             <template
                 v-for="(e , index) in content?.[item.value]">
               <el-collapse-item
                   v-if="!!e?.children"
-                  :name="index"
+                  :name="e?.id"
                   :title="e?.name">
                 <template #title>
                   <el-checkbox
@@ -221,6 +258,7 @@ const suffixUnit = () => h('span', control.preset.units)
                           clickable:hasMore(sub),
                           select:select.has(sub)}">
                       <el-checkbox :value="sub.id"
+                                   @click.stop="()=>{}"
                                    v-if="selectable"
                       ></el-checkbox>
                       <img class="item--image" :src="`/images/layer/${sub.id}/431.png`" alt=""/>
@@ -237,29 +275,47 @@ const suffixUnit = () => h('span', control.preset.units)
                 </el-checkbox-group>
               </el-collapse-item>
               <template v-else>
-                <div class="second"
-                     @click.stop="onToggleSelect(e)"
-                     :class="{
+                <div class="el-collapse-item">
+                  <el-checkbox
+                      style="position: absolute;left: -999px;opacity: 0"
+                      @click.stop=""
+                      v-if="selectable"
+                      v-model="checkAlls[e.id]"
+                      :indeterminate="checkIsIndeterminates[e.id]"
+                      @change="(ev)=>handleCheckAllChange(ev,e)"
+                  />
+                  <div class="el-collapse-item__header box-border"
+                       @click.stop="onToggleSelect(e)"
+                       :class="{
                           clickable:hasMore(e),
                           select:select.has(e)}">
-                  <el-checkbox :value="e.id"
-                               v-if="selectable"
-                  ></el-checkbox>
-                  <img class="item--image" :src="`/images/layer/${e.id}/431.png`" alt=""/>
-                  <label class="item--label" :title="e.name">{{ e.name }}</label>
-                  <Icon icon="mdi:earth" color="darkgray" v-if="select.has(e)"></Icon>
-                  <label class="item--space flex-1"></label>
-                  <label class="item--value"> {{ e.count ?? "--" }}</label>
-                  <label class="item--units" v-if="!!e.unit">（{{ e.unit }}）</label>
-                  <label class="item--mores">
-                    <Icon :size="22" v-if="hasMore(e)" @click.stop="onDetails(e)" icon="mdi:view-headline"/>
-                  </label>
+                    <el-checkbox-group
+                        v-model="checks[e.id]"
+                        @change="(ev)=>handleCheckedGroupChange(ev,e)"
+                    >
+                      <el-checkbox :value="e.id"
+                                   @click.stop="()=>{}"
+                                   v-if="selectable"
+                      ></el-checkbox>
+                      <img class="item--image" :src="`/images/layer/${e.id}/431.png`" alt=""/>
+                      <label class="item--label" :title="e.name">{{ e.name }}</label>
+                      <Icon icon="mdi:earth" color="darkgray" v-if="select.has(e)"></Icon>
+                      <label class="item--space flex-1"></label>
+                      <label class="item--value"> {{ e.count ?? "--" }}</label>
+                      <label class="item--units" v-if="!!e.unit">（{{ e.unit }}）</label>
+                      <label class="item--mores">
+                        <Icon :size="22" v-if="hasMore(e)" @click.stop="onDetails(e)" icon="mdi:view-headline"/>
+                      </label>
+                    </el-checkbox-group>
+                  </div>
                 </div>
               </template>
             </template>
 
           </el-collapse>
         </div>
+
+                </Stateful>
       </template>
     </div>
   </div>
@@ -270,37 +326,63 @@ $prefix-cls: #{$namespace}-component-around-query-page;
 $second_height: 40px;
 $icon_width: 32px;
 .#{$prefix-cls} {
-  padding:  5px;
+  padding: 5px;
   height: 100%;
   min-height: 100%;
   box-sizing: border-box;
+  display: grid;
+  //grid-template-rows: auto auto 1fr;
   .el-radio-button__inner {
     padding-left: 5px;
     padding-right: 5px;
   }
-
   .el-input__inner {
     text-align: center;
     font-weight: bolder;
   }
-  display: grid;
-  grid-template-rows: auto auto 1fr;
   .block__style, .linear__style {
     background: #ecf0f2;
-    //height: 100%;
+  }
+  .renderer--title {
+    font-size: 18px;
+    font-weight: bold;
+    text-align: left;
+    text-indent: 15px;
+    color: $primary-color;
   }
   &.narrow {
     grid-template-columns: auto 1fr;
+    grid-template-rows:unset;
+    gap: 5px;
+  }
+
+  .renderer--content {
+    height: 100%;
+    min-height: 0;
+    overflow-y: scroll;
+    padding-bottom: 30px;
+    box-sizing: border-box;
+    width: 100%;
+  }
+
+  .around-linear-progress {
+    bottom: 0;
+    right: 0;
+    left: 0;
+    width: auto;
+    z-index: 10;
   }
   .renderer--container {
     display: grid;
     grid-template-rows: 50px 50px 1fr;
     height: 100%;
     min-height: 100%;
+
     .renderer--container-adapt {
       display: flex;
       flex-direction: row-reverse;
       align-items: center;
+
       .renderer--control {
         flex: 1;
         display: grid;
@@ -309,18 +391,22 @@ $icon_width: 32px;
         justify-content: start;
       }
     }
-    &.narrow{
+
+    &.narrow {
       grid-template-rows: auto 1fr;
+
       .renderer--container-adapt {
         display: grid;
-        grid-template-rows: repeat(2,50px);
+        grid-template-rows: repeat(2, 40px);
       }
+
       .renderer--actions {
         width: 100%;
         display: flex;
         justify-content: space-between;
         align-items: center;
       }
+
       .renderer--control {
         width: 100%;
         display: grid;
@@ -330,23 +416,29 @@ $icon_width: 32px;
     }
 
   }
+
   .el-checkbox {
     margin: 0 !important;
   }
+
   .el-collapse {
     border-bottom: none;
     border-top: none;
+
     .el-collapse-item__header {
       border-bottom: 1px solid rgba(142, 152, 168, 0.4);
       padding-left: 12px;
+
       .item--label {
         font-size: 18px;
       }
     }
+
     .el-collapse-item__wrap {
       border-bottom: none;
     }
   }
+
   .el-collapse-item {
     margin: 1px 0 10px 0;
     box-sizing: border-box;
@@ -357,8 +449,10 @@ $icon_width: 32px;
     box-shadow: 0 0.0625rem 0.3125rem 0 rgb(0 0 0 / 20%), 0 0.125rem 0.125rem 0 rgb(0 0 0 / 14%), 0 0.1875rem 0.0625rem -0.125rem rgb(0 0 0 / 12%);
 
   }
+
   .el-collapse-item__content {
     padding-bottom: 0;
+
     .second {
       transition: all .5s ease-in-out;
       margin-left: 30px;
@@ -426,6 +520,7 @@ $icon_width: 32px;
       font-size: 16px;
     }
   }
+
   .item--image {
     width: 21px;
     height: 21px;

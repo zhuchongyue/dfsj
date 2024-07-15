@@ -9,6 +9,7 @@ import {
 } from '/@/api/common';
 import {findRsvrDam, findRsvrStation} from "@/components/Explorer";
 import {defHttp} from "@/utils/http/axios";
+import Common from "@/components/Explorer/src/config/common.config.ts";
 
 export default {
   renders: [
@@ -23,7 +24,6 @@ export default {
         // 曲线加载
         //@ts-ignore
         loader: ({ target }) => {
-          console.log('/////请求大坝示意图', target);
           const params = {
             stcd: target?.stcd ?? target?.mocd,
           };
@@ -167,13 +167,11 @@ export default {
         // 曲线加载
         //@ts-ignore
         loader: ({ target, condition }) => {
-          console.log('target',target)
           const params = {
             stcd: target.stcd,
             dnid: condition.gate,
             heights: condition.apertures,
           };
-          console.log('/////泄洪曲线', params);
           return getDrainageCurves(params);
         },
         control: {
@@ -207,5 +205,6 @@ export default {
         },
       },
     },
+    ...Common.renders
   ],
 };

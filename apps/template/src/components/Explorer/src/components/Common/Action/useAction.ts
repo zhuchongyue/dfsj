@@ -24,7 +24,6 @@ export function useAction(form, formMethods, on = {
             disabled.value = true;
         } else if (event?.type == ActionType.SAVE) {
             const elFormExpose = await getElFormExpose()
-            console.log('elFormExpose', elFormExpose);
             elFormExpose?.validate((isValid) => {
                 if (isValid) {
                     const params = unref(form);
@@ -39,8 +38,6 @@ export function useAction(form, formMethods, on = {
                 }
             })
             const elFormData = await getFormData();
-            console.log('elFormData', elFormData);
-            console.log('form', form);
         }
     }
 
