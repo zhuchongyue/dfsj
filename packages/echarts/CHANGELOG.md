@@ -1,6 +1,24 @@
 # Change Log
 
-All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+All notable changes to this project will be documented in this file.
+See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [3.2.0](http://10.10.12.18/dfsj/dfsj/compare/@dfsj/echarts@3.1.3...@dfsj/echarts@3.2.0) (2024-07-16)
+
+
+### Bug Fixes
+
+* (echarts) 水库实时数据配置错误 ([25917f7](http://10.10.12.18/dfsj/dfsj/commits/25917f7194a6c104154af564a1453caa69e774bc))
+
+
+### Features
+
+* (echarts) export Table.vue ([f06fb32](http://10.10.12.18/dfsj/dfsj/commits/f06fb32eb1ef19a56425cb0dbbf7cde611dc0e9c))
+
+
+
+
+
 
 ## 3.1.3 (2024-07-01)
 

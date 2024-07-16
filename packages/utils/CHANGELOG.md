@@ -1,6 +1,25 @@
 # Change Log
 
-All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+All notable changes to this project will be documented in this file.
+See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [3.2.0](http://10.10.12.18/dfsj/dfsj/compare/@dfsj/utils@3.1.3...@dfsj/utils@3.2.0) (2024-07-16)
+
+
+### Bug Fixes
+
+* (utils) getter diff ([2fb1032](http://10.10.12.18/dfsj/dfsj/commits/2fb10328973b6bfc72d65bbc2598f3321ec346df))
+* (utils) getter diff ([b10389c](http://10.10.12.18/dfsj/dfsj/commits/b10389cb2a2df5655de8b6dd881e643ca90a693b))
+
+
+### Features
+
+* (ol) 优化重复代码 ([e45f56e](http://10.10.12.18/dfsj/dfsj/commits/e45f56ed644350c660de6c03c5e3108ae50f0ed7))
+
+
+
+
+
 
 ## 3.1.3 (2024-07-01)
 

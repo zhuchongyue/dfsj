@@ -1,6 +1,19 @@
 # Change Log
 
-All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+All notable changes to this project will be documented in this file.
+See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [3.2.0](http://10.10.12.18/dfsj/dfsj/compare/@dfsj/hooks@3.1.3...@dfsj/hooks@3.2.0) (2024-07-16)
+
+
+### Bug Fixes
+
+* (utils) export 工具函数 ([f0a4aec](http://10.10.12.18/dfsj/dfsj/commits/f0a4aec69cb2f34c2b544ce4d7bd53fab88ad5de))
+
+
+
+
+
 
 ## 3.1.3 (2024-07-01)
 

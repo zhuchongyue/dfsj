@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.2.0](http://10.10.12.18/dfsj/dfsj/compare/@dfsj/template@3.1.3...@dfsj/template@3.2.0) (2024-07-16)
+
+
+### Bug Fixes
+
+* (template) 标绘清除和保存，gis组件ready状态更改 ([2795801](http://10.10.12.18/dfsj/dfsj/commits/279580198477335aa06107add5fb9bdf516f6db4))
+* (template) 上图逻辑 ([98645cd](http://10.10.12.18/dfsj/dfsj/commits/98645cde7dd558c86de99f11dafac1eb73b1b1d5))
+* (template) 图例 ([3f10fbc](http://10.10.12.18/dfsj/dfsj/commits/3f10fbc996221e26219d4a6f6e899752bc5197dd))
+* (template) 站点详情查看器 ([bad602e](http://10.10.12.18/dfsj/dfsj/commits/bad602eda7c82afac78ec549ebd3a22a1821cd36))
+
+
+### Features
+
+* (template) 水库水文雨量详情弹窗 ([0361d2a](http://10.10.12.18/dfsj/dfsj/commits/0361d2aec899fd306a405ee3cbe7ff2ffc9dbbd1))
+* (template) 周边查询组件 ([d07f59a](http://10.10.12.18/dfsj/dfsj/commits/d07f59aa07bf28df4166fc4a2247fd050fbaec83))
+
+
+
+
+
 ## 3.1.3 (2024-07-01)
 
 

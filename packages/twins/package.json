@@ -31,7 +31,7 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.24.0",
-    "@dfsj/utils": "workspace:^3.0.0",
+    "@dfsj/utils": "workspace:^3.2.0",
     "@photo-sphere-viewer/autorotate-plugin": "5.1.6",
     "@photo-sphere-viewer/compass-plugin": "5.1.6",
     "@photo-sphere-viewer/core": "5.1.6",

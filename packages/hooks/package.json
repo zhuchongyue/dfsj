@@ -1,6 +1,6 @@
 {
   "name": "@dfsj/hooks",
-  "version": "3.1.3",
+  "version": "3.2.0",
   "description": "通用的vue3 hooks函数",
   "type": "module",
   "keywords": [
@@ -30,7 +30,7 @@
   },
   "devDependencies": {
     "@dfsj/rollup": "workspace:^",
-    "@dfsj/utils": "workspace:^3.1.3",
+    "@dfsj/utils": "workspace:^3.2.0",
     "@types/node": "^20.11.3"
   },
   "peerDependencies": {

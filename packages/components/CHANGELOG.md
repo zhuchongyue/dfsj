@@ -1,6 +1,26 @@
 # Change Log
 
-All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+All notable changes to this project will be documented in this file.
+See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [3.2.0](http://10.10.12.18/dfsj/dfsj/compare/@dfsj/components@3.1.3...@dfsj/components@3.2.0) (2024-07-16)
+
+
+### Bug Fixes
+
+* (components) UnifyChart.vue ([9a5d4db](http://10.10.12.18/dfsj/dfsj/commits/9a5d4dbe80b10bf9de80718e0b6e18c22cbd0205))
+
+
+### Features
+
+* (components) BasicModal支持vh、vw、px、rem ([866c6d2](http://10.10.12.18/dfsj/dfsj/commits/866c6d2447a203329ba3783f6a3edababf91a50c))
+* (components) Descriptions ([5873c14](http://10.10.12.18/dfsj/dfsj/commits/5873c14bc746596c536b203551147de8d2c097c0))
+* (components) UnifyChart.vue 导出方法 ([d4065b9](http://10.10.12.18/dfsj/dfsj/commits/d4065b984d4f97dad21bb55474bb616f2149a16e))
+
+
+
+
+
 
 ## 3.1.3 (2024-07-01)
 

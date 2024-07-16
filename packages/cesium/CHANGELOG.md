@@ -1,6 +1,16 @@
 # Change Log
 
-All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+All notable changes to this project will be documented in this file.
+See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [3.2.0](http://10.10.12.18/dfsj/dfsj/compare/@dfsj/cesium@3.1.3...@dfsj/cesium@3.2.0) (2024-07-16)
+
+**Note:** Version bump only for package @dfsj/cesium
+
+
+
+
+
 
 ## 3.1.3 (2024-07-01)
 

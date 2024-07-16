@@ -1,6 +1,26 @@
 # Change Log
 
-All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+All notable changes to this project will be documented in this file.
+See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [3.2.0](http://10.10.12.18/dfsj/dfsj/compare/@dfsj/ol@3.1.3...@dfsj/ol@3.2.0) (2024-07-16)
+
+
+### Bug Fixes
+
+* (ol) 要素的鼠标事件完善&高亮属性&wkb ([4dbec0d](http://10.10.12.18/dfsj/dfsj/commits/4dbec0df355b34404f2269839f00dea87b1d3f44))
+
+
+### Features
+
+* (ol) 优化重复代码 ([aa56697](http://10.10.12.18/dfsj/dfsj/commits/aa56697a59aab1cc33b26d1d52b0789bb08c995d))
+* (ol) 优化重复代码 ([e45f56e](http://10.10.12.18/dfsj/dfsj/commits/e45f56ed644350c660de6c03c5e3108ae50f0ed7))
+* (ol) Point Billboard 支持多label ([a686da4](http://10.10.12.18/dfsj/dfsj/commits/a686da49045eaddac290eb256783508862f869ee))
+
+
+
+
+
 
 ## 3.1.3 (2024-07-01)
 
