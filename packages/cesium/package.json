@@ -11,7 +11,7 @@
   "author": "yangbo <1747837358@qq.com>",
   "homepage": "",
   "license": "MIT",
-  "main": "src/index.ts",
+  "main": "dist/index.js",
   "directories": {
     "lib": "lib",
     "test": "__tests__"
@@ -44,8 +44,8 @@
     "tslib": "^2.5.0"
   },
   "gitHead": "0b570d86e0ba05e19a5713e24c05b2f0d5aaeb73",
-  "module": "src/index.js",
-  "browser": "src/index.js",
+  "module": "dist/index.js",
+  "browser": "dist/index.js",
   "types": "dist/index.d.ts",
   "publishConfig": {
     "access": "public"

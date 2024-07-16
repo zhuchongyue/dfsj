@@ -10,9 +10,9 @@
   "author": "yangbo <1747837358@qq.com>",
   "homepage": "",
   "license": "MIT",
-  "main": "src/index.ts",
-  "module": "src/index.ts",
-  "browser": "src/index.ts",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "browser": "dist/index.js",
   "types": "dist/index.d.ts",
   "directories": {
     "lib": "lib",
