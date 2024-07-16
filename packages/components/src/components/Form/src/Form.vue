@@ -82,7 +82,6 @@ export default defineComponent({
     const getProps = computed(() => {
       const propsObj = {...props};
       Object.assign(propsObj, unref(mergeProps));
-      console.log('propsObj', propsObj);
       return propsObj;
     });
 
