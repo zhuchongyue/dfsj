@@ -5,7 +5,7 @@ import {compProps} from "@/components/Explorer";
 import {isEmpty} from "@dfsj/utils";
 import Basic from "./Basic.vue";
 
-const {prefixCls} = useDesign('component-baseinfo-page');
+const {prefixCls} = useDesign('rain-baseinfo-page');
 const props = defineProps(compProps);
 const { target } = toRefs(props)
 const { options } = props;
@@ -36,6 +36,7 @@ const getBindValue = computed(()=>{
   <div :class="`${prefixCls} h-full w-full`">
    <template v-if="!isEmpty(details)">
      <Basic
+         :class="`${prefixCls}__content`"
          v-bind="getBindValue"
      />
    </template>
@@ -43,42 +44,19 @@ const getBindValue = computed(()=>{
 </template>
 
 <style lang="scss">
-$prefix-cls: #{$namespace}-component-baseinfo-page;
-//$height:40px;
+$prefix-cls: #{$namespace}-rain-baseinfo-page;
 $height:100%;
 .#{$prefix-cls} {
   padding: 10px;
   box-sizing: border-box;
-  display: grid;
-  grid-template-rows: auto 1fr;
   min-height: 100%;
-  //.el-form-item{
-  //  &.headline{
-  //    .el-form-item__label{
-  //      color: $primary-color-6;
-  //      font-size: 20px;
-  //      font-weight: bolder;
-  //    }
-  //  }
-  //}
+  &__content{
+    height: 100%;
+    //overflow:auto;
+  }
   .el-form-item--default{
      margin-bottom: 0px;
      height: $height;
-    .el-input__wrapper{
-      //box-shadow: none;
-
-    }
-  //  .el-form-item__label{
-  //    height: $height;
-  //    border-right: .0625rem solid #ebeef5;
-  //    border-top: .0625rem solid #ebeef5;
-  //    font-size: .875rem;
-  //    font-weight: 700;
-  //    //text-align: right;
-  //    word-wrap: break-word;
-  //    color: #606266;
-  //    background-color: rgba(205, 205, 205, .247);
-  //  }
   }
 }
 </style>

@@ -14,19 +14,20 @@
         />
       </el-form-item>
     </el-form>
-    <TelescopicContainer :reverse="true" width="50%" :draw-open="false">
+    <TelescopicContainer :reverse="true" width="40%" :draw-open="true">
       <template #left>
         <UnifyChart ref="unifyRef" v-bind="getBindValue"/>
       </template>
       <template #right>
-        <div class="p-3 flex flex-col h-full">
+        <div class="pl-10px box-border  overflow-hidden flex flex-col h-full">
           <Attache
               :fields="riverFields"
               :target="stationInfo"
           />
-          <div class="flex-1 relative mt-2">
-            <div class="absolute h-full w-full" v-if="!isEmpty(datasource) && !isEmpty(chart)"> <!---->
+          <div class="flex-1  box-border mt-2">
+            <div class="relative h-full w-full" v-if="!isEmpty(datasource) && !isEmpty(chart)"> <!---->
               <ChartTable
+                  v-if="!isEmpty(datasource?.source)"
                   :shadow="false"
                   :page="{
                    layout: 'total, sizes, prev, pager, next',
@@ -34,6 +35,7 @@
                   immediate
                   :chart="chart"
                   :value="datasource" :visible="true"/>
+              <Stateful :value="'empty'" v-else/>
             </div>
           </div>
         </div>
@@ -42,12 +44,12 @@
   </div>
 </template>
 <script setup lang="ts">
-import {computed, defineProps, reactive, ref, unref} from 'vue';
+import {computed, defineProps, reactive, ref, unref, watchEffect} from 'vue';
 import {useDesign} from "/@/hooks/web/useDesign";
 import {useAttrs, useRequest} from '@dfsj/hooks';
 import {getter, isEmpty} from "@dfsj/utils";
 import {ChartTable, useAssist, useComplexHydrology} from "@dfsj/echarts";
-import {EToolbox, UnifyChart, useLoader} from '@dfsj/components';
+import {EToolbox, Stateful, UnifyChart, useLoader} from '@dfsj/components';
 import {compProps, findRiverStation} from '/@/components/Explorer';
 import {TelescopicContainer} from "@/components/Container";
 import Attache from "@/components/Explorer/src/components/Common/Attache/Attache.vue";

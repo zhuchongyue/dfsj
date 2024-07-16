@@ -1,191 +1,14 @@
 <script lang="ts" setup>
-import {computed, reactive} from "vue";
-import {useDesign} from "/src/hooks/web/useDesign.ts";
-import {Table, TableColumn} from "@dfsj/components";
+import {ref, reactive, toRaw, unref, toRefs} from "vue";
+import {useDesign} from "@/hooks/web/useDesign.ts"
+import {Table, TableColumn, Icon} from "@dfsj/components";
+import {isEmpty} from "@dfsj/utils";
+import {ElNotification} from "element-plus";
+import {Action, compProps, updateStRsvrFsrB} from "@/components/Explorer";
 
-const {prefixCls} = useDesign('component-baseinfo-page');
-const model = reactive({
-  "stcd": "60800520",
-  "stnm": "乌江渡电站",
-  "rvnm": "乌江",
-  "hnnm": "思南以上",
-  "bsnm": "长江流域",
-  "lgtd": 106.760973,
-  "lttd": 27.319963,
-  "stlc": "遵义市播州区乌江镇",
-  "addvcd": "520304",
-  "addvcd_2": null,
-  "dtmnm": "黄海高程",
-  "dtmel": null,
-  "dtpr": null,
-  "sttp": "RR",
-  "frgrd": null,
-  "esstym": null,
-  "bgfrym": null,
-  "atcunit": null,
-  "admauth": null,
-  "locality": null,
-  "stbk": null,
-  "stazt": null,
-  "dstrvm": null,
-  "drna": null,
-  "incp": null,
-  "phcd": null,
-  "usfl": null,
-  "comments": "水利厅2022年12月水库（数量2692座）",
-  "moditime": null,
-  "withPptn": null,
-  "datasource": "水利厅2022年12月水库（数量2692座）",
-  "updatetime": null,
-  "createtime": null,
-  "delFlag": null,
-  "createtimeStr": null,
-  "updatetimeStr": null,
-  "rsvrtp": "1",
-  "damel": null,
-  "ckflz": 762.8,
-  "dsflz": null,
-  "normz": 760.0,
-  "ddz": 720.0,
-  "actz": null,
-  "ttcp": 2300.0,
-  "fldcp": null,
-  "actcp": null,
-  "ddcp": 780.0,
-  "hhrz": null,
-  "hmxw": null,
-  "hhrztm": null,
-  "hmxinq": null,
-  "rstdr": null,
-  "hmxinqtm": null,
-  "hmxotq": null,
-  "hmxotqtm": null,
-  "hlrz": null,
-  "hlrztm": null,
-  "hmninq": null,
-  "hmninqtm": null,
-  "laz": null,
-  "sfq": null,
-  "fsl": [
-    {
-      "stcd": "60800520",
-      "bgmd": "0501",
-      "edmd": "0930",
-      "fsltdz": 760.0,
-      "fsltdw": null,
-      "fstp": "1",
-      "moditime": "2021-05-26 00:00:00",
-      "datasource": null,
-      "updatetime": null
-    }
-  ],
-  "materialtp": "1",
-  "materialtpName": "混凝土坝",
-  "structuretp": "1",
-  "structuretpName": "重力坝",
-  "resCode": "60800520",
-  "resName": "乌江渡电站",
-  "lowLeftLong": 0.0,
-  "lowLeftLat": 0.0,
-  "upRightLong": 0.0,
-  "upRightLat": 0.0,
-  "resLoc": "遵义市播州区乌江镇",
-  "resType": "1",
-  "engGrad": "1",
-  "engScal": "1",
-  "watShedArea": 27790.0,
-  "daadMulAverRuof": null,
-  "uppLevFlco": null,
-  "normWatLev": 760.0,
-  "normPoolStagArea": 47.5,
-  "normPoolStagCap": null,
-  "flLowLimLev": 762.8,
-  "flLowLimLevCap": null,
-  "deadLev": 720.0,
-  "totCap": 230000.0,
-  "storFlCap": null,
-  "flcoCap": null,
-  "benResCap": null,
-  "deadCap": 78000.0,
-  "engStat": "3",
-  "runStat": null,
-  "startDate": null,
-  "compDate": null,
-  "admDep": null,
-  "damCode": "60800520",
-  "damName": "乌江渡电站",
-  "startLong": null,
-  "startLat": null,
-  "endLong": null,
-  "endLat": null,
-  "damLoc": "遵义市播州区乌江镇",
-  "ifMainDam": "1",
-  "damGrad": "Ⅰ",
-  "damMaxHeig": 165.0,
-  "damTopLen": 395.0,
-  "damTopWid": null,
-  "damTypeMat": "1",
-  "damTypeStr": "1",
-  "auxiliaryDamNum": null,
-  "auxiliaryDamLen": null,
-  "auxiliaryDamMaxHeight": null,
-  "inqa": null,
-  "factoryForm": null,
-  "mwrtbdtp": "1",
-  "dmbsspms": null,
-  "dscncltp": null,
-  "fhgcDscnList": null,
-  "plmvppqn": null,
-  "mvppqn": null,
-  "prodpop": null,
-  "irrigatedArea": null,
-  "protectedObj": null,
-  "admAuth": 2,
-  "videoDevice": 1,
-  "waterLevelDevice": 1,
-  "floodType": 1,
-  "taskIrrigate": 0,
-  "taskFlood": 0,
-  "taskWater": 0,
-  "taskPower": 0,
-  "topRsvr": null,
-  "riskRsvr": null,
-  "barrage": 2,
-  "fsltdzDesc": null,
-  "normw": 2140.0,
-  "established": 1,
-  "rsvrTasks": [
-    99
-  ],
-  "registrationNo": null,
-  "formerStnm": null,
-  "category": null,
-  "projectOverview": null,
-  "unitManage1": null,
-  "unitManage2": null,
-  "sdstcp": null,
-  "dsflst": null,
-  "chflst": null,
-  "dsflfl": null,
-  "chflfl": null,
-  "dflmd": null,
-  "cflmd": null,
-  "dwchsfds": null,
-  "storageDate": null,
-  "supplyTown": null,
-  "supplyVillage": null,
-  "province": "贵州省",
-  "city": "遵义市",
-  "county": "播州区",
-  "town": "乌江镇",
-  "riverCodeMo": null,
-  "riverSegCode": null,
-  "riverName": null,
-  "eacid": null,
-  "motype": 1,
-  "inbtcgel": null,
-  "fsltdz": 760.0
-});
+const props = defineProps(compProps);
+const {target} = toRefs(props)
+const editable = ref(true)
 const columns: TableColumn[] = [
   {
     type: 'index',
@@ -218,20 +41,89 @@ const columns: TableColumn[] = [
     field: 'fstp',
     align: 'center',
   },
-  {
-    label: '操作',
-    field: 'action',
-    align: 'center',
-  },
-];
-function sureRemove(row) {
+  //@ts-ignore
+  (function () {
+    if (editable.value) {
+      return {
+        label: '操作',
+        field: 'action',
+        align: 'center',
+      }
+    }
+    return null
+  })(),
+].filter(Boolean);
+const {prefixCls} = useDesign('rsvr-level-page');
+const dataList = ref(target.value.fsl ?? [])
 
+
+function hasUnDef(col) {
+  return col?.some((e) => {
+    const {
+      bgmd = '',
+      edmd = '',
+      fsltdz = '',
+      fsltdw = '',
+      fstp = '',
+    } = e;
+    return isEmpty(bgmd) &&
+        isEmpty(edmd) &&
+        isEmpty(fsltdz) &&
+        isEmpty(fsltdw) &&
+        isEmpty(fstp)
+  });
 }
 
-const dataList = computed(() => model.fsl)
+function handleDelCol(row, index) {
+  if (dataList.value.length) dataList.value.splice(index, 1);
+}
+
+function addRowHandle() {
+  //检查是否有空行
+  const rows = toRaw(unref(dataList));
+  const can = hasUnDef(rows);
+  console.log('has', can)
+  if (can) {
+    return ElNotification({
+      title: '表单提示',
+      message: '有空行,请填写完整后在添加!',
+      type: 'warning',
+      duration: 1000,
+    });
+  }
+  const emptyCol = {
+    bgmd: '',
+    edmd: null,
+    fsltdz: null,
+    fsltdw: null,
+    fstp: null,
+  };
+  dataList.value.push(emptyCol);
+}
+
+function onSave() {
+  const rows = toRaw(unref(dataList));
+  const stcd = target.value?.stcd
+  rows.forEach((e)=>e.stcd = stcd)
+  const params = {
+    datas: rows,
+    stcd: stcd
+  }
+  updateStRsvrFsrB(params).then(() => {
+    props?.refresh({target:target.value})
+  })
+}
+
 </script>
 <template>
-  <div :class="`${prefixCls} h-full w-full`">
+  <div :class="[`${prefixCls} relative box-border h-full w-full`,{editable:editable}]">
+    <div :class="`${prefixCls}__plus`" v-if="editable">
+      <el-button type="primary" circle @click.stop="addRowHandle">
+        <template #icon>
+          <Icon :icon="'mdi:plus'"/>
+        </template>
+      </el-button>
+    </div>
     <Table
         :height="'100%'"
         :header-align="'center'"
@@ -240,18 +132,70 @@ const dataList = computed(() => model.fsl)
         :data="dataList"
         :pagination="null"
     >
-      <template #action="{ row }">
-            <span class="flex items-center justify-center">
-              <el-button text link type="danger" @click="sureRemove(row)">删除</el-button>
-            </span>
+      <template #bgmd="{row}">
+        <el-input v-if="editable" style="width: 90%" v-model="row.bgmd"></el-input>
+        <span v-else>{{ row.bgmd }}</span>
+      </template>
+      <template #edmd="{row}">
+        <el-input v-if="editable" style="width: 90%" v-model="row.edmd"></el-input>
+        <span v-else>{{ row.edmd }}</span>
+      </template>
+      <template #fsltdz="{row}">
+        <el-input v-if="editable" style="width: 90%" v-model="row.fsltdz"></el-input>
+        <span v-else>{{ row.fsltdz }}</span>
+      </template>
+      <template #fsltdw="{row}">
+        <el-input v-if="editable" style="width: 90%" v-model="row.fsltdw"></el-input>
+        <span v-else>{{ row.fsltdw }}</span>
+      </template>
+      <template #fstp="{row}">
+        <el-input v-if="editable" style="width: 90%" v-model="row.fstp"></el-input>
+        <span v-else>{{ row.fstp }}</span>
+      </template>
+
+      <template #action="{ row, index }" v-if="editable">
+        <el-popconfirm
+            confirm-button-text="确定"
+            cancel-button-text="取消"
+            icon-color="#626AEF"
+            title="确定删除?"
+            @confirm="() => handleDelCol(row, index)"
+        >
+          <template #reference>
+            <Icon class="cursor-pointer" :icon="'mdi:delete'" color="red"/>
+          </template>
+        </el-popconfirm>
       </template>
     </Table>
+    <div :class="`${prefixCls}__save absolute`" v-if="editable">
+      <el-button type="success" circle size="large" @click="onSave">
+        <template #icon>
+          <Icon :size="26" icon="mdi:content-save-check"/>
+        </template>
+      </el-button>
+    </div>
   </div>
 </template>
-
 <style lang="scss">
-$prefix-cls: #{$namespace}-component-baseinfo-page;
+$prefix-cls: #{$namespace}-rsvr-level-page;
 .#{$prefix-cls} {
+  min-height: 100%;
 
+  &.editable {
+    display: grid;
+    grid-template-rows: 40px 1fr;
+  }
+
+  &__save {
+    bottom: 10%;
+    right: 10%;
+    z-index: 1000;
+  }
+
+  &__plus {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+  }
 }
 </style>

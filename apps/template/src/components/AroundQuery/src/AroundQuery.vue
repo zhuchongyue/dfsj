@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import {computed, h, reactive, Ref, ref, unref, watch} from "vue";
+import {computed, h, reactive, Ref, ref, toRaw, unref, watch} from "vue";
 import {useDesign} from "/@/hooks/web/useDesign.ts";
 import {Icon, Stateful} from "@dfsj/components"
 import {groupBy} from "lodash-es";
@@ -15,7 +15,7 @@ import {LinearProgress} from "@/components/LinearProgress";
 const {prefixCls} = useDesign('component-around-query-page');
 const catagory = "catagory";
 const props = defineProps(AroundQueryProps);
-const {options, narrow, sizer,target,title} = toReactive(props)
+const {options, narrow, sizer,target,title,gisKey} = toReactive(props)
 const active: Ref = ref<any>(null),
     selectable: Ref = ref(false),
     checks = reactive<any>({}),
@@ -35,7 +35,7 @@ function onSelectable() {
 }
 function onClear() {
   if (select.size){
-    const manager = getLayerManage(GisSymbolKey.default)
+    const manager = getLayerManage(toRaw(unref(gisKey)))
     select.forEach((item)=>{
       const config = getAroundQueryLayerConfig(toRaw(unref(item)));
       manager.remove(config)
@@ -142,7 +142,7 @@ function onDetails(item) {
 //加载图层信息
 function onToggleSelect(item) {
   if (item?.loadMap != 1) return;
-  const manager = getLayerManage(GisSymbolKey.default)
+  const manager = getLayerManage(toRaw(unref(gisKey)))
   const selected = select.has(item);
   const config = getAroundQueryLayerConfig(item);
   if (!selected && item.count > 0) {

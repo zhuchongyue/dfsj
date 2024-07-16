@@ -14,26 +14,28 @@
         />
       </el-form-item>
     </el-form>
-    <TelescopicContainer :reverse="true" width="50%" :draw-open="true">
+    <TelescopicContainer :reverse="true" width="40%" :draw-open="true">
       <template #left>
         <UnifyChart ref="unifyRef" v-bind="getBindValue"/>
       </template>
       <template #right>
-        <div class="p-3 flex flex-col h-full">
+        <div class="flex box-border flex-col w-full h-full pl-10px overflow-hidden" >
           <Attache
               :fields="rsvrFields"
               :target="stationInfo"
           />
-          <div class="flex-1 relative mt-2">
-            <div class="absolute h-full w-full" v-if="!isEmpty(datasource) && !isEmpty(chart)"> <!---->
+          <div class="flex-1  box-border relative mt-2">
+            <div class="relative h-full w-full" v-if="!isEmpty(datasource) && !isEmpty(chart)">
               <ChartTable
+                  v-if="!isEmpty(datasource)"
                   :shadow="false"
                   :page="{
-                   layout: 'total, sizes, prev, pager, next',
+                  layout: 'total, sizes, prev, pager, next',
                   pagerCount:5,small:true}"
                   immediate
                   :chart="chart"
                   :value="datasource" :visible="true"/>
+              <Stateful :value="'empty'" v-else />
             </div>
           </div>
         </div>
@@ -47,7 +49,7 @@ import {useAttrs, useRequest} from '@dfsj/hooks';
 import {useDesign} from "/@/hooks/web/useDesign";
 import {getter, isEmpty} from "@dfsj/utils";
 import {ChartTable, useAssist, useComplexHydrology} from "@dfsj/echarts";
-import {EToolbox, UnifyChart, useLoader} from '@dfsj/components';
+import {EToolbox, UnifyChart, useLoader,Stateful} from '@dfsj/components';
 import {compProps, findRsvrStation} from '/@/components/Explorer';
 import {TelescopicContainer} from "@/components/Container";
 import Attache from "@/components/Explorer/src/components/Common/Attache/Attache.vue";
@@ -85,6 +87,9 @@ const chart = computed(() => unifyRef.value?.getBindValue?.instance?.())
 <style lang="scss">
 $prefixCls: #{$namespace}-reservoir-real-warp;
 .#{$prefixCls} {
+  .assistant{
+    padding: 0;
+  }
   .el-form-item {
     margin-bottom: 0px;
   }

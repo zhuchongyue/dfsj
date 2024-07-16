@@ -6,7 +6,7 @@ import BasicTabs from "/src/components/Tabs/BasicTabs.vue"
 import {compProps} from "@/components/Explorer";
 import {isEmpty} from "@dfsj/utils";
 
-const {prefixCls} = useDesign('component-baseinfo-page');
+const {prefixCls} = useDesign('river-baseinfo-page');
 const props = defineProps(compProps);
 const { target } = toRefs(props)
 const { options } = props;
@@ -47,6 +47,7 @@ const getBindValue = computed(()=>{
     />
    <template v-if="comp && !isEmpty(details)">
      <component
+         :class="`${prefixCls}__content`"
          v-bind="getBindValue"
          :is="comp"
      />
@@ -56,8 +57,7 @@ const getBindValue = computed(()=>{
 </template>
 
 <style lang="scss">
-$prefix-cls: #{$namespace}-component-baseinfo-page;
-//$height:40px;
+$prefix-cls: #{$namespace}-river-baseinfo-page;
 $height:100%;
 .#{$prefix-cls} {
   padding: 10px;
@@ -65,33 +65,21 @@ $height:100%;
   display: grid;
   grid-template-rows: auto 1fr;
   min-height: 100%;
-  //.el-form-item{
-  //  &.headline{
-  //    .el-form-item__label{
-  //      color: $primary-color-6;
-  //      font-size: 20px;
-  //      font-weight: bolder;
-  //    }
-  //  }
-  //}
+  .el-col{
+    display: flex;
+  }
+  &__content{
+    height: 100%;
+    overflow: hidden;
+    padding: 10px 0;
+  }
+  .el-form{
+    height: 100%;
+    overflow-y: scroll;
+  }
   .el-form-item--default{
      margin-bottom: 0px;
      height: $height;
-    .el-input__wrapper{
-      //box-shadow: none;
-
-    }
-  //  .el-form-item__label{
-  //    height: $height;
-  //    border-right: .0625rem solid #ebeef5;
-  //    border-top: .0625rem solid #ebeef5;
-  //    font-size: .875rem;
-  //    font-weight: 700;
-  //    //text-align: right;
-  //    word-wrap: break-word;
-  //    color: #606266;
-  //    background-color: rgba(205, 205, 205, .247);
-  //  }
   }
 }
 </style>

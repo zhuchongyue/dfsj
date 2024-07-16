@@ -159,7 +159,7 @@ function stopDragging(){
       &::after{
         content: "";
         display: block;
-        border-left: 1px black dashed;
+        border-left: 1px #ccc dashed;
         height: 100%;
       }
     }

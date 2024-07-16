@@ -1,11 +1,8 @@
 <script lang="ts" setup>
 import {reactive, toRefs} from "vue";
-import {useDesign} from "/src/hooks/web/useDesign.ts";
 import {Descriptions, Form, useForm} from "@dfsj/components";
-import {Action, compProps, updateStRsvrFcchB, useAction} from "@/components/Explorer";
+import {Action, compProps, updateRsvrProject, useAction} from "@/components/Explorer";
 import {useDamPower} from "./tsx/useDamPower.tsx";
-
-const {prefixCls} = useDesign('component-baseinfo-page');
 const { formRegister, formMethods } = useForm();
 const props = defineProps(compProps);
 const {target} = toRefs(props)
@@ -13,13 +10,13 @@ const form = reactive(target.value)
 //接口信息
 const callback = {
   refresh:()=>props?.refresh({target:target.value}),
-  edit:updateStRsvrFcchB
+  edit:updateRsvrProject
 }
 const {disabled, hander} = useAction(form, formMethods,callback)
 const { rules ,schema } = useDamPower(form,disabled)
 </script>
 <template>
-  <div :class="`${prefixCls} h-full w-full`">
+  <div :class="`box-border h-full w-full`">
     <Form
         ref="formRef"
         @register="formRegister"
@@ -36,13 +33,3 @@ const { rules ,schema } = useDamPower(form,disabled)
     <Action @change="hander"/>
   </div>
 </template>
-
-<style lang="scss">
-$prefix-cls: #{$namespace}-component-baseinfo-page;
-$height:40px;
-.#{$prefix-cls} {
-  padding: 10px;
-  box-sizing: border-box;
-
-}
-</style>

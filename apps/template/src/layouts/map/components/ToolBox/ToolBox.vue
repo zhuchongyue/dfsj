@@ -199,15 +199,15 @@ $ITEM_HEIGHT: 48px;
 
     .item {
       height: $ITEM_HEIGHT;
-
+      transition: color 0.3s,
+      background-color 0.3s;
       .section {
         &:first-child {
           margin-right: 5px;
         }
       }
 
-      transition: color 0.3s,
-      background-color 0.3s;
+
 
       &:hover {
         .focus-helper {

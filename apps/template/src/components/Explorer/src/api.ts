@@ -8,10 +8,13 @@ enum Api {
   riverinfo = '/station-service/station/findRiverStation',
   getRiverRealPro = '/station-service/station/getRiverRealPro',
   findCommunicationByStcd = '/station-service/station/findCommunicationByStcd',
-  //水库基础信息修改
-  updateStRsvrFcchB = '/station-service/stationUpdate/updateStRsvrFcchB',
+  updateStRsvrFsrB='/station-service/stationUpdate/updateStRsvrFsrB',//ADD 更新水库汛限水位
+  updateRsvrProject= '/station-service/stationUpdate/updateRsvrProject',//更新水库大坝/工程信息
+
+  //水库基础信息修改  更新水库特征值
+  updateStRsvrFcchB = '/station-service/stationUpdate/updateStRsvrFcchB',//更新水库特征值
  //水文站  基础信息修改
-  updateStStbprpB='/station-service/stationUpdate/updateStStbprpB',
+  updateStStbprpB='/station-service/stationUpdate/updateStStbprpB',//水文  水库基础信息
   //水文站 特征值修改
   updateStRvFcchB='/station-service/stationUpdate/updateStRvFcchB',
   //水库闸门开度试算
@@ -79,7 +82,12 @@ export const findRsvrStation = (params) => {
 export const updateStRsvrFcchB = (params) => {
   return defHttp.post({ url: Api.updateStRsvrFcchB, params });
 };
-
+export const updateStRsvrFsrB = (params) => {
+  return defHttp.post({ url: Api.updateStRsvrFsrB, params });
+};
+export const updateRsvrProject = (params) => {
+  return defHttp.post({ url: Api.updateRsvrProject, params });
+};
 /**
  * 水文站点信息修改
  */

@@ -35,11 +35,9 @@ watch(() => props.target, (value) => {
 <template>
   <div :class="prefixCls">
     <Descriptions
-        :title="'基础信息'"
         :schema="schema"
         :data="model"
         :size="'small'"
-        :message="'可在基础信息里面修改'"
     />
   </div>
 </template>
@@ -47,5 +45,12 @@ watch(() => props.target, (value) => {
 <style lang="scss">
 $prefix-cls: #{$namespace}-component-attache-page;
 .#{$prefix-cls} {
+  width: 100%;
+  height: auto;
+  box-sizing: border-box;
+  overflow: hidden;
+  .el-col{
+    display: flex;
+  }
 }
 </style>

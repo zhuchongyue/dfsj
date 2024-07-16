@@ -1,6 +1,7 @@
 import {useRootStoreWithOut} from "@/store/root.ts";
 import {aroundQueryDetails, aroundQueryExport, aroundQuerySubject} from "@/components/AroundQuery/src/api.ts";
 import {downloadByUrl} from "@dfsj/utils";
+import {GisSymbolKey} from "@/core/GisCache.ts";
 
 interface Handlers {
     export: Function;
@@ -115,6 +116,10 @@ export const AroundQueryProps = {
     title: {
         type: String,
         default: () => ''
+    },
+    gisKey: {
+        type: Symbol,
+        default: () => GisSymbolKey.default
     },
     narrow: {
         type: Boolean,

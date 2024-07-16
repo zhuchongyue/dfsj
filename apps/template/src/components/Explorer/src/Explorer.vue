@@ -138,9 +138,11 @@ $prefixCls: #{$namespace}-explorer-wrap;
     min-width: 0;
     height: 100%;
     min-height: 0;
-    //padding: 10px;
 
     &-tabs {
+      width: 100%;
+      min-width: 0;
+      height: 50px;
       .el-tabs__active-bar {
         display: none;
       }
@@ -150,9 +152,7 @@ $prefixCls: #{$namespace}-explorer-wrap;
         background-color: #dcdcdc;
       }
 
-      width: 100%;
-      min-width: 0;
-      height: 50px;
+
 
       .el-tabs__item {
         height: 50px;
@@ -160,11 +160,11 @@ $prefixCls: #{$namespace}-explorer-wrap;
         font-size: 16px;
 
         &.is-top:nth-child(2) {
-          padding-left: 20px;
+          padding-left: 20px!important;
         }
 
         &.is-top:last-child {
-          padding-right: 20px;
+          padding-right: 20px!important;
         }
       }
 
