@@ -1,6 +1,6 @@
 {
   "name": "@dfsj/components",
-  "version": "3.2.0",
+  "version": "3.2.1",
   "description": "通用的vue组件;包括专业组件、原子级组件",
   "type": "module",
   "keywords": [
