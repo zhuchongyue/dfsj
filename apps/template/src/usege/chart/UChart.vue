@@ -5,9 +5,9 @@ import "@dfsj/echarts/src/themes/index"
 import {useEChartsThemes} from "@dfsj/echarts"
 import bigviewThemeJson from "./bigview.json"
 
-// const {registerTheme,setTheme} = useEChartsThemes() ;
-// registerTheme('bigview',bigviewThemeJson)
-// setTheme('bigview')
+const {registerTheme,setTheme} = useEChartsThemes() ;
+registerTheme('bigview',bigviewThemeJson)
+setTheme('bigview')
 import StageDischarge from "/@/usege/chart/StageDischarge/StageDischarge.vue";
 // const {registerTheme,setTheme} = useEChartsThemes() ;
 // registerTheme('bigview',bigviewThemeJson)

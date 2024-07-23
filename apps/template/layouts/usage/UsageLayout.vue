@@ -10,9 +10,9 @@ import UUtils from "/@//usege/utils/UUtils.vue";
 </script>
 <template>
   <!-- 基础业务组件-->
-<!--    <UComponents />-->
+    <UComponents />
   <!--  水文图表-->
-    <UChart />
+<!--    <UChart />-->
   <!--  工具函数-->
   <!--  地图-->
 <!--    <OlScene/>-->

@@ -225,10 +225,10 @@ const target =
         :size="assemblySize"
         :button="buttonConfig"
     >
-<!--      <UsageLayout/>-->
+      <UsageLayout/>
 <!--      <RouterView/>-->
 <!--      <MapLayout />-->
-      <DefaultLayout/>
+<!--      <DefaultLayout/>-->
     </el-config-provider>
   </AppProvider>
 
